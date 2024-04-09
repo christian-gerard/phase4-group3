@@ -13,6 +13,17 @@ const App = () => {
         <li>Aurora Something</li>
         <li>Moonrise Something</li>
       </ul>
+        <h2>Test Colors</h2>
+      <section>
+        <div id='a' class='color-test'></div>
+        <div id='b' class='color-test'></div>
+        <div id='c' class='color-test'></div>
+        <div id='d' class='color-test'></div>
+        <div id='e' class='color-test'></div>
+        <div id='f' class='color-test'></div>
+        <div id='g' class='color-test'></div>
+        <div id='h' class='color-test'></div>
+      </section>
 		</div>
 )}
 

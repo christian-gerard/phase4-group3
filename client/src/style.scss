@@ -117,6 +117,51 @@ ul, li {
 	line-height: 1.5;
 }
 
+h2 {
+	margin: 20px 0;
+	font-family: $font-accent;
+	font-size: x-large;
+	color: $test-4;
+	text-transform: uppercase;
+}
+
+section {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.color-test {
+	height: 30px;
+	width: 30px;
+	margin-left: 16px;
+	border-radius: 3px;
+}
+
+#a {
+	background: $test-1
+}
+#b {
+	background: $test-2
+}
+#c {
+	background: $test-3
+}
+#d {
+	background: $test-4
+}
+#e {
+	background: $test-5
+}
+#f {
+	background: $test-6
+}
+#g {
+	background: $test-7
+}
+#h {
+	background: $test-8
+}
+
 // Breakpoints
 // Tablet
 
