@@ -55,10 +55,25 @@ with app.app_context():
     # # # # # Create Users
     print('[purple]Creating Users[/purple] 🧑🏻‍💻 ...\n')
     try:
+
+        users = []
+        usernames = []
+
         for _ in range(20):
-            new_user = User(username=fake.first_name())
-            db.session.add(new_user)
-        db.session.commit()
+
+            username = fake.first_name()
+
+            while username in usernames:
+                username = fake.first_name()
+
+            usernames.append(username)
+
+            user = User(username=username)
+            user.password_hash = user.username + 'password'
+
+            users.append(user)
+
+        db.session.add_all(users)
 
         print('\t[green]Users Created[/green] ✅ \n')
     except Exception as e:
