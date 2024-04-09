@@ -2,18 +2,18 @@ from . import SerializerMixin, validates, re, db
 from datetime import datetime
 
 
-class User(db.Model, SerializerMixin):
+class Category(db.Model, SerializerMixin):
     # # # # # Table Name
-    __tablename__ = 'users'
+    __tablename__ = 'categories'
 
     # # # # # Attribute
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String)
-    _password_hash = db.Column(db.String)
+    name = db.Column(db.String)
+    description = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     # # # # # Relationship
-    entries = db.relationship('Entry', back_populates='user')
+    entries = db.relationship('Entry', back_populates='category')
 
     # # # # # Serialize
     serialize_rules=('-entries',)
@@ -21,12 +21,13 @@ class User(db.Model, SerializerMixin):
     # # # # # Representation
     def __repr__(self):
         return f""" 
-            <User {self.id}
-                username: {self.username}
+            <Category {self.id}
+                name: {self.name}
+                description: {self.description[0:10]} ...
                 created_at: {self.created_at}
                 />
         """
 
     # # # # # Property
-    
+
     # # # # # Validate
