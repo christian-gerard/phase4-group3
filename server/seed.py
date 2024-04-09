@@ -7,6 +7,7 @@ from models.entry import Entry
 from models.user import User
 
 import sys
+import random
 from rich import print
 
 fake = Faker()
@@ -37,7 +38,11 @@ with app.app_context():
     # # # # # Create Categories
     print('[purple]Creating Categories 🔮[/purple] ...\n')
     try:
-        dream_categories = ['']
+        dream_categories = ['False-awakening', 'Healing', 'Lucid', 'Nightmare', 'Recurring', 'Premonition']
+        for dream in dream_categories:
+            category = Category(name=dream,description=fake.paragraph())
+            db.session.add(category)
+        db.session.commit()
 
         print('\t[green]Categories Created ✅[/green] \n')
 
@@ -50,6 +55,10 @@ with app.app_context():
     # # # # # Create Users
     print('[purple]Creating Users[/purple] 🧑🏻‍💻 ...\n')
     try:
+        for _ in range(20):
+            new_user = User(username=fake.first_name())
+            db.session.add(new_user)
+        db.session.commit()
 
         print('\t[green]Users Created[/green] ✅ \n')
     except Exception as e:
@@ -61,6 +70,15 @@ with app.app_context():
      # # # # # Create Entries
     print('[purple]Creating Entries[/purple] ✍🏽 ...\n')
     try:
+        for _ in range(100):
+            new_entry = Entry(
+                title=fake.sentence(), 
+                body=fake.paragraph(), 
+                user_id=random.randint(1,20), 
+                category_id=random.randint(1,6)
+                )
+            db.session.add(new_entry)
+        db.session.commit()
 
         print('\t[green]Entries Created ✅[/green]\n')
 
