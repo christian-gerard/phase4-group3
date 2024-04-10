@@ -10,6 +10,7 @@ flask_migrate = '*'
 flask_restful = '*'
 flask_marshmallow = '*'
 flask_sqlalchemy = '*'
+flask_session = '*'
 sqlalchemy = '*'
 ipdb = '*'
 
