@@ -15,7 +15,6 @@ class Entries(Resource):
     def get(self):
         try:
             serialized_entries = entries_schema.dump(Entry.query)
-
             return serialized_entries, 200
         except Exception as e:
             return {"Error": str(e)}, 400
@@ -76,7 +75,13 @@ api.add_resource(EntryById, '/entries/<int:id>')
 class SignUp(Resource):
     def post(self):
         try:
-            pass
+            data = request.get_json()
+            new_user = User(username=data.get('username'))
+            new_user.password_hash = data.get('password')
+            db.session.add(new_user)
+            db.session.commit()
+            session['user_id'] = new_user.id
+            return new_user.to_dict(), 201
         except Exception as e:
             return {"Error": str(e)}, 400
 
@@ -85,7 +90,13 @@ api.add_resource(SignUp, '/signup')
 class Login(Resource):
     def post(self):
         try:
-            pass
+            data = request.get_json()
+            user = User.query.filter_by(username=data.get('username')).first()
+            if user and user.authenticate(data.get('password')):
+                session['user_id'] = user.id
+                return user.to_dict(), 200
+            else:
+                return {"Message": "Invalid Login"}, 422
         except Exception as e:
             return {"Error": str(e)}, 400
 
