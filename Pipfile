@@ -8,6 +8,7 @@ flask = '*'
 flask_bcrypt = '*'
 flask_migrate = '*'
 flask_restful = '*'
+marshmallow = '*'
 flask_sqlalchemy = '*'
 sqlalchemy = '*'
 
