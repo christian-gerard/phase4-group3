@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_session import Session
 from flask_bcrypt import Bcrypt
+from flask_marshmallow import Marshmallow
 from os import environ
 
 app = Flask(__name__)
@@ -14,14 +15,20 @@ app.secret_key = environ.get("SESSION_SECRET")
 app.config["SESSION_TYPE"] = "sqlalchemy"
 app.config["SESSION_SQLALCHEMY_TABLE"] = "sessions"
 
-# flask-sqlalchemy connection to app
+
+# # # # # App + SQLAlchemy Connection
 db = SQLAlchemy(app)
 app.config["SESSION_SQLALCHEMY"] = db
-# flask-migrate connection to app
 migrate = Migrate(app, db)
-# flask-restful connection to app
+
+# # # # # Rest API
 api = Api(app, prefix="/api/v1")
-# flask-session
+
+# # # # # Session
 session = Session(app)
-# session.app.session_interface.db.create_all()
+
+# # # # # Bcrypt
 flask_bcrypt = Bcrypt(app)
+
+# # # # # Marshmallow
+ma = Marshmallow(app)

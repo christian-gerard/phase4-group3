@@ -8,8 +8,10 @@ flask = '*'
 flask_bcrypt = '*'
 flask_migrate = '*'
 flask_restful = '*'
+flask_marshmallow = '*'
 flask_sqlalchemy = '*'
 sqlalchemy = '*'
+ipdb = '*'
 
 
 [dev-packages]
