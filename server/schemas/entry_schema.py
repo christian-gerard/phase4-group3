@@ -6,14 +6,18 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
         ordered = True
 
-    
-    title = fields.String()
-    body = fields.String()
-    date = fields.DateTime()
+    id = ma.auto_field()
+    title = ma.auto_field()
+    body = ma.auto_field()
+    date = ma.auto_field()
+    created_at = ma.auto_field()
+    updated_at = ma.auto_field()
 
-    user_id = fields.Integer(required=True)
-    category_id = fields.Integer(required=True)
+    user_id = ma.auto_field()
+    category_id = ma.auto_field()
 
 
 
 entry_schema = EntrySchema()
+
+entries_schema = EntrySchema(many=True)

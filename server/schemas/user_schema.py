@@ -5,7 +5,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         model = User
         load_instance = True
 
-        username = fields.String(required=True, validate=validate.length(min=2, max=20))
+        username = fields.String(required=True, validate=validate.Length(min=2, max=20))
 
 
 
