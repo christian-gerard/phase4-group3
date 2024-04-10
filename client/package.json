@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "formik": "^2.4.5",
-    "sass": "^1.74.1"
+    "sass": "^1.74.1",
+    "uuid": "^9.0.1"
   }
 }

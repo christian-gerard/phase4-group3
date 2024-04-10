@@ -1,3 +1,7 @@
+import { Outlet } from 'react-router-dom'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
+
 const App = () => {
 	return (
 		<div className='main'>
@@ -15,14 +19,19 @@ const App = () => {
       </ul>
         <h2>Test Colors</h2>
       <section>
-        <div id='a' class='color-test'></div>
-        <div id='b' class='color-test'></div>
-        <div id='c' class='color-test'></div>
-        <div id='d' class='color-test'></div>
-        <div id='e' class='color-test'></div>
-        <div id='f' class='color-test'></div>
-        <div id='g' class='color-test'></div>
-        <div id='h' class='color-test'></div>
+        <div id='a' className='color-test'></div>
+        <div id='b' className='color-test'></div>
+        <div id='c' className='color-test'></div>
+        <div id='d' className='color-test'></div>
+        <div id='e' className='color-test'></div>
+        <div id='f' className='color-test'></div>
+        <div id='g' className='color-test'></div>
+        <div id='h' className='color-test'></div>
+      </section>
+      <section className='tester'>
+        <Nav />
+        <Outlet />
+        <Footer />
       </section>
 		</div>
 )}

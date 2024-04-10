@@ -162,6 +162,48 @@ section {
 	background: $test-7
 }
 
+.tester {
+	margin: 16px 0;
+	padding: 16px;
+	display: block;
+}
+// Links & Buttons
+a {
+	color: $test-7;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+  a:hover {
+	color: $test-3;
+  }
+
+#link {
+	margin-right: 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: $font-primary;
+	font-size: medium;
+	color: $test-5;
+}
+
+// Footer
+footer {
+	margin: 3em 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+footer > p {
+	// width: 85%;
+	font-family: $font-primary;
+	font-size: small;
+	line-height: normal;
+	text-align: center;
+  }
+
 // Breakpoints
 // Tablet
 
