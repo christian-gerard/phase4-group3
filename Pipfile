@@ -10,9 +10,16 @@ flask_migrate = '*'
 flask_restful = '*'
 flask_marshmallow = '*'
 flask_sqlalchemy = '*'
+sqlalchemy-serializer = "*"
 flask_session = '*'
 sqlalchemy = '*'
 ipdb = '*'
+
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
 
 
 [dev-packages]

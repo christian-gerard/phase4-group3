@@ -7,18 +7,17 @@ export const url = '#'
 const ContextProvider = ({ children }) => {
     const [user, setUser] = useState([])
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const res = await fetch(url)
-                const data = await res.json()
-                setUser(data)
-            } catch (err) {
-                console.log(err)
-            }
-        })()
-    }, [])
-
+    // useEffect(() => {
+    //     (async () => {
+    //         try {
+    //             const res = await fetch(url)
+    //             const data = await res.json()
+    //             setUser(data)
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     })()
+    // }, [])
 
     return (
         <Context.Provider value={{ user }}>

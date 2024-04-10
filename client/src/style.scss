@@ -168,6 +168,17 @@ section {
 	padding: 16px;
 	display: block;
 }
+
+.auth {
+	margin: 16px 0;
+	background-color: $test-6;
+
+}
+
+form {
+	background-color: $test-8;
+}
+
 // Links & Buttons
 a {
 	color: $test-7;
