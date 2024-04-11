@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import * as Yup from 'yup'
@@ -44,7 +44,8 @@ const initialValues = {
 const Auth = () => {
     const { user } = useContext(UserContext)
 	const { setUser } = useOutletContext()
-	const navigate = useNavigate()
+	const [formStatus, setformStatus] = useState('')
+    const navigate = useNavigate()
 	const requestUrl = user ? '/login' : '/signup'
 
 	const formik = useFormik({
