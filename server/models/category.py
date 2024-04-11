@@ -9,6 +9,7 @@ class Category(db.Model, SerializerMixin):
     # # # # # Attribute
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String)
+    summary = db.Column(db.String)
     description = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
@@ -23,6 +24,7 @@ class Category(db.Model, SerializerMixin):
         return f""" 
             <Category {self.id}
                 name: {self.name}
+                summary: {self.summary}
                 description: {self.description[0:10]} ...
                 created_at: {self.created_at}
                 />
