@@ -112,11 +112,11 @@ h1 {
 	color: $test-7;
 }
 
-ul, li {
-	font-family: $font-primary;
-	line-height: 1.5;
-	display: inline-block;
-}
+// ul, li {
+// 	font-family: $font-primary;
+// 	line-height: 1.5;
+// 	display: inline-block;
+// }
 
 h2 {
 	margin: 20px 0;
@@ -172,6 +172,7 @@ section {
 .auth {
 	margin: 16px 0;
 	background-color: $test-6;
+	border: 1px solid $test-7;
 
 }
 
