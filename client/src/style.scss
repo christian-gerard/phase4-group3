@@ -92,31 +92,34 @@ $test-7: #d4e6f2;
 	background-color: $bg;
 }
 
-hr {
-	background-color: $test-1;
-	border: none;
-	height: 2px;
-}
-
-.main {
-	margin: 16px;
+main {
+	margin: 0 16px;
 	padding: 16px;
+	background-color: $test-6;
 	border: 1px solid $test-8;
 	border-radius: 3px;
+}
 
+header {
+	background-color: $test-7;
+}
+
+nav {
+	background-color: $test-8;
 }
 
 h1 {
 	font-family: $font-accent;
 	font-size: 45px;
 	color: $test-7;
+	background-color: $test-3;
 }
 
-// ul, li {
-// 	font-family: $font-primary;
-// 	line-height: 1.5;
-// 	display: inline-block;
-// }
+hr {
+	background-color: $test-1;
+	border: none;
+	height: 2px;
+}
 
 h2 {
 	margin: 20px 0;

@@ -1,16 +1,15 @@
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 
 const App = () => {
+
 	return (
-		<div className='main'>
-      <section className='tester'>
-        <Nav />
-        <Outlet />
-        <Footer />
-      </section>
-        <h2>Test Colors</h2>
+		<main>
+      <Nav />
+      <Outlet context={{  }}/>
+      <h2>Test Colors</h2>
       <section>
         <div id='a' className='color-test' />
         <div id='b' className='color-test' />
@@ -21,7 +20,8 @@ const App = () => {
         <div id='g' className='color-test' />
         <div id='h' className='color-test' />
       </section>
-		</div>
+      <Footer />
+		</main>
 )}
 
 export default App
