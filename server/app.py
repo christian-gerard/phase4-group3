@@ -109,7 +109,10 @@ class Logout(Resource):
             if "user_id" in session:
                 del session['user_id']
                 del session['username'] #! delete the entire key-value pair
-            return {}, 204
+                return {}, 204
+            else:
+                return {"Error": "A User is not logged in"}, 404
+
         except Exception as e:
             return {"Error": str(e)}, 400
 

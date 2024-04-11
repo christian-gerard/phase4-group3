@@ -5,7 +5,7 @@ from models.__init__ import db
 from models.category import Category
 from models.entry import Entry
 from models.user import User
-from schemas.user_schema import user_schema
+
 
 import sys
 import random
