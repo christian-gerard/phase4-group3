@@ -10,6 +10,16 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
     id = fields.Integer(required=True)
     name = fields.String(required=True)
 
+    summary = fields.String(
+        validate=validate.Length(
+            min=1,
+            max=100,
+            error='Summary must be between 1 and 100 characters'
+        ),
+        required=True
+
+    )
+
     description = fields.String(
         validate=validate.Length(
             min=3,
