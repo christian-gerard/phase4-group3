@@ -5,15 +5,18 @@ from models.__init__ import db
 from models.category import Category
 from models.entry import Entry
 from models.user import User
+from schemas.user_schema import user_schema
 
 import sys
 import random
 from rich import print
+import ipdb
 
 fake = Faker()
 
 
 with app.app_context():
+
 
     # # # # # BEGIN SEED
     print('\n[purple]------------- BEGIN ------------[/purple]')
@@ -69,6 +72,7 @@ with app.app_context():
             usernames.append(username)
 
             user = User(username=username)
+
             user.password_hash = user.username + 'password'
 
             users.append(user)

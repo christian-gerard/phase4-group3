@@ -6,15 +6,26 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
         ordered = True
 
-    id = ma.auto_field()
-    title = ma.auto_field()
-    body = ma.auto_field()
-    date = ma.auto_field()
-    created_at = ma.auto_field()
-    updated_at = ma.auto_field()
+    id = fields.Integer(required=True)
 
-    user_id = ma.auto_field()
-    category_id = ma.auto_field()
+    title = fields.String(
+        validate=validate.Length(min=0,max=30, error="Title must be between 2 and 30 characters")
+        )
+    
+    body = fields.String(
+        require=True, 
+        validate=validate.Length(min=15,max=1250, error="Body must be between 15 and 1250 characters")
+        )
+    
+    date = fields.Date(require=True)
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
+
+    user_id = fields.Integer()
+    user = fields.Nested('UserSchema', exclude=('created_at',))
+
+    category_id = fields.Integer()
+    category = fields.Nested('CategorySchema', exclude=('created_at',))
 
 
 
