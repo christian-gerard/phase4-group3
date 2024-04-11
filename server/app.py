@@ -75,9 +75,9 @@ class SignUp(Resource):
         try:
             # Pass partial on load() method to avoid id requirement
             data = request.get_json()
-            # user_schema.load(data)
-            new_user = User(username=data.get('username'))
-            new_user.password_hash = data.get('password')
+            new_user = user_schema_post.load({"username": data.get('usernmae')})
+            # new_user = User(username=data.get('username'))
+            new_user.password_hash = data.get('_password_hash')
             db.session.add(new_user)
             db.session.commit()
             session['user_id'] = new_user.id

@@ -22,7 +22,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
             ]
         )
         
-        password = fields.String(
+        _password_hash = fields.String(
             required=True,
             validate=validate.Length(
                 min=8,
@@ -30,24 +30,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
             )
         )
 
-class UserSchema_Get(ma.SQLAlchemyAutoSchema):
-    class Meta:
-        model = User
-        load_instance = True
-        ordered = True
-        exclude = ('_password_hash',)
-
-        id = fields.Integer(required=True)
-
-        username = fields.String(
-            required=True, 
-            validate=validate.Length(
-                min=2, 
-                max=20,
-                error="Username must be between 2 and 20 characters")
-            )
-        
-        _password_hash = fields.String(required=True)
-
-user_schema_get = UserSchema_Get()
 user_schema_post = UserSchema()
+users_schema = UserSchema(many=True, exclude=('_password_hash',))
+
+
