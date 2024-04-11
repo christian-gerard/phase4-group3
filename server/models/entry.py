@@ -10,9 +10,9 @@ class Entry(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
     body = db.Column(db.String)
-    date = db.Column(db.DateTime, default=datetime.now())
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, onupdate=datetime.now())
+    date = db.Column(db.String, default=datetime.now().date().strftime("%m-%d-%Y"))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

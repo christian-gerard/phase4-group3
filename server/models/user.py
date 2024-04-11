@@ -18,7 +18,7 @@ class User(db.Model, SerializerMixin):
     entries = db.relationship('Entry', back_populates='user')
 
     # # # # # Serialize
-    serialize_rules=('-entries', '-password_hash')
+    serialize_rules=('-entries', '-_password_hash')
 
     # # # # # Representation
     def __repr__(self):

@@ -1,21 +1,42 @@
-from . import ma, fields, validate, Entry
+from . import ma, fields, validate, validates, Entry, datetime
 
 class EntrySchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Entry
         load_instance = True
         ordered = True
+        partial = ('id',)
 
-    id = ma.auto_field()
-    title = ma.auto_field()
-    body = ma.auto_field()
-    date = ma.auto_field()
-    created_at = ma.auto_field()
-    updated_at = ma.auto_field()
+    id = fields.Integer()
 
-    user_id = ma.auto_field()
-    category_id = ma.auto_field()
+    title = fields.String(
+        validate=validate.Length(
+            max=50, 
+            error="Title must be less than 50 characters")
+        )
+    
+    body = fields.String(
+        require=True, 
+        validate=validate.Length(
+            min=10,
+            max=40000, 
+            error="Body must be between 15 and 40,000 characters")
+        )
+    
+    date = fields.String(require=True)
+    created_at = fields.DateTime()
+    updated_at = fields.DateTime()
 
+    user_id = fields.Integer(required=True)
+    user = fields.Nested('UserSchema', exclude=('created_at',))
+
+    category_id = fields.Integer(required=True)
+    category = fields.Nested('CategorySchema', exclude=('created_at',))
+
+    @validates('date')
+    def validate_date(self, date):
+        if not datetime.strptime(date, "%m-%d-%Y"):
+            raise ValueError('Date must be in \"MM-DD-YYYY\"')
 
 
 entry_schema = EntrySchema()
