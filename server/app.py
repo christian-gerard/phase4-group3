@@ -1,7 +1,7 @@
 from flask import request, session
 from flask_restful import Resource
 from config import app, db, api
-from schemas.user_schema import user_schema
+from schemas.user_schema import user_schema_post
 from schemas.entry_schema import entry_schema, entries_schema
 from schemas.category_schema import category_schema
 from models.category import Category
@@ -81,7 +81,7 @@ class SignUp(Resource):
             db.session.add(new_user)
             db.session.commit()
             session['user_id'] = new_user.id
-            return user_schema.dump(new_user), 201
+            return user_schema_post.dump(new_user), 201
         except Exception as e:
             return {"Error": str(e)}, 400
 
@@ -95,7 +95,7 @@ class Login(Resource):
             if user and user.authenticate(data.get('password')):
                 session["user_id"] = user.id
                 session["username"] = user.username
-                return user_schema.dump(user), 200
+                return user_schema_post.dump(user), 200
             else:
                 return {"Message": "Invalid Login"}, 422
         except Exception as e:
@@ -103,7 +103,17 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+class Logout(Resource):
+    def delete(self):
+        try:
+            if "user_id" in session:
+                del session['user_id']
+                del session['username'] #! delete the entire key-value pair
+            return {}, 204
+        except Exception as e:
+            return {"Error": str(e)}, 400
 
+api.add_resource(Logout, '/logout')
 
 # # # # # Execute App
 if __name__ == "__main__":
