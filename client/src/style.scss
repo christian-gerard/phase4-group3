@@ -92,29 +92,33 @@ $test-7: #d4e6f2;
 	background-color: $bg;
 }
 
-hr {
-	background-color: $test-1;
-	border: none;
-	height: 2px;
-}
-
-.main {
-	margin: 16px;
+main {
+	margin: 0 16px;
 	padding: 16px;
+	background-color: $test-6;
 	border: 1px solid $test-8;
 	border-radius: 3px;
+}
 
+header {
+	background-color: $test-7;
+}
+
+nav {
+	background-color: $test-8;
 }
 
 h1 {
 	font-family: $font-accent;
 	font-size: 45px;
 	color: $test-7;
+	background-color: $test-3;
 }
 
-ul, li {
-	font-family: $font-primary;
-	line-height: 1.5;
+hr {
+	background-color: $test-1;
+	border: none;
+	height: 2px;
 }
 
 h2 {
@@ -167,6 +171,18 @@ section {
 	padding: 16px;
 	display: block;
 }
+
+.auth {
+	margin: 16px 0;
+	background-color: $test-6;
+	border: 1px solid $test-7;
+
+}
+
+form {
+	background-color: $test-8;
+}
+
 // Links & Buttons
 a {
 	color: $test-7;
@@ -189,7 +205,7 @@ a {
 
 // Footer
 footer {
-	margin: 3em 0;
+	margin-top: 3em;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

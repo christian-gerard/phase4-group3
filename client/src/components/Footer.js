@@ -1,7 +1,7 @@
 const Footer = () => {
 	return (
 		<footer>
-			<p>THIS APP was built by
+			<p>Rabbit Rabbit was built by
 				<a href='https://github.com/stephbertram' rel='noreferrer noopener' target='_blank'> Steph Bertram</a>,
 				<a href='https://github.com/christian-gerard' rel='noreferrer noopener' target='_blank'> Christian Gerard</a>, and
 				<a href='https://github.com/pwangy/' rel='noreferrer noopener' target='_blank'> Peggy Wang

@@ -41,6 +41,7 @@
   "devDependencies": {
     "formik": "^2.4.5",
     "sass": "^1.74.1",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "@babel/plugin-proposal-private-property-in-object": "*"
   }
 }
