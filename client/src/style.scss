@@ -71,10 +71,6 @@ $font-default: 400;
 
 // Colors
 $text: snow;
-// $text-accent: ;
-// $color-primary: ;
-// $color-secondary: ;
-// $color-accent: ;
 $offwhite: #f8f8ea;
 $barelyblue: #d4e6f2;
 $lilac: #ccc1d5;
@@ -96,17 +92,17 @@ $bg: #19194d;
 main {
 	margin: 0 16px;
 	padding: 16px;
-	// background-color: $purple;
+	background-color: $purple;
 	border: 1px solid $dkgrapefruit;
 	border-radius: 3px;
 }
 
 header {
-	// background-color: grey;
+	background-color: grey;
 }
 
 nav {
-	// background-color: $grapefruit;
+	background-color: $grapefruit;
 }
 
 h1 {
@@ -228,13 +224,13 @@ footer > p {
 		max-width: 990px;
 	}
 	main {
-		// background-color: snow;
+		background-color: snow;
 	}
 }
 
 // Desktop
 @media only screen and (min-width: 992px) {
 	main {
-		// background-color: darkgreen;
+		background-color: darkgreen;
 	}
 }

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import * as Yup from 'yup'
@@ -12,17 +12,18 @@ YupPassword(Yup)
 // Signup
 const signupSchema = object({
 	username: string()
-		.min(3, 'Username must be at least 3 characters long.')
-		.max(20, 'Username must be 20 characters or less.')
+		// .min(3, 'Username must be at least 3 characters long.')
+		// .max(20, 'Username must be 20 characters or less.')
 		.required('Username is required.'),
+
 	// Check password requirements
 	password: string()
-		.min(8, 'Password must be at least 8 characters long.')
+		// .min(8, 'Password must be at least 8 characters long.')
 		// .matches(/[a-zA-Z0-9]/, "Password should contain letters and numbers.")
-		.minLowercase(1, 'Password must contain at least 1 lowercase letter.')
-		.minUppercase(1, 'Password must contain at least 1 uppercase letter.')
-		.minNumbers(1, 'Password must contain at least 1 number.')
-		.minSymbols(1, 'Password must contain at least 1 special character.')
+		// .minLowercase(1, 'Password must contain at least 1 lowercase letter.')
+		// .minUppercase(1, 'Password must contain at least 1 uppercase letter.')
+		// .minNumbers(1, 'Password must contain at least 1 number.')
+		// .minSymbols(1, 'Password must contain at least 1 special character.')
 		.required('Password is required.')
 })
 
@@ -44,7 +45,7 @@ const initialValues = {
 const Auth = () => {
     const { user } = useContext(UserContext)
 	const { setUser } = useOutletContext()
-	const [formStatus, setformStatus] = useState('')
+	// const [formStatus, setformStatus] = useState('')
     const navigate = useNavigate()
 	const requestUrl = user ? '/login' : '/signup'
 
