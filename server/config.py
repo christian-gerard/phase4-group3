@@ -6,6 +6,7 @@ from flask_session import Session
 from flask_bcrypt import Bcrypt
 from flask_marshmallow import Marshmallow
 from os import environ
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dreams.db"
@@ -32,3 +33,6 @@ flask_bcrypt = Bcrypt(app)
 
 # # # # # Marshmallow
 ma = Marshmallow(app)
+
+# # # # # CORS
+CORS(app)

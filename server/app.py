@@ -1,7 +1,7 @@
 from flask import request, session
 from flask_restful import Resource
 from config import app, db, api
-from schemas.user_schema import user_schema_post
+from schemas.user_schema import user_schema
 from schemas.entry_schema import entry_schema, entries_schema
 from schemas.category_schema import category_schema
 from models.category import Category
@@ -80,13 +80,11 @@ class SignUp(Resource):
         try:
             # Pass partial on load() method to avoid id requirement
             data = request.get_json()
-            new_user = user_schema_post.load({"username": data.get('username')})
-            # new_user = User(username=data.get('username'))
-            new_user.password_hash = data.get('_password_hash')
+            new_user = user_schema.load({"username": data.get('username'), "password_hash": data.get("_password_hash")})
             db.session.add(new_user)
             db.session.commit()
             session['user_id'] = new_user.id
-            return user_schema_post.dump(new_user), 201
+            return user_schema.dump(new_user), 201
         except Exception as e:
             return {"Error": str(e)}, 400
 
@@ -97,10 +95,10 @@ class Login(Resource):
         try:
             data = request.get_json()
             user = User.query.filter_by(username=data.get('username')).first()
-            if user and user.authenticate(data.get('password')):
+            if user and user.authenticate(data.get('_password_hash')):
                 session["user_id"] = user.id
                 session["username"] = user.username
-                return user_schema_post.dump(user), 200
+                return user_schema.dump(user), 200
             else:
                 return {"Message": "Invalid Login"}, 422
         except Exception as e:

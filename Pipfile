@@ -15,6 +15,9 @@ flask_sqlalchemy = '*'
 flask_session = '*'
 sqlalchemy = '*'
 ipdb = '*'
+faker = '*'
+rich='*'
+
 
 [dev-packages]
 
