@@ -12,7 +12,6 @@ import { useFormik } from 'formik'
 // category
 
 // Yup entry validation
-//! Figure out date and category
 const entrySchema = object({
     title: string().max(50, 'Title must be 50 characters or less'),
     date: yupDate().required('Date is required.'),
@@ -32,17 +31,15 @@ const NewEntry = () => {
     // const { updateCurrentUser } = useOutletContext()
     const navigate = useNavigate()
     
-    //! User_id and created_at set on the backend
     const formik = useFormik({
         initialValues,
         validationSchema: entrySchema,
         onSubmit: (formData) => {
-            fetch("/entries", {
+            fetch("http://127.0.0.1:5555/api/v1/entries", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                // body: JSON.stringify(formData)
                 body: JSON.stringify({
                     title: formData.title,
                     date: formData.date,
