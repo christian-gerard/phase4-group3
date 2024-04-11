@@ -9,12 +9,17 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
     id = fields.Integer(required=True)
 
     title = fields.String(
-        validate=validate.Length(min=0,max=30, error="Title must be between 2 and 30 characters")
+        validate=validate.Length(
+            max=50, 
+            error="Title must be less than 50 characters")
         )
     
     body = fields.String(
         require=True, 
-        validate=validate.Length(min=15,max=1250, error="Body must be between 15 and 1250 characters")
+        validate=validate.Length(
+            min=10,
+            max=40000, 
+            error="Body must be between 15 and 40,000 characters")
         )
     
     date = fields.Date(require=True)

@@ -12,7 +12,7 @@ class Entry(db.Model, SerializerMixin):
     body = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
     updated_at = db.Column(db.DateTime, onupdate=datetime.now())
-    date = db.Column(db.Date, default=datetime.now().date())
+    date = db.Column(db.String, default=datetime.now().date().strftime("%m-%d-%Y"))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

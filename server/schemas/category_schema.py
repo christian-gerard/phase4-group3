@@ -1,4 +1,4 @@
-from . import ma, fields, validate, Category
+from . import ma, fields, validate, Category, validates
 
 class CategorySchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -8,7 +8,16 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
         exclude=('created_at',)
 
     id = fields.Integer(required=True)
-    name = fields.String(required=True)
+    
+    name = fields.String(
+        required=True,
+        unique=True,
+        validate= validate.Length(
+            min=1,
+            max=25,
+            error="Name must be between 1 and 25 characters"
+        )
+        )
 
     summary = fields.String(
         validate=validate.Length(
@@ -23,8 +32,8 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
     description = fields.String(
         validate=validate.Length(
             min=3,
-            max=1000,
-            error="Description must be between 3 and 1000 characters"
+            max=1250,
+            error="Description must be between 3 and 1250 characters"
         ),
     )
 
