@@ -22,7 +22,12 @@ class Entries(Resource):
     def post(self):
         try:
             data = request.get_json()
-            entry = entry_schema.load(data)
+            entry = entry_schema.load({
+                "title" : data.get("title"),
+                "body" : data.get("body"),
+                "date" : data.get("date"),
+                "category_id" : data.get("category_id"),
+                "user_id" : session['user_id']})
             db.session.add(entry)
             db.session.commit()
             return entry_schema.dump(entry), 201
@@ -75,7 +80,7 @@ class SignUp(Resource):
         try:
             # Pass partial on load() method to avoid id requirement
             data = request.get_json()
-            new_user = user_schema_post.load({"username": data.get('usernmae')})
+            new_user = user_schema_post.load({"username": data.get('username')})
             # new_user = User(username=data.get('username'))
             new_user.password_hash = data.get('_password_hash')
             db.session.add(new_user)
