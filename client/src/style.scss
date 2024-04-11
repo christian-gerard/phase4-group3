@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	max-width: 600px;
 }
 ol, ul {
 	list-style: none;
@@ -74,15 +75,15 @@ $text: snow;
 // $color-primary: ;
 // $color-secondary: ;
 // $color-accent: ;
+$offwhite: #f8f8ea;
+$barelyblue: #d4e6f2;
+$lilac: #ccc1d5;
+$greyblue: #a3b4dc;
+$goldochre: #febd0f;
+$grapefruit: #f26d79;
+$dkgrapefruit: #cc6666;
+$purple: #6d69ac;
 $bg: #19194d;
-$test-4: #f8f8ea;
-$test-1: #febd0f;
-$test-3: #f26d79;
-$test-8: #cc6666;
-$test-2: #ccc1d5;
-$test-5: #a3b4dc;
-$test-6: #6d69ac;
-$test-7: #d4e6f2;
 
 * {
 	font-optical-sizing: auto;
@@ -95,28 +96,28 @@ $test-7: #d4e6f2;
 main {
 	margin: 0 16px;
 	padding: 16px;
-	background-color: $test-6;
-	border: 1px solid $test-8;
+	// background-color: $purple;
+	border: 1px solid $dkgrapefruit;
 	border-radius: 3px;
 }
 
 header {
-	background-color: $test-7;
+	// background-color: grey;
 }
 
 nav {
-	background-color: $test-8;
+	// background-color: $grapefruit;
 }
 
 h1 {
 	font-family: $font-accent;
 	font-size: 45px;
-	color: $test-7;
-	background-color: $test-3;
+	color: $barelyblue;
+	// background-color: $bg;
 }
 
 hr {
-	background-color: $test-1;
+	background-color: $barelyblue;
 	border: none;
 	height: 2px;
 }
@@ -125,7 +126,7 @@ h2 {
 	margin: 20px 0;
 	font-family: $font-accent;
 	font-size: x-large;
-	color: $test-4;
+	color: $goldochre;
 	text-transform: uppercase;
 }
 
@@ -142,57 +143,57 @@ section {
 }
 
 #a {
-	background: $test-4
+	background: $offwhite;
 }
 #b {
-	background: $test-1
+	background: $barelyblue;
 }
 #c {
-	background: $test-3
+	background: $lilac;
 }
 #d {
-	background: $test-8
+	background: $greyblue;
 }
 #e {
-	background: $test-2
+	background: $goldochre;
 }
 #f {
-	background: $test-5
+	background: $grapefruit;
 }
 #g {
-	background: $test-6
+	background: $dkgrapefruit;
 }
 #h {
-	background: $test-7
-}
-
-.tester {
-	margin: 16px 0;
-	padding: 16px;
-	display: block;
+	background: $purple;
 }
 
 .auth {
 	margin: 16px 0;
-	background-color: $test-6;
-	border: 1px solid $test-7;
-
+	// background-color: hotpink;
+	border: 1px solid $goldochre;
 }
 
 form {
-	background-color: $test-8;
+	background-color: $greyblue;
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+input {
+	background-color: $offwhite;
+	border-radius: 3px;
 }
 
 // Links & Buttons
 a {
-	color: $test-7;
+	color: $greyblue;
 	text-decoration: none;
 	cursor: pointer;
   }
   
-  a:hover {
-	color: $test-3;
-  }
+a:hover {
+color: $grapefruit;
+}
 
 #link {
 	margin-right: 10px;
@@ -200,7 +201,7 @@ a {
 	text-transform: uppercase;
 	font-family: $font-primary;
 	font-size: medium;
-	color: $test-5;
+	color: cornflowerblue;
 }
 
 // Footer
@@ -220,7 +221,20 @@ footer > p {
 	text-align: center;
   }
 
-// Breakpoints
+/* Breakpoints */
 // Tablet
+@media only screen and (min-width: 600px) {
+	body {
+		max-width: 990px;
+	}
+	main {
+		background-color: snow;
+	}
+}
 
 // Desktop
+@media only screen and (min-width: 992px) {
+	main {
+		// background-color: darkgreen;
+	}
+}

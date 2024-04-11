@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
 import { useFormik } from 'formik'
+import { UserContext } from '../context/UserContext'
 
 YupPassword(Yup)
 
@@ -17,7 +18,7 @@ const signupSchema = object({
 	// Check password requirements
 	password: string()
 		.min(8, 'Password must be at least 8 characters long.')
-		// .matches(/[a-zA-Z0-9]/, "Password can only contain letters and numbers.")
+		// .matches(/[a-zA-Z0-9]/, "Password should contain letters and numbers.")
 		.minLowercase(1, 'Password must contain at least 1 lowercase letter.')
 		.minUppercase(1, 'Password must contain at least 1 uppercase letter.')
 		.minNumbers(1, 'Password must contain at least 1 number.')
@@ -41,14 +42,14 @@ const initialValues = {
 }
 
 const Auth = () => {
-	const [loggedIn, setLoggedIn] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
+    const { user } = useContext(UserContext)
+	const { setUser } = useOutletContext()
 	const navigate = useNavigate()
-	const requestUrl = loggedIn ? '/login' : '/signup'
+	const requestUrl = user ? '/login' : '/signup'
 
 	const formik = useFormik({
 		initialValues,
-		validationSchema: loggedIn ? loginSchema : signupSchema,
+		validationSchema: user ? loginSchema : signupSchema,
 		onSubmit: (formData) => {
 			fetch(requestUrl, {
 				method: 'POST',
@@ -59,7 +60,7 @@ const Auth = () => {
 			}).then((res) => {
 				if (res.ok) {
 					res.json()
-						// .then(updateCurrentUser)
+						.then(setUser)
 						.then(() => navigate('/'))
 				} else {
 					return res
@@ -73,13 +74,10 @@ const Auth = () => {
 	return (
 		<div className='auth'>
 			<h2>Sign up or log in to get started</h2>
-			{/* <h3>{loggedIn ? "Not a member?" : "Already signed up?"}</h3> */}
-			<button onClick={() => setLoggedIn((currentState) => !currentState)}>
-				{loggedIn ? 'Sign up' : 'Login'}
-			</button>
+			<button onClick={() => setUser((currentState) => !currentState)}>{user ? 'Sign up' : 'Login'}</button>
 
 			<form onSubmit={formik.handleSubmit}>
-				{!loggedIn && (
+				{!user && (
 					<>
 						<label>Username </label>
 						<input
@@ -109,7 +107,7 @@ const Auth = () => {
 						{formik.errors.password}
 					</div>
 				)}
-				<input type='submit' value={loggedIn ? 'Login' : 'Sign up'} />
+				<input type='submit' value={user ? 'Login' : 'Sign up'} />
 			</form>
 		</div>
 )}
