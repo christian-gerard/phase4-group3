@@ -115,7 +115,7 @@ with app.app_context():
 
             user = User(username=username)
 
-            user.password_hash = user.username + 'password'
+            user.password_hash = user.username + 'Password1!'
 
             users.append(user)
 

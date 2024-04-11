@@ -35,8 +35,8 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
 
     @validates('date')
     def validate_date(self, date):
-        if not datetime.strptime(date, "%m-%d-%Y"):
-            raise ValueError('Date must be in \"MM-DD-YYYY\"')
+        if not datetime.strptime(date, "%Y-%m-%d"):
+            raise ValueError('Date must be in \"YYYY-MM-DD\"')
 
 
 entry_schema = EntrySchema()
