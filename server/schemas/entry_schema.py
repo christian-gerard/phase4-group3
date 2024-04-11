@@ -7,7 +7,7 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         ordered = True
         partial = ('id',)
 
-    id = fields.Integer()
+    # id = fields.Integer()
 
     title = fields.String(
         validate=validate.Length(
