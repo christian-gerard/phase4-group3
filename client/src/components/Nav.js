@@ -7,7 +7,8 @@ const Nav = () => {
     console.log(user)
     return (
         <header>
-            <h1>Rabbit Rabbit &#128007;</h1><hr/>
+            <h1>Rabbit Rabbit &#128007;</h1>
+            <hr/>
             <nav>
                 <NavLink id='link' to='/' className=''>Home</NavLink>
                 {user ?

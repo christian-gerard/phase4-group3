@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import Error from '../pages/Error'
-// import Auth from '../pages/Auth'
 import Auth from '../components/auth/Auth'
 import NewEntry from '../pages/NewEntry'
 import Entries from '../pages/Entries'
