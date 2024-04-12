@@ -63,6 +63,13 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         load_only=True
     )
 
+    entries = fields.Nested(
+        "EntrySchema",
+        only=('title', 'body', 'date', 'id'),
+        exclude=('user',),
+        many=True
+    )
+
     def load(self, data, instance=None, *, partial=False, **kwargs):
         # Load the instance using Marshmallow's default behavior
         loaded_instance = super().load(
