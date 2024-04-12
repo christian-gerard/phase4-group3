@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import Error from '../pages/Error'
-import Auth from '../pages/Auth'
+// import Auth from '../pages/Auth'
+import Registration from '../components/auth/Registration'
 import NewEntry from '../pages/NewEntry'
 import Entries from '../pages/Entries'
 import Entry from '../pages/Entry'
@@ -14,12 +15,12 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Auth />,
+                element: <Registration />,
                 index: true
-            },
+            },  
             {
-                path: '/auth', 
-                element: <Auth />
+                path: '/registration', 
+                element: <Registration />
             },
             {
                 path: '/new',

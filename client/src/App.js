@@ -2,12 +2,31 @@
 import { Outlet } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 
 const App = () => {
-	return (
+  const [currentUser, setCurrentUser] = useState(null)
+	
+
+  const updateCurrentUser = (user) => setCurrentUser(user)
+
+  // useEffect(() => {
+  //   fetch("/me")
+  //   .then(resp => {
+  //     if (resp.ok) {
+  //       resp.json().then(updateCurrentUser)
+        
+  //     } else {
+  //       toast.error("Please log in")
+  //     }
+  //   })
+  // }, []);
+
+  return (
 		<main>
       <Nav />
-      <Outlet context={{  }}/>
+      <Outlet context={{ currentUser }}/>
       <h2>Test Colors</h2>
       <section>
         <div id='a' className='color-test' />

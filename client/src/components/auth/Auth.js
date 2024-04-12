@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
 import { useFormik } from 'formik'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 
 YupPassword(Yup)
 

@@ -41,24 +41,32 @@ const initialValues = {
 	password: ''
 }
 const Registration = () => {
+	// Track if someone is in a login or signup state, defaults to signup
 	const [isLogin, setIsLogin] = useState(false)
 	const { updateCurrentUser } = useOutletContext()
 	const navigate = useNavigate()
 	const requestUrl = isLogin ? '/login' : '/signup'
+
 	const formik = useFormik({
 		initialValues,
 		validationSchema: isLogin ? loginSchema : signupSchema,
+		// onSubmit is used as handleSubmit in the form
 		onSubmit: (formData) => {
 			fetch(requestUrl, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(formData)
+				// body: JSON.stringify(formData)
+				body: JSON.stringify({
+					username: formData.username,
+					_password_hash: formData.password
+				})
 			}).then((resp) => {
 				if (resp.ok) {
 					resp.json()
 						.then(updateCurrentUser)
+						//! Update to view all journal entries
 						.then(() => navigate('/'))
 				} else {
 					return resp
@@ -71,30 +79,23 @@ const Registration = () => {
 
 	return (
 		<div>
-			<h2>Sign up or log in to get started</h2>
-			{/* <h3>{isLogin ? "Not a member?" : "Already signed up?"}</h3> */}
-			<button onClick={() => setIsLogin((currentState) => !currentState)}>
-				{isLogin ? 'Sign up' : 'Login'}
-			</button>
-
+			<h2>Get started</h2>
 			<form onSubmit={formik.handleSubmit}>
-				{!isLogin && (
-					<>
-						<label>Username </label>
-						<input
-							type='text'
-							name='username'
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							value={formik.values.username}
-						/>
-						{formik.errors.username && formik.touched.username && (
-							<div className='error-message show'>
-								{formik.errors.username}
-							</div>
-						)}
-					</>
-				)}
+				<>
+					<label>Username </label>
+					<input
+						type='text'
+						name='username'
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.username}
+					/>
+					{formik.errors.username && formik.touched.username && (
+						<div className='error-message show'>
+							{formik.errors.username}
+						</div>
+					)}
+				</>
 				<label>Password </label>
 				<input
 					type='password'
@@ -108,9 +109,13 @@ const Registration = () => {
 						{formik.errors.password}
 					</div>
 				)}
-
 				<input type='submit' value={isLogin ? 'Login' : 'Sign up'} />
 			</form>
+			<br />
+			<h3>{isLogin ? "Not a member?" : "Already signed up?"}</h3>
+				<button onClick={() => setIsLogin((currentState) => !currentState)}>
+				{isLogin ? 'Sign up' : 'Login'}
+			</button>
 		</div>
 	)
 }
