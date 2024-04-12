@@ -13,8 +13,14 @@ function Entries() {
         .then(resp => resp.json())
         .then(data => setEntries(data))
 
-        setPages(entries.length / 10)
+        
 
+
+    }, [])
+
+    useEffect(() => {
+
+        setPages(entries.length / 10)
 
     }, [entries])
 
@@ -30,7 +36,10 @@ function Entries() {
         } 
     }
 
-    const renderEntryPreviews = entries.slice((currentPage - 1) * 10, currentPage * 10).map((entry) => <EntryPreview key={entry.id} {...entry} />)
+    const startIndex = (currentPage - 1) * 10
+    const endIndex = currentPage * 10
+
+    const renderEntryPreviews = entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />)
 
     return ( 
         <>
