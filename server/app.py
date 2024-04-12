@@ -90,15 +90,6 @@ class SignUp(Resource):
 
 api.add_resource(SignUp, '/signup')
 
-class CheckSession(Resource):
-    def get(self):
-        if 'user_id' not in session:
-            return {'message': 'Not Authorized'}, 403
-        if user := db.session.get(User, session['user_id']):
-            return user.to_dict(), 200
-        return {'message': 'Not Authorized'}, 403
-api.add_resource(CheckSession, '/check_session') 
-
 class Login(Resource):
     def post(self):
         try:
