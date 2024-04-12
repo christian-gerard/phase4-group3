@@ -229,18 +229,58 @@ section {
 }
 
 // New Entry
-article {
+#new {
 	margin-top: 16px;
 	border: 1px solid $grapefruit;
 	font-family: $font-primary;
 	display: flex;
 	flex-flow: column nowrap;
-	justify-content: center;
-	
 }
+
 .new-entry {
-	background-color: $lilac;
+	width: 88%;
+	// background-color: $lilac;
 	border: 1px solid $greyblue;
+	align-self: center;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	color: $bg;
+}
+
+.new-entry > input {
+	margin: 0 0 16px 16px;
+	padding: 3px 6px;
+	width: 16em;
+	height: 1.75em;
+	border-radius: 3px;
+	border: none;
+	background-color: $offwhite;
+	color: $bg;
+	float: left;
+	// position: relative;
+}
+
+.new-entry > label {
+	font-size: 12px;
+	text-transform: uppercase;
+	float: left;
+}
+
+#title {
+	width: 25em;
+}
+
+#date {
+	width: 8em;
+}
+
+#entry {
+	width: 40em;
+	height: 25em;
+	overflow-wrap: normal;
+	resize: none;
+
 
 }
 
@@ -269,11 +309,17 @@ footer > p {
 	main {
 		background-color: $purple;
 	}
+	nav {
+		max-width: 500px;
+	}
 }
 
 // Desktop
 @media only screen and (min-width: 992px) {
 	main {
 		background-color: darkblue;
+	}
+	nav {
+		max-width: 500px;
 	}
 }
