@@ -48,9 +48,7 @@ table {
 }
 
 /* 
-<uniquifier>: Use a unique and descriptive class name
 <weight>: Use a value from 100 to 900
-<width>: Use a value from 62.5 to 100
 
 .noto-sans-<uniquifier> {
   font-family: "Noto Sans", sans-serif;
@@ -63,15 +61,13 @@ table {
 
 
 /* Start Styles */
-
 // Typography
 $font-primary: "Noto Sans", sans-serif;
 $font-accent: "Autour One", Verdana, Tahoma, sans-serif;
 $font-default: 400;
 
 // Colors
-// $text: snow;
-$text: #febd0f;
+$text: snow;
 $offwhite: #f8f8ea;
 $barelyblue: #d4e6f2;
 $lilac: #ccc1d5;
@@ -93,30 +89,57 @@ $bg: #19194d;
 main {
 	margin: 0 16px;
 	padding: 16px;
-	// background-color: $purple;
-	border: 1px solid $dkgrapefruit;
+	// border: 1px solid $dkgrapefruit;
 	border-radius: 3px;
 }
 
-// header {
-// 	background-color: grey;
-// }
+// Links & Buttons
+a {
+	color: $greyblue;
+	text-decoration: none;
+	cursor: pointer;
+  }
+  
+a:hover {
+	color: $dkgrapefruit;
+	text-decoration: underline;
+	cursor: pointer;
+}
 
-// nav {
-// 	background-color: $grapefruit;
-// }
+#link {
+	margin-right: 10px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-family: $font-primary;
+	font-size: medium;
+	color: $greyblue ;
+	cursor: pointer;
+}
+
+#link.nav-link:hover {
+	text-decoration: underline;
+}
+
+#link.nav-link.active {
+	color: $grapefruit;
+}
+
+nav {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+}
 
 h1 {
 	font-family: $font-accent;
 	font-size: 45px;
 	color: $barelyblue;
-	// background-color: $bg;
 }
 
 hr {
-	// background-color: $barelyblue;
+	background-color: $greyblue;
 	border: none;
-	height: 2px;
+	height: 1px;
 }
 
 h2 {
@@ -164,6 +187,7 @@ section {
 	background: $purple;
 }
 
+// Auth
 .auth {
 	margin: 16px 0;
 	// background-color: hotpink;
@@ -204,24 +228,20 @@ section {
 	background-color: $greyblue;
 }
 
-// Links & Buttons
-a {
-	color: $greyblue;
-	text-decoration: none;
-	cursor: pointer;
-  }
-  
-a:hover {
-color: $grapefruit;
-}
-
-#link {
-	margin-right: 10px;
-	text-decoration: none;
-	text-transform: uppercase;
+// New Entry
+article {
+	margin-top: 16px;
+	border: 1px solid $grapefruit;
 	font-family: $font-primary;
-	font-size: medium;
-	color: cornflowerblue;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	
+}
+.new-entry {
+	background-color: $lilac;
+	border: 1px solid $greyblue;
+
 }
 
 // Footer
@@ -234,9 +254,8 @@ footer {
 }
 
 footer > p {
-	// width: 85%;
 	font-family: $font-primary;
-	font-size: small;
+	font-size: x-small;
 	line-height: normal;
 	text-align: center;
   }
@@ -248,7 +267,7 @@ footer > p {
 		max-width: 990px;
 	}
 	main {
-		background-color: snow;
+		background-color: $purple;
 	}
 }
 
