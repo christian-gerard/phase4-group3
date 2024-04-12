@@ -93,18 +93,18 @@ $bg: #19194d;
 main {
 	margin: 0 16px;
 	padding: 16px;
-	background-color: $purple;
+	// background-color: $purple;
 	border: 1px solid $dkgrapefruit;
 	border-radius: 3px;
 }
 
-header {
-	background-color: grey;
-}
+// header {
+// 	background-color: grey;
+// }
 
-nav {
-	background-color: $grapefruit;
-}
+// nav {
+// 	background-color: $grapefruit;
+// }
 
 h1 {
 	font-family: $font-accent;
@@ -114,14 +114,14 @@ h1 {
 }
 
 hr {
-	background-color: $barelyblue;
+	// background-color: $barelyblue;
 	border: none;
 	height: 2px;
 }
 
 h2 {
 	margin: 20px 0;
-	font-family: $font-accent;
+	font-family: $font-primary;
 	font-size: x-large;
 	color: $goldochre;
 	text-transform: uppercase;
@@ -167,18 +167,41 @@ section {
 .auth {
 	margin: 16px 0;
 	// background-color: hotpink;
-	border: 1px solid $goldochre;
+	border: 1px solid $barelyblue;
 }
 
-form {
-	background-color: $greyblue;
+.form {
+	// background-color: $greyblue;
+	font-family: $font-primary;
+	color: $bg;
 	display: flex;
 	flex-flow: column nowrap;
+	align-items: center;
 }
 
-input {
-	background-color: $offwhite;
+.auth > p {
+	margin: 16px 0;
+	font-family: $font-primary;
+	text-align: center;
+	color: $greyblue;
+}
+
+.input {
+	background-color: #333;
+	margin-bottom: 16px;
+	padding: 3px 6px;
+	width: 16em;
+	height: 1.75em;
 	border-radius: 3px;
+	border: none;
+}
+
+.submit, .change-form{
+	margin-bottom: 16px;
+	height: 2em;
+	width: 16em;
+	text-transform: uppercase;
+	background-color: $greyblue;
 }
 
 // Links & Buttons
@@ -232,6 +255,6 @@ footer > p {
 // Desktop
 @media only screen and (min-width: 992px) {
 	main {
-		background-color: darkgreen;
+		background-color: darkblue;
 	}
 }

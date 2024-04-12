@@ -1,12 +1,16 @@
+import { NavLink } from 'react-router-dom'
 
-function EntryPreview({title, body, date, category}) {
+function EntryPreview({id, title, body, date, category}) {
 
 
     return (
-        <>
-            <h5>{date} | </h5>
-            <p>Body Preview ~100 Char</p>
-        </>
+        <NavLink to={`/view/${id}`} className=''>
+            <div>
+                <h5>{date} | {title}</h5>
+                <h4>{category.name}</h4>
+                <p>{body}</p>
+            </div>
+        </NavLink>
     )
 }
 
