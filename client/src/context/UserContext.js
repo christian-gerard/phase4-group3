@@ -3,13 +3,14 @@ import { createContext, useState, useEffect } from 'react'
 export const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const url = 'http://localhost:5555/api/v1/'
-    const [user, setUser] = useState([])
+    const url = 'http://localhost:5555/api/v1'
+    const [user, setUser] = useState(null)
 
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch(`${url}login/`)
+                // const res = await fetch(`${url}/login`)
+                const res = await fetch(`${url}/entries`)
                 const data = await res.json()
                 setUser(data)
             } catch (err) {
@@ -17,6 +18,14 @@ const UserProvider = ({ children }) => {
             }
         })()
     }, [])
+
+    const login = (user) => {
+        setUser(user)
+    }
+
+    const logout = (user) => {
+        setUser(null)
+    }
 
     // const handleNewUser = async () => {
     //     try {
@@ -28,7 +37,7 @@ const UserProvider = ({ children }) => {
     // }
 
     return (
-        <UserContext.Provider value={{ user, setUser }}>
+        <UserContext.Provider value={{ user, login, logout }}>
             {children}
         </UserContext.Provider>
 )}

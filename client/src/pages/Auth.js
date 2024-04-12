@@ -1,10 +1,10 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
-import { useFormik } from 'formik'
+import { Formik, Form, Field, useFormik } from 'formik'
 import { UserContext } from '../context/UserContext'
 
 YupPassword(Yup)
@@ -12,19 +12,22 @@ YupPassword(Yup)
 // Signup
 const signupSchema = object({
 	username: string()
-		// .min(3, 'Username must be at least 3 characters long.')
-		// .max(20, 'Username must be 20 characters or less.')
+		.min(3, 'Username must be at least 3 characters long.')
+		.max(20, 'Username must be 20 characters or less.')
 		.required('Username is required.'),
 
-	// Check password requirements
 	password: string()
-		// .min(8, 'Password must be at least 8 characters long.')
-		// .matches(/[a-zA-Z0-9]/, "Password should contain letters and numbers.")
-		// .minLowercase(1, 'Password must contain at least 1 lowercase letter.')
-		// .minUppercase(1, 'Password must contain at least 1 uppercase letter.')
-		// .minNumbers(1, 'Password must contain at least 1 number.')
-		// .minSymbols(1, 'Password must contain at least 1 special character.')
-		.required('Password is required.')
+		.min(8, 'Password must be at least 8 characters long.')
+		.matches(/[a-zA-Z0-9]/, "Password should contain letters and numbers.")
+		.minLowercase(1, 'Password must contain at least 1 lowercase letter.')
+		.minUppercase(1, 'Password must contain at least 1 uppercase letter.')
+		.minNumbers(1, 'Password must contain at least 1 number.')
+		.minSymbols(1, 'Password must contain at least 1 special character.')
+		.required('Password is required.'),
+
+	confirmPassword: string()
+		.oneOf([Yup.ref('password'), null], 'Passwords must match.')
+		.required('Confirm Password is required.')
 })
 
 // Login
@@ -33,19 +36,20 @@ const loginSchema = object({
 	// Add additional password requirements
 	password: string()
 		.min(8, 'Password must be at least 8 characters long.')
-		// .matches(/[a-zA-Z0-9]/, "Password can only contain letters and numbers.")
+		.matches(/[a-zA-Z0-9]/, "Password can only contain letters and numbers.")
 		.required('Password is required.')
 })
 
 const initialValues = {
 	username: '',
-	password: ''
+	password: '',
+	confirmPassword: ''
 }
 
 const Auth = () => {
-    const { user } = useContext(UserContext)
+    const { user, login } = useContext(UserContext)
 	const { setUser } = useOutletContext()
-	// const [formStatus, setformStatus] = useState('')
+    // const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate()
 	const requestUrl = user ? '/login' : '/signup'
 
@@ -62,7 +66,7 @@ const Auth = () => {
 			}).then((res) => {
 				if (res.ok) {
 					res.json()
-						.then(setUser)
+						.then((userData) => login(userData))
 						.then(() => navigate('/'))
 				} else {
 					return res
@@ -75,42 +79,59 @@ const Auth = () => {
 
 	return (
 		<div className='auth'>
-			<h2>Sign up or log in to get started</h2>
-			<button onClick={() => setUser((currentState) => !currentState)}>{user ? 'Sign up' : 'Login'}</button>
-
-			<form onSubmit={formik.handleSubmit}>
-				{!user && (
-					<>
-						<label>Username </label>
-						<input
-							type='text'
-							name='username'
-							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
-							value={formik.values.username}
-						/>
-						{formik.errors.username && formik.touched.username && (
-							<div className='error-message show'>
-								{formik.errors.username}
-							</div>
-						)}
-					</>
-				)}
-				<label>Password </label>
-				<input
-					type='password'
-					name='password'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.password}
-				/>
-				{formik.errors.password && formik.touched.password && (
-					<div className='error-message show'>
-						{formik.errors.password}
-					</div>
-				)}
-				<input type='submit' value={user ? 'Login' : 'Sign up'} />
-			</form>
+			<p>Sign up or log in to get started</p>
+			<Formik>
+				<Form className='form' onSubmit={formik.handleSubmit}>
+					<Field
+						type='text'
+						name='username'
+						placeholder='Username'
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.username}
+						className='input'
+					/>
+					{formik.errors.username && formik.touched.username && (
+						<div className='error-message show'>
+							{formik.errors.username}
+						</div>
+					)}
+					<Field
+						type='password'
+						name='password'
+						placeholder='Password'
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.password}
+						className='input'
+					/>
+					{formik.errors.password && formik.touched.password && (
+						<div className='error-message show'>
+							{formik.errors.password}
+						</div>
+					)}
+					{!user && (
+						<>
+							<Field
+								type='password'
+								name='confirmPassword'
+								placeholder='Confirm Password'
+								onChange={formik.handleChange}
+								onBlur={formik.handleBlur}
+								value={formik.values.confirmPassword}
+								className='input'
+							/>
+							{formik.errors.confirmPassword && formik.touched.confirmPassword && (
+								<div className='error-message show'>
+									{formik.errors.confirmPassword}
+								</div>
+							)}
+						</>
+					)}
+				<input type='submit' className='submit' value={user ? 'Login' : 'Sign up'} />
+				<button className='change-form' onClick={() => setUser((currentState) => !currentState)}>{user ? 'Sign up' : 'Login'}</button>
+				</Form>
+			</Formik>
 		</div>
 )}
 
