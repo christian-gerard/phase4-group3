@@ -9,8 +9,7 @@ const UserProvider = ({ children }) => {
     useEffect(() => {
         (async () => {
             try {
-                // const res = await fetch(`${url}/login`)
-                const res = await fetch(`${url}/entries`)
+                const res = await fetch(`${url}/login`)
                 const data = await res.json()
                 setUser(data)
             } catch (err) {
