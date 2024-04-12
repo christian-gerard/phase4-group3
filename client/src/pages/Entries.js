@@ -1,27 +1,27 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import EntryPreview from './EntryPreview'
+import UserContext from '../context/UserContext'
 
 function Entries() {
 
+    const user = useContext(UserContext)
     const [entries, setEntries] = useState([])
-    const [pages, setPages] = useState()
+    const [pages, setPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
 
+    console.log(user)
+
     useEffect(() => {
-
-        fetch('http://127.0.0.1:5555/api/v1/entries')
-        .then(resp => resp.json())
-        .then(data => setEntries(data))
-
-        
-
+        if(user) {
+            setEntries(user.entries)
+        }
 
     }, [])
 
     useEffect(() => {
 
-        setPages(entries.length / 10)
-
+            setPages(Math.ceil(entries.length / 10))
+    
     }, [entries])
 
     const handlePrev = () => {
