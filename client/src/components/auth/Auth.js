@@ -76,7 +76,7 @@ const Auth = () => {
 						login(userData)
 					})
 					.then(() => {
-						navigate('/view')
+						isLogin ? navigate('/view') : navigate('/new')
 						toast.success("Logged in")
 					})
 					console.log(user)
