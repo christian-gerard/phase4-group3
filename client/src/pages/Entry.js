@@ -10,8 +10,15 @@ function Entry() {
 
     useEffect(() => {
 
-        fetch(`http://127.0.0.1:5555/api/v1/entries/${params.id}`)
-        .then(resp => resp.json())
+        fetch(`/entries/${params.id}`)
+        .then(resp => {
+            if(resp.ok) {
+               return resp.json()
+            } else if (resp.status === 403) {
+                return "User not logged in"
+            }
+
+        })
         .then(data => setSingleEntry(data))
 
         setIsEdit(false)

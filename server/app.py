@@ -11,11 +11,16 @@ from models.user import User
 import ipdb
 
 
+
+
 class Entries(Resource):
     def get(self):
         try:
-            entries = entries_schema.dump(Entry.query)
-            return entries, 200
+            if session.get("user_id"):
+                entries = entries_schema.dump(Entry.query.filter_by(user_id=session.get("user_id")))
+                return entries, 200
+            else:
+                return {"Error": "User not logged in"}, 403
         except Exception as e:
             return {"Error": str(e)}, 400
         
@@ -93,6 +98,7 @@ api.add_resource(SignUp, '/signup')
 class Login(Resource):
     def post(self):
         try:
+            
             data = request.get_json()
             user = User.query.filter_by(username=data.get('username')).first()
             if user and user.authenticate(data.get('_password_hash')):

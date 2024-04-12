@@ -1,10 +1,10 @@
 import {useState, useEffect, useContext} from 'react'
 import EntryPreview from './EntryPreview'
-import UserContext from '../context/UserContext'
+import { UserContext } from '../context/UserContext'
 
 function Entries() {
 
-    const user = useContext(UserContext)
+    const { user } = useContext(UserContext)
     const [entries, setEntries] = useState([])
     const [pages, setPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
