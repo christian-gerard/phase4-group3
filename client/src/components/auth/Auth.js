@@ -72,7 +72,6 @@ const Auth = () => {
 				if (res.ok) {
 					res.json()
 					.then((userData) => {
-						logout()
 						login(userData)
 					})
 					.then(() => {
