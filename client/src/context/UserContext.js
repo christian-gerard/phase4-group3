@@ -10,13 +10,22 @@ const UserProvider = ({ children }) => {
     }
 
     const logout = () => {
-        setUser(null)
+        fetch("/logout", {method: "DELETE"})
+        .then(resp => {
+            if (resp.status === 204) {
+                setUser(null)
+            }
+        })
+    }
+
+    const updateEntries = (updatedEntries) => {
+        setUser({...user, entries: updatedEntries})
     }
 
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
+        <UserContext.Provider value={{ user, login, logout, updateEntries }}>
             {children}
         </UserContext.Provider>
-)}
+)} 
 
 export default UserProvider

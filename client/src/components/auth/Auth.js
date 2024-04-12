@@ -50,9 +50,10 @@ const initialValues = {
 }
 
 const Auth = () => {
-	const { user, login, logout } = useContext(UserContext)
-	const [isLogin, setIsLogin] = useState(false)
-	const navigate = useNavigate()
+    const { user, login, logout } = useContext(UserContext)
+	  const [isLogin, setIsLogin] = useState(false)
+    const navigate = useNavigate()
+    
 	const requestUrl = isLogin ? '/login' : '/signup'
 
 	const handleIsLogin = () => {
@@ -70,17 +71,17 @@ const Auth = () => {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(formData)
-			}).then((res) => {
+			})
+			.then((res) => {
 				if (res.ok) {
 					res.json()
-						.then((userData) => {
-							logout()
-							login(userData)
-						})
-						.then(() => {
-							isLogin ? navigate('/view') : navigate('/new')
-							toast.success('Logged in')
-						})
+					.then((userData) => {
+						login(userData)
+					})
+					.then(() => {
+						isLogin ? navigate('/view') : navigate('/new')
+						toast.success("Logged in")
+					})
 					console.log(user)
 				} else {
 					return res
@@ -119,12 +120,11 @@ const Auth = () => {
 						value={formik.values._password_hash}
 						className='input'
 					/>
-					{formik.errors._password_hash &&
-						formik.touched._password_hash && (
-							<div className='error-message show'>
-								{formik.errors._password_hash}
-							</div>
-						)}
+					{formik.errors._password_hash && formik.touched._password_hash && (
+						<div className='error-message show'>
+							{formik.errors._password_hash}
+						</div>
+					)}
 					{!isLogin && (
 						<>
 							<Field
@@ -144,17 +144,8 @@ const Auth = () => {
 								)}
 						</>
 					)}
-					<input
-						type='submit'
-						className='submit'
-						value={isLogin ? 'Login' : 'Sign up'}
-					/>
-					<button
-						type='button'
-						className='change-form'
-						onClick={handleIsLogin}>
-						SWITCH : {isLogin ? 'Sign up' : 'Login'}
-					</button>
+				<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
+				<button type='button' className='change-form' onClick={handleIsLogin }>SWITCH : {isLogin ? 'Sign up' : 'Login'}</button>
 				</Form>
 			</Formik>
 		</div>
