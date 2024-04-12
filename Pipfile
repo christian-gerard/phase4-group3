@@ -17,6 +17,7 @@ sqlalchemy = '*'
 ipdb = '*'
 faker = '*'
 rich='*'
+flask_cors = '*'
 
 
 [dev-packages]
