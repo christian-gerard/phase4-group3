@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react'
+import toast from 'react-hot-toast'
 
 export const UserContext = createContext()
 
@@ -10,12 +11,21 @@ const UserProvider = ({ children }) => {
     }
 
     const logout = () => {
-        fetch("/logout", {method: "DELETE"})
-        .then(resp => {
-            if (resp.status === 204) {
-                setUser(null)
-            }
-        })
+        try {
+            fetch("/logout", {method: "DELETE"})
+            .then(resp => {
+                if (resp.status === 204) {
+                    setUser(null)
+                    toast.success('Entry Deleted')
+                } else {
+                    toast.error('Deletion failed...')
+                }
+            })
+        }
+        catch(err) {
+            throw err
+        }
+
     }
 
     const updateEntries = (updatedEntries) => {
