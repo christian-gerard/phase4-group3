@@ -15,6 +15,7 @@ const Nav = () => {
                     (<>
                         <NavLink id='link' to='/new' className=''>New Entry</NavLink>
                         <NavLink id='link' to='/view' className=''>View Journal</NavLink>
+                        <NavLink id='link' to='/categories' className=''>Dream Categories</NavLink>
                         <NavLink id='link' to='/' className='' onClick={logout}>Logout</NavLink>
                     </>) : null
                 }

@@ -5,6 +5,7 @@ import Auth from '../components/auth/Auth'
 import NewEntry from '../pages/NewEntry'
 import Entries from '../pages/Entries'
 import Entry from '../pages/Entry'
+import Categories from '../pages/Categories'
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path: '/view/:id',
                 element: <Entry />
+            },
+            {
+                path: '/categories',
+                element: <Categories />
             },
     ]}
 ])

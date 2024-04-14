@@ -11,7 +11,15 @@ from models.user import User
 import ipdb
 
 
-
+class Categories(Resource):
+    def get(self):
+        try:
+            serialized_categories = category_schema.dump(Category.query)
+            return serialized_categories, 200
+        except Exception as e:
+            return {"Error": str(e)}, 400
+        
+api.add_resource(Categories, '/categories')
 
 class Entries(Resource):
     def get(self):
