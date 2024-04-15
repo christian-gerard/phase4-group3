@@ -124,6 +124,19 @@ a:hover {
 	color: $grapefruit;
 }
 
+.all-entries {
+	margin-bottom: 16px;
+	height: 2em;
+	width: 5em;
+	text-transform: uppercase;
+	background-color: $purple;
+	border-radius: 3px;
+}
+
+.all-entries div > .error-message {
+	margin: 16px;
+}
+
 nav {
 	display: flex;
 	flex-flow: row nowrap;
@@ -190,7 +203,6 @@ section {
 // Auth
 .auth {
 	margin: 16px 0;
-	// border: 1px solid $barelyblue;
 }
 
 .form {
@@ -234,6 +246,7 @@ section {
 .error-message {
 	font-size: small;
 	color: $grapefruit;
+	font-family: $font-primary;
 }
 
 // New Entry
