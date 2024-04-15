@@ -1,44 +1,32 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 
 export const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const url = 'http://localhost:5555/api/v1'
     const [user, setUser] = useState(null)
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const res = await fetch(`${url}/login`)
-                const data = await res.json()
-                setUser(data)
-            } catch (err) {
-                throw new Error('Not found')
-            }
-        })()
-    }, [])
 
     const login = (user) => {
         setUser(user)
     }
 
-    const logout = (user) => {
-        setUser(null)
+    const logout = () => {
+        fetch("/logout", {method: "DELETE"})
+        .then(resp => {
+            if (resp.status === 204) {
+                setUser(null)
+            }
+        })
     }
 
-    // const handleNewUser = async () => {
-    //     try {
-
-    //     } catch (err) {
-            
-    //     }
-        
-    // }
+    const updateEntries = (updatedEntries) => {
+        setUser({...user, entries: updatedEntries})
+    }
 
     return (
-        <UserContext.Provider value={{ user, login, logout }}>
+        <UserContext.Provider value={{ user, login, logout, updateEntries }}>
             {children}
         </UserContext.Provider>
-)}
+)} 
 
 export default UserProvider

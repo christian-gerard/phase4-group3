@@ -1,28 +1,17 @@
 import {useState, useEffect, useContext} from 'react'
 import EntryPreview from './EntryPreview'
-import UserContext from '../context/UserContext'
+import { UserContext } from '../context/UserContext'
 
 function Entries() {
 
-    const user = useContext(UserContext)
-    const [entries, setEntries] = useState([])
+    const { user } = useContext(UserContext)
     const [pages, setPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
 
-    console.log(user)
-
-    useEffect(() => {
-        if(user) {
-            setEntries(user.entries)
-        }
-
-    }, [])
-
     useEffect(() => {
 
-            setPages(Math.ceil(entries.length / 10))
     
-    }, [entries])
+    }, [user])
 
     const handlePrev = () => {
         if (currentPage > 1) {
@@ -39,11 +28,18 @@ function Entries() {
     const startIndex = (currentPage - 1) * 10
     const endIndex = currentPage * 10
 
-    const renderEntryPreviews = entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />)
 
     return ( 
         <>
-        {renderEntryPreviews} 
+        {
+            user ? 
+
+            user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
+
+            : 
+            
+            <h1>User not Logged in</h1>
+        }
 
         <div>
             <button onClick={handlePrev}>Prev</button>

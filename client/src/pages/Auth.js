@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
 import { Formik, Form, Field, useFormik } from 'formik'
-import { UserContext } from '../context/UserContext'
+import { UserContext } from '../../context/UserContext'
 
 YupPassword(Yup)
 
@@ -16,7 +16,7 @@ const signupSchema = object({
 		.max(20, 'Username must be 20 characters or less.')
 		.required('Username is required.'),
 
-	password: string()
+	_password_hash: string()
 		.min(8, 'Password must be at least 8 characters long.')
 		.matches(/[a-zA-Z0-9]/, "Password should contain letters and numbers.")
 		.minLowercase(1, 'Password must contain at least 1 lowercase letter.')
@@ -26,7 +26,7 @@ const signupSchema = object({
 		.required('Password is required.'),
 
 	confirmPassword: string()
-		.oneOf([Yup.ref('password'), null], 'Passwords must match.')
+		.oneOf([Yup.ref('_password_hash'), null], 'Passwords must match.')
 		.required('Confirm Password is required.')
 })
 
@@ -34,7 +34,7 @@ const signupSchema = object({
 const loginSchema = object({
 	username: string().required('Username is required.'),
 	// Add additional password requirements
-	password: string()
+	_password_hash: string()
 		.min(8, 'Password must be at least 8 characters long.')
 		.matches(/[a-zA-Z0-9]/, "Password can only contain letters and numbers.")
 		.required('Password is required.')
@@ -42,32 +42,43 @@ const loginSchema = object({
 
 const initialValues = {
 	username: '',
-	password: '',
+	_password_hash: '',
 	confirmPassword: ''
 }
 
 const Auth = () => {
-    const { user, login } = useContext(UserContext)
-	const { setUser } = useOutletContext()
-    // const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const { user, login, logout } = useContext(UserContext)
+	const [isLogin, setIsLogin] = useState(false)
     const navigate = useNavigate()
-	const requestUrl = user ? '/login' : '/signup'
+	const requestUrl = isLogin ? '/login' : '/signup'
+
+	const handleIsLogin = () => {
+		setIsLogin(!isLogin)
+	}
 
 	const formik = useFormik({
 		initialValues,
-		validationSchema: user ? loginSchema : signupSchema,
+		validationSchema: isLogin ? loginSchema : signupSchema,
 		onSubmit: (formData) => {
+			console.log(formData)
 			fetch(requestUrl, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(formData)
-			}).then((res) => {
+			})
+			.then((res) => {
 				if (res.ok) {
 					res.json()
-						.then((userData) => login(userData))
-						.then(() => navigate('/'))
+					.then((userData) => {
+						login(userData)
+					})
+					.then(() => {
+						isLogin ? navigate('/view') : navigate('/new')
+						toast.success("Logged in")
+					})
+					console.log(user)
 				} else {
 					return res
 						.json()
@@ -80,7 +91,7 @@ const Auth = () => {
 	return (
 		<div className='auth'>
 			<p>Sign up or log in to get started</p>
-			<Formik>
+			<Formik onSubmit={formik.handleSubmit}>
 				<Form className='form' onSubmit={formik.handleSubmit}>
 					<Field
 						type='text'
@@ -98,19 +109,19 @@ const Auth = () => {
 					)}
 					<Field
 						type='password'
-						name='password'
+						name='_password_hash'
 						placeholder='Password'
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
-						value={formik.values.password}
+						value={formik.values._password_hash}
 						className='input'
 					/>
-					{formik.errors.password && formik.touched.password && (
+					{formik.errors._password_hash && formik.touched._password_hash && (
 						<div className='error-message show'>
-							{formik.errors.password}
+							{formik.errors._password_hash}
 						</div>
 					)}
-					{!user && (
+					{!isLogin && (
 						<>
 							<Field
 								type='password'
@@ -128,8 +139,8 @@ const Auth = () => {
 							)}
 						</>
 					)}
-				<input type='submit' className='submit' value={user ? 'Login' : 'Sign up'} />
-				<button className='change-form' onClick={() => setUser((currentState) => !currentState)}>{user ? 'Sign up' : 'Login'}</button>
+				<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
+				<button type='button' className='change-form' onClick={handleIsLogin }>SWITCH : {isLogin ? 'Sign up' : 'Login'}</button>
 				</Form>
 			</Formik>
 		</div>
