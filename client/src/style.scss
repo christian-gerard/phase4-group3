@@ -49,7 +49,6 @@ table {
 
 /* 
 <weight>: Use a value from 100 to 900
-
 .noto-sans-<uniquifier> {
   font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
@@ -77,6 +76,7 @@ $grapefruit: #f26d79;
 $dkgrapefruit: #cc6666;
 $purple: #6d69ac;
 $bg: #19194d;
+$black: #000;
 
 * {
 	font-optical-sizing: auto;
@@ -190,12 +190,10 @@ section {
 // Auth
 .auth {
 	margin: 16px 0;
-	// background-color: hotpink;
-	border: 1px solid $barelyblue;
+	// border: 1px solid $barelyblue;
 }
 
 .form {
-	// background-color: $greyblue;
 	font-family: $font-primary;
 	color: $bg;
 	display: flex;
@@ -211,11 +209,12 @@ section {
 }
 
 .input {
-	background-color: #333;
 	margin-bottom: 16px;
 	padding: 3px 6px;
 	width: 16em;
 	height: 1.75em;
+	color: $black;
+	background-color: $offwhite;
 	border-radius: 3px;
 	border: none;
 }
@@ -228,20 +227,76 @@ section {
 	background-color: $greyblue;
 }
 
+.auth .error-message {
+	margin-bottom: 16px;
+}
+
+.error-message {
+	font-size: small;
+	color: $grapefruit;
+}
+
 // New Entry
-article {
+#new {
+	width: 100%;
 	margin-top: 16px;
-	border: 1px solid $grapefruit;
 	font-family: $font-primary;
 	display: flex;
 	flex-flow: column nowrap;
-	justify-content: center;
-	
+	align-items: center;
 }
-.new-entry {
-	background-color: $lilac;
-	border: 1px solid $greyblue;
 
+.new-entry {
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.new-entry > input, textarea, select, option {
+	margin: 0 0 16px 0;
+	padding: 3px 6px;
+	height: 1.75em;
+	border-radius: 3px;
+	border: none;
+	background-color: $offwhite;
+	color: $black;
+}
+
+.new-entry > label {
+	width: 30em;
+	margin-bottom: 3px;
+	font-size: 12px;
+	text-transform: uppercase;
+	resize: none;
+}
+
+#title {
+	min-width: 20em;
+	max-width: 22em;
+}
+
+#date {
+	width: 8em;
+}
+
+select, option {
+	width: 15em;
+}
+
+textarea {
+	min-width: 20em;
+	max-width: 29em;
+	height: 25em;
+	overflow: auto;
+	resize: none;
+	font-family: $font-primary;
+}
+
+#submit-new {
+	margin-bottom: 16px;
+	height: 2em;
+	width: 16em;
+	text-transform: uppercase;
+	background-color: $greyblue;
 }
 
 // Footer
@@ -261,6 +316,7 @@ footer > p {
   }
 
 /* Breakpoints */
+//! inc styles for text area width in new entry
 // Tablet
 @media only screen and (min-width: 600px) {
 	body {
@@ -269,11 +325,23 @@ footer > p {
 	main {
 		background-color: $purple;
 	}
+	nav {
+		max-width: 500px;
+	}
+	textarea {
+		width: 50em;
+	}
 }
 
 // Desktop
 @media only screen and (min-width: 992px) {
 	main {
 		background-color: darkblue;
+	}
+	nav {
+		max-width: 500px;
+	}
+	textarea {
+		width: 60em;
 	}
 }

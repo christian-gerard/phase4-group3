@@ -8,10 +8,6 @@ function Entries() {
     const [pages, setPages] = useState(0)
     const [currentPage, setCurrentPage] = useState(1)
 
-    useEffect(() => {
-
-    
-    }, [user])
 
     const handlePrev = () => {
         if (currentPage > 1) {
