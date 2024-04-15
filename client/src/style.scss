@@ -190,12 +190,10 @@ section {
 // Auth
 .auth {
 	margin: 16px 0;
-	// background-color: hotpink;
-	border: 1px solid $barelyblue;
+	// border: 1px solid $barelyblue;
 }
 
 .form {
-	// background-color: $greyblue;
 	font-family: $font-primary;
 	color: $bg;
 	display: flex;
@@ -211,11 +209,12 @@ section {
 }
 
 .input {
-	background-color: #333;
 	margin-bottom: 16px;
 	padding: 3px 6px;
 	width: 16em;
 	height: 1.75em;
+	color: $black;
+	background-color: $offwhite;
 	border-radius: 3px;
 	border: none;
 }
@@ -226,6 +225,10 @@ section {
 	width: 16em;
 	text-transform: uppercase;
 	background-color: $greyblue;
+}
+
+.auth .error-message {
+	margin-bottom: 16px;
 }
 
 .error-message {
@@ -276,7 +279,7 @@ section {
 }
 
 select, option {
-	width: 20em;
+	width: 15em;
 }
 
 textarea {
@@ -325,6 +328,9 @@ footer > p {
 	nav {
 		max-width: 500px;
 	}
+	textarea {
+		width: 50em;
+	}
 }
 
 // Desktop
@@ -335,7 +341,7 @@ footer > p {
 	nav {
 		max-width: 500px;
 	}
-	// textarea {
-	
-	// }
+	textarea {
+		width: 60em;
+	}
 }
