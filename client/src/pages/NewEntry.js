@@ -30,10 +30,34 @@ const initialValues = {
 	category: ''
 }
 const NewEntry = () => {
-	// const [isLogin, setIsLogin] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
-	const navigate = useNavigate()
+	const [isRecording, setIsRecording] = useState(false)
+	const handleRecorder = () => {
+        
+		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+		const recognition = new SpeechRecognition()
+		
+			if(!isRecording){
+	
+				console.log("RECORD")
+				recognition.start()
+	
+				recognition.onresult = async function (event) {
+					const transcript = event.results[0][0].transcript
+	
+					formik.values.entry = transcript
+	
+					console.log('STOP')
+					recognition.stop()
 
+					setIsRecording(!isRecording)
+				}
+	
+			} 
+	
+		setIsRecording(!isRecording)
+		
+	}
+	const navigate = useNavigate()
 	const formik = useFormik({
 		initialValues,
 		validationSchema: entrySchema,
@@ -98,6 +122,10 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label>Entry</label>
+				<div>
+            		<button type='button' onClick={handleRecorder}>{isRecording ? "Stop" : "Record"}</button>   
+        		</div>
+
 				<input
 					type='text'
 					name='entry'
