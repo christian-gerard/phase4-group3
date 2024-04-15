@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
@@ -51,7 +51,7 @@ const initialValues = {
 
 const Auth = () => {
     const { user, login, logout } = useContext(UserContext)
-	  const [isLogin, setIsLogin] = useState(false)
+	  const [isLogin, setIsLogin] = useState(true)
     const navigate = useNavigate()
     
 	const requestUrl = isLogin ? '/login' : '/signup'
@@ -83,6 +83,8 @@ const Auth = () => {
 						toast.success("Logged in")
 					})
 					console.log(user)
+				} else if (res.status === 422) {
+						toast.error('Invalid Login')
 				} else {
 					return res
 						.json()
@@ -105,7 +107,7 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.username}
 						className='input'
-					/>
+						/>
 					{formik.errors.username && formik.touched.username && (
 						<div className='error-message show'>
 							{formik.errors.username}
@@ -119,7 +121,7 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values._password_hash}
 						className='input'
-					/>
+						/>
 					{formik.errors._password_hash && formik.touched._password_hash && (
 						<div className='error-message show'>
 							{formik.errors._password_hash}
@@ -135,7 +137,7 @@ const Auth = () => {
 								onBlur={formik.handleBlur}
 								value={formik.values.confirmPassword}
 								className='input'
-							/>
+								/>
 							{formik.errors.confirmPassword &&
 								formik.touched.confirmPassword && (
 									<div className='error-message show'>
@@ -149,6 +151,7 @@ const Auth = () => {
 				</Form>
 			</Formik>
 		</div>
+
 	)
 }
 
