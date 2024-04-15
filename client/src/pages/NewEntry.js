@@ -65,11 +65,14 @@ const NewEntry = () => {
 		}
 	})
 
+	//! something should happen upon successful form submission. redirect to... view all entries, else error message.
+	 
 	return (
 		<article id='new'>
-			<h2>Create a new journal entry</h2>
+			<h2>New journal entry</h2>
 			<form className='new-entry' onSubmit={formik.handleSubmit}>
-				<label>Title &nbsp;</label>
+
+				<label htmlFor='title'>Title &nbsp;</label>
 				<input
 					type='text'
 					name='title'
@@ -77,12 +80,13 @@ const NewEntry = () => {
 					onBlur={formik.handleBlur}
 					value={formik.values.title}
                     id = 'title'
+					placeholder='Title'
 				/>
 				{formik.errors.title && formik.touched.title && (
 					<div className='error-message show'>{formik.errors.title}</div>
 				)}
 				<br />
-				<label>Date &nbsp;</label>
+				<label htmlFor='date'>Date &nbsp;</label>
 				<input
 					type='date'
 					name='date'
@@ -97,14 +101,18 @@ const NewEntry = () => {
 					</div>
 				)}
 				<br />
-				<label>Entry</label>
-				<input
-					type='text'
+				<label htmlFor='entry'>Entry</label>
+				<textarea
+					type='textarea'
 					name='entry'
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					value={formik.values.entry}
+					rows='30'
+					cols='100'
                     id='entry'
+					wrap='soft'
+					placeholder="Last night's dream..."
 				/>
 				{formik.errors.entry && formik.touched.entry && (
 					<div className='error-message show'>
@@ -112,7 +120,7 @@ const NewEntry = () => {
 					</div>
 				)}
 				<br />
-				<label>Category</label>
+				<label htmlFor='category'>Category</label>
 				<select
 					name='category'
 					onChange={formik.handleChange}
@@ -150,7 +158,7 @@ const NewEntry = () => {
 					</div>
 				)}
 				<br />
-				<input type='submit' value={'Submit'} />
+				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
 		</article>
 	)
