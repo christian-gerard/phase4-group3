@@ -12,14 +12,12 @@ const Nav = () => {
             <nav>
                 <NavLink id='link' to='/' className=''>Home</NavLink>
                     {user ? 
-                        (
-                        <>
+                        (<>
                         <NavLink id='link' to='/new' className=''>New Entry</NavLink>
                         <NavLink id='link' to='/view' className=''>View Journal</NavLink>
                         <NavLink id='link' to='/' className='' onClick={logout}>Logout</NavLink>
-                        </>
-                    ) : null
-                }
+                        </>) : null
+                    }
             </nav>
         </header>
 )}
