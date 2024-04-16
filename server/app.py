@@ -7,8 +7,8 @@ from schemas.category_schema import category_schema
 from models.category import Category
 from models.entry import Entry
 from models.user import User
-import speech_recognition
-import pyttsx3
+# import speech_recognition
+# import pyttsx3
 import ipdb
 
 

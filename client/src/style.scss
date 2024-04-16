@@ -315,6 +315,26 @@ textarea {
 	background-color: $greyblue;
 }
 
+#category-container {
+    display: flex;
+    width: 95%;
+	padding: 10px;
+	font-family: $font-primary;  
+
+}
+
+#category-name {
+    width: 14%;  
+	padding-top: 5px;
+}
+
+#category-descr {
+    width: 86%;
+	font-weight: 100;
+	line-height: 1.6;  
+
+}
+
 // Footer
 footer {
 	margin-top: 3em;
