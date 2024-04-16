@@ -29,10 +29,34 @@ const initialValues = {
 	entry: '',
 	category: ''
 }
+
 const NewEntry = () => {
 	// const [isLogin, setIsLogin] = useState(false)
 	// const { updateCurrentUser } = useOutletContext()
 	const navigate = useNavigate()
+	const [isRecording, setIsRecording] = useState(false)
+
+	const handleRecorder = () => {
+		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+		const recognition = new SpeechRecognition()
+		
+			if(!isRecording){
+				console.log("RECORD")
+				recognition.start()
+	
+				recognition.onresult = async function (event) {
+					const transcript = event.results[0][0].transcript
+	
+					formik.values.entry = transcript
+	
+					console.log('STOP')
+					recognition.stop()
+
+					setIsRecording(!isRecording)
+				}
+			} 
+		setIsRecording(!isRecording)
+	}
 
 	const formik = useFormik({
 		initialValues,
@@ -161,7 +185,6 @@ const NewEntry = () => {
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
 		</article>
-	)
-}
+)}
 
 export default NewEntry
