@@ -124,6 +124,23 @@ a:hover {
 	background-color: $purple;
 	border-radius: 3px;
 }
+.error-nav {
+	margin: 16px 16px 0 0;
+	height: 2em;
+	width: 10em;
+	text-transform: uppercase;
+	background-color: $greyblue;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.nav-error {
+	font-family: $font-accent;
+	color: $dkgrapefruit;
+}
+.non-route {
+	margin: 16px;
+}
 div .entries-error-message {
 	margin: 16px 0;
 	font-size: medium;
@@ -213,9 +230,11 @@ section {
 .submit, .change-form{
 	margin-bottom: 16px;
 	height: 2em;
-	width: 16em;
+	width: 17em;
 	text-transform: uppercase;
 	background-color: $greyblue;
+	border: none;
+	border-radius: 3px;
 }
 .auth .error-message {
 	margin-bottom: 16px;
@@ -279,11 +298,11 @@ textarea {
 .record {
 	height: 2em;
 	width: 100%;
+	color: $bg;
 	border-top-left-radius: 3px;
 	border-top-right-radius: 3px;
 	border: none;
 	background-color: $goldochre;
-	color: $bg;
 }
 .record:hover {
 	background-color: $purple;
