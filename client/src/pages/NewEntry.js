@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
@@ -31,33 +31,52 @@ const initialValues = {
 }
 
 const NewEntry = () => {
-	// const [isLogin, setIsLogin] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
 
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
 	recognition.interimResults = true
-	recognition.continous = true
+	recognition.continuous = true
 
-	const handleRecorder = () => {
+	recognition.onresult = async function (event) {
 
-		console.log("T")
-		recognition.onresult = async function (event) {
-			const transcript = event.results[0][0].transcript
-			const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
-			formik.setFieldValue('entry', newText)
+			if(!event.results[0].isFinal) {
+				const transcript = event.results[0][0].transcript
+				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('entry', newText)
+
+			} else {
+				const transcript = event.results[0][0].transcript
+				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('entry', newText)
+				recognition.stop()
+			}
+
 		}
+
+	recognition.onend = async function (event) {
+		// recognition.start()
+		console.log(event)
+		setIsRecording(false)
+
+	}
+
+
+
 		
-		if(!isRecording){
+	const voiceToText = async () => {
+
+		if(!isRecording) {
 			setIsRecording(true)
 			recognition.start()
 		} else {
 			setIsRecording(false)
+			recognition.stop()
 		}
-		recognition.stop()
 
 	}
+
+
 
 	const navigate = useNavigate()
 	const formik = useFormik({
@@ -128,7 +147,7 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label htmlFor='entry'>Entry</label>
-				<button type='button' onClick={handleRecorder}>{isRecording ? "Stop" : "Record" }</button>
+				<button type='button' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
 				<textarea
 					type='textarea'
 					name='entry'
