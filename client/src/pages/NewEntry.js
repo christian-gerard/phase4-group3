@@ -5,12 +5,6 @@ import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
 
-// Form fields:
-// title
-// date
-// entry
-// category
-
 // Yup entry validation
 const entrySchema = object({
 	title: string().max(50, 'Title must be 50 characters or less'),
