@@ -17,7 +17,7 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
             max=25,
             error="Name must be between 1 and 25 characters"
         )
-        )
+    )
 
     summary = fields.String(
         validate=validate.Length(
@@ -26,7 +26,6 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
             error='Summary must be between 1 and 100 characters'
         ),
         required=True
-
     )
 
     description = fields.String(

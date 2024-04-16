@@ -12,7 +12,16 @@ import pyttsx3
 import ipdb
 
 
-
+class Categories(Resource):
+    def get(self):
+        try:
+            ## Without specifying many=True, the schema expects a single object rather than a list of objects
+            serialized_categories = category_schema.dump(Category.query, many=True)
+            return serialized_categories, 200
+        except Exception as e:
+            return {"Error": str(e)}, 400
+        
+api.add_resource(Categories, '/categories')
 
 class Entries(Resource):
     def get(self):
