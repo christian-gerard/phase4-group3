@@ -23,6 +23,7 @@ const Categories = () => {
     ))
     return(
         <div>
+            <h2>Learn About Dream Categories</h2>
             {mappedCategories}
         </div>
     )
