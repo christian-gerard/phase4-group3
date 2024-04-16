@@ -24,7 +24,7 @@ function Entries() {
             {user ? 
                 user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
                 : 
-                <div className='error-message'>You must be logged in to view entries!</div>
+                <div className='entries-error-message entries'>You must be logged in to view entries!</div>
             }
             <div>
                 <button className='all-entries' onClick={handlePrev}>Prev</button>

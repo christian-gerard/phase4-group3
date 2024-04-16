@@ -133,8 +133,11 @@ a:hover {
 	border-radius: 3px;
 }
 
-.all-entries div > .error-message {
-	margin: 16px;
+div .entries-error-message {
+	margin: 16px 0;
+	font-size: medium;
+	color: $grapefruit;
+	font-family: $font-primary;
 }
 
 nav {
