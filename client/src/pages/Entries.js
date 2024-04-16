@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react'
-import EntryPreview from './EntryPreview'
+import EntryPreview from '../components/EntryPreview'
 import { UserContext } from '../context/UserContext'
 
 function Entries() {
@@ -19,7 +19,7 @@ function Entries() {
             setCurrentPage((currentPage) => currentPage + 1)
     }}
 
-    return ( 
+    return (
         <>
             {user ? 
                 user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
