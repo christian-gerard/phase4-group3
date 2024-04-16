@@ -161,10 +161,10 @@ h1 {
 	color: $barelyblue;
 }
 h2 {
-	margin: 20px 0;
+	margin: 36px 0 16px 0;
 	font-family: $font-primary;
 	font-size: x-large;
-	color: $goldochre;
+	color: $lilac;
 	text-transform: uppercase;
 }
 section {
@@ -212,11 +212,12 @@ section {
 	flex-flow: column nowrap;
 	align-items: center;
 }
-.auth > p {
+.auth > h2 {
 	margin: 36px 0 16px 0;
 	font-family: $font-primary;
 	text-align: center;
 	color: $lilac;
+	text-transform: none;
 }
 .input {
 	margin-bottom: 16px;
@@ -309,6 +310,10 @@ textarea {
 .record:hover {
 	background-color: $purple;
 }
+//! talks to isRecording...
+.record:active {
+	background-color: $dkgrapefruit;
+}
 #submit-new {
 	margin-bottom: 16px;
 	height: 2em;
@@ -316,8 +321,6 @@ textarea {
 	text-transform: uppercase;
 	background-color: $greyblue;
 }
-
-//! fix nav active style
 
 // View Entries
 .all-entries-wrapper {
@@ -328,37 +331,40 @@ textarea {
 	color: $lilac;
 	text-transform: none;
 }
-.entry-link {
-	font-size: small;
+.all-entries-wrapper > a {
+	text-decoration: none;
+	line-height: normal;
+}
+.entry-link > p {
 	color: $barelyblue;
-	text-decoration: none;
+	margin-bottom: 16px;
+	font-weight: 300;
+	display: inline-grid;
 }
-.entry-link:hover {
+.entry-link > p:hover, .entry-link > p > span:hover {
 	color: $goldochre;
-	text-decoration: none;
 }
-.long-desc {
+.entry-link > p > span {
+	color: $greyblue;
 	font-size: smaller;
+	letter-spacing: .03em;
 }
 
+// Categories
 #category-container {
     display: flex;
     width: 95%;
 	padding: 10px;
 	font-family: $font-primary;  
-
 }
-
 #category-name {
-    width: 14%;  
+    width: 14%;
 	padding-top: 5px;
 }
-
 #category-descr {
     width: 86%;
 	font-weight: 100;
 	line-height: 1.6;  
-
 }
 
 // Footer
