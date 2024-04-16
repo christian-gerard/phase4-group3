@@ -20,7 +20,6 @@ function Entry() {
 
     const handleDelete = () => {
         try {
-
             fetch(`/entries/${currentEntry.id}`, {
                 method: 'DELETE',
                 headers: {
@@ -34,11 +33,9 @@ function Entry() {
                     navigate('/view')
                 }
             })
-
         } catch(err) {
             throw err
-        }
-    }
+    }}
 
     const editSchema = object({
         title: string(),

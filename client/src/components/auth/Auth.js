@@ -51,7 +51,7 @@ const initialValues = {
 
 const Auth = () => {
     const { user, login, logout } = useContext(UserContext)
-	  const [isLogin, setIsLogin] = useState(true)
+	const [isLogin, setIsLogin] = useState(true)
     const navigate = useNavigate()
     
 	const requestUrl = isLogin ? '/login' : '/signup'
@@ -151,8 +151,6 @@ const Auth = () => {
 				</Form>
 			</Formik>
 		</div>
-
-	)
-}
+)}
 
 export default Auth
