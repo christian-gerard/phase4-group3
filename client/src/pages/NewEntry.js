@@ -95,7 +95,7 @@ const NewEntry = () => {
 	 
 	return (
 		<article id='new'>
-			<h2>New journal entry</h2>
+			<h2>New Journal Entry</h2>
 			<form className='new-entry' onSubmit={formik.handleSubmit}>
 				<label htmlFor='title'>Title &nbsp;</label>
 				<input

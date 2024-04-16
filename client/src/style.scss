@@ -106,7 +106,7 @@ a:hover {
 	text-decoration: none;
 	text-transform: uppercase;
 	font-family: $font-primary;
-	font-size: medium;
+	font-size: small;
 	color: $greyblue ;
 	cursor: pointer;
 }
@@ -123,6 +123,7 @@ a:hover {
 	text-transform: uppercase;
 	background-color: $purple;
 	border-radius: 3px;
+	border: none;
 }
 .error-nav {
 	margin: 16px 16px 0 0;
@@ -212,10 +213,10 @@ section {
 	align-items: center;
 }
 .auth > p {
-	margin: 16px 0;
+	margin: 36px 0 16px 0;
 	font-family: $font-primary;
 	text-align: center;
-	color: $greyblue;
+	color: $lilac;
 }
 .input {
 	margin-bottom: 16px;
@@ -256,6 +257,7 @@ section {
 }
 #new > h2 {
 	color: $lilac;
+	text-transform: none;
 }
 .new-entry {
 	display: flex;
@@ -313,6 +315,13 @@ textarea {
 	width: 16em;
 	text-transform: uppercase;
 	background-color: $greyblue;
+}
+
+//! fix nav active style
+
+// View Entries
+.all-entries-wrapper {
+	font-family: $font-primary;
 }
 
 // Footer

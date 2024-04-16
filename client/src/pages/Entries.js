@@ -20,7 +20,7 @@ function Entries() {
     }}
 //! include chips for categories for filtering
     return (
-        <>
+        <article className='all-entries-wrapper'>
             {user ? 
                 user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
                 : 
@@ -31,7 +31,7 @@ function Entries() {
                 &nbsp; {currentPage} of {pages} &nbsp;
                 <button className='all-entries' onClick={handleNext}>Next</button>
             </div>
-        </>
+        </article>
     )
 }
 
