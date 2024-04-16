@@ -45,6 +45,7 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     username = fields.String(
 
         required=True, 
+        unique=True,
         validate=[
             validate.Length(
                 min=2, 
