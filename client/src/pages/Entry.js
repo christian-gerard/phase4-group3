@@ -40,7 +40,7 @@ function Entry() {
     const editSchema = object({
         title: string(),
         date: string()
-            .matches(/[a-zA-Z0-9]/, "Password can only contain letters and numbers.")
+            .matches(/[a-zA-Z0-9]/, "Date can only contain letters and numbers.")
             .required('Date is required.'),
         body: string()
     })
@@ -70,11 +70,9 @@ function Entry() {
                         navigate('/view')
                     }
                 })
-
             } catch(err) {
                 throw err
-            }
-         }
+        }}
     })
     
     const handleSave = () => {
@@ -82,10 +80,9 @@ function Entry() {
 
     return (
         currentEntry ?
-    
         (isEdit ? 
             <div>
-                <h2>EDIT MODE</h2>
+                <h2>Editing: {currentEntry.title}</h2>
                 <button onClick={editMode}>Edit</button>
                 <button onClick={handleDelete}>Delete</button>
                 <Formik enableReinitialize={true}>
@@ -140,7 +137,7 @@ function Entry() {
             </div>
             :
             <div>
-                <h2>VIEW MODE</h2>
+                <h2>Viewing: {currentEntry.title}</h2>
                 <button onClick={editMode}>Edit</button>
                 <button onClick={handleDelete}>Delete</button>
                 <p>{currentEntry.title}</p>

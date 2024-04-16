@@ -1,6 +1,4 @@
 const CategoryCard = ({name, description}) => {
-
-
     return (
         <div id='category-container'>
             <div id='category-name'> 
@@ -10,7 +8,6 @@ const CategoryCard = ({name, description}) => {
                 <p>{description}</p>
             </div>
         </div>
-    )
-}
+)}
 
 export default CategoryCard

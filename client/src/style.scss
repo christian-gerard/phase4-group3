@@ -116,21 +116,15 @@ a:hover {
 #link.nav-link.active {
 	color: $grapefruit;
 }
-.all-entries {
-	margin: 16px 0;
-	height: 2em;
-	width: 5em;
-	text-transform: uppercase;
-	background-color: $purple;
-	border-radius: 3px;
-	border: none;
-}
+
 .error-nav {
 	margin: 16px 16px 0 0;
 	height: 2em;
 	width: 10em;
+	font-weight: 700;
 	text-transform: uppercase;
 	background-color: $greyblue;
+	color: $bg;
 	border: none;
 	border-radius: 3px;
 	cursor: pointer;
@@ -234,6 +228,8 @@ section {
 	height: 2em;
 	width: 17em;
 	text-transform: uppercase;
+	font-weight: 700;
+	color: $bg;
 	background-color: $greyblue;
 	border: none;
 	border-radius: 3px;
@@ -318,6 +314,7 @@ textarea {
 	margin-bottom: 16px;
 	height: 2em;
 	width: 16em;
+	font-weight: 700;
 	text-transform: uppercase;
 	background-color: $greyblue;
 }
@@ -349,22 +346,47 @@ textarea {
 	font-size: smaller;
 	letter-spacing: .03em;
 }
+.all-entries {
+	margin: 16px 0;
+	height: 2em;
+	width: 5em;
+	color: $bg;
+	text-transform: uppercase;
+	font-weight: 700;
+	background-color: $barelyblue;
+	border-radius: 3px;
+	border: none;
+}
 
 // Categories
+.learn {
+	text-transform: none;
+}
 #category-container {
     display: flex;
     width: 95%;
 	padding: 10px;
-	font-family: $font-primary;  
+	font-family: $font-primary;
 }
 #category-name {
-    width: 14%;
+	width: 14%;
 	padding-top: 5px;
+	font-size: small;
+	text-transform: uppercase;
 }
+#category-name > h3 {
+	color: $barelyblue;
+}
+
 #category-descr {
     width: 86%;
-	font-weight: 100;
-	line-height: 1.6;  
+	margin-left: 16px;
+	font-weight: 300;
+	line-height: 1.6;
+}
+#category-descr > p {
+	// color: $lilac;
+	letter-spacing: .01em;
 }
 
 // Footer
