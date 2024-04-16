@@ -41,7 +41,7 @@ const NewEntry = () => {
 	recognition.continous = true
 
 	const handleRecorder = () => {
-        
+
 		recognition.onresult = async function (event) {
 			const transcript = event.results[0][0].transcript
 			const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
@@ -97,7 +97,6 @@ const NewEntry = () => {
 		<article id='new'>
 			<h2>New journal entry</h2>
 			<form className='new-entry' onSubmit={formik.handleSubmit}>
-
 				<label htmlFor='title'>Title &nbsp;</label>
 				<input
 					type='text'
@@ -128,7 +127,7 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label htmlFor='entry'>Entry</label>
-				<button type='button' onClick={handleRecorder}>{isRecording ? "Stop" : "Record" }</button>
+				<button type='button' className='record' onClick={handleRecorder}>{isRecording ? "Stop" : "Record" }</button>
 				<textarea
 					type='textarea'
 					name='entry'

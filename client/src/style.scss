@@ -235,6 +235,9 @@ section {
 	flex-flow: column nowrap;
 	align-items: center;
 }
+#new > h2 {
+	color: $lilac;
+}
 .new-entry {
 	display: flex;
 	flex-flow: column nowrap;
@@ -272,6 +275,18 @@ textarea {
 	overflow: auto;
 	resize: none;
 	font-family: $font-primary;
+}
+.record {
+	height: 2em;
+	width: 100%;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border: none;
+	background-color: $goldochre;
+	color: $bg;
+}
+.record:hover {
+	background-color: $purple;
 }
 #submit-new {
 	margin-bottom: 16px;
