@@ -31,32 +31,28 @@ const initialValues = {
 }
 const NewEntry = () => {
 	const [isRecording, setIsRecording] = useState(false)
+	const [text, setText] = useState('')
+	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+	const recognition = new SpeechRecognition()
+	recognition.interimResults = true
+	recognition.continous = true
+
 	const handleRecorder = () => {
         
-		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-		const recognition = new SpeechRecognition()
-		
-			if(!isRecording){
-	
-				console.log("RECORD")
-				recognition.start()
-	
-				recognition.onresult = async function (event) {
-					const transcript = event.results[0][0].transcript
-	
-					formik.values.entry = transcript
-	
-					console.log('STOP')
-					recognition.stop()
+		recognition.onresult = async function (event) {
+			const transcript = event.results[0][0].transcript
+			formik.setFieldValue('entry', transcript)
+		}
 
-					setIsRecording(!isRecording)
-				}
-	
-			} 
-	
-		setIsRecording(!isRecording)
+		if(!isRecording){
+			recognition.start()
+		} else {
+			recognition.stop()
+		}
 		
+		setIsRecording(!isRecording)
 	}
+
 	const navigate = useNavigate()
 	const formik = useFormik({
 		initialValues,

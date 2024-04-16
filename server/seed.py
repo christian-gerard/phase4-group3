@@ -6,7 +6,6 @@ from models.category import Category
 from models.entry import Entry
 from models.user import User
 
-
 import sys
 import random
 from rich import print
