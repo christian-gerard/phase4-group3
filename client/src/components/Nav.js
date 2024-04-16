@@ -7,7 +7,16 @@ const Nav = () => {
     return (
         <header>
             <h1>Rabbit Rabbit &#128007;</h1>
-            <hr/>
+            <section>
+                <div id='h' className='color-bar' />
+                <div id='g' className='color-bar' />
+                <div id='f' className='color-bar' />
+                <div id='e' className='color-bar' />
+                <div id='d' className='color-bar' />
+                <div id='c' className='color-bar' />
+                <div id='b' className='color-bar' />
+                <div id='a' className='color-bar' />
+            </section>
             <nav>
                 <NavLink id='link' to='/' className=''>Home</NavLink>
                     {user ? 
