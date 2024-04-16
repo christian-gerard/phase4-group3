@@ -1,17 +1,55 @@
-from flask import request, session
+from flask import request, session, g
+from time import time
 from flask_restful import Resource
 from config import app, db, api
+from werkzeug.exceptions import NotFound
+from functools import wraps
 from schemas.user_schema import user_schema
 from schemas.entry_schema import entry_schema, entries_schema
 from schemas.category_schema import category_schema
 from models.category import Category
 from models.entry import Entry
 from models.user import User
-# import speech_recognition
-# import pyttsx3
 import ipdb
 
+# # # General Route
 
+# # # # # Error Handling
+@app.errorhandler(NotFound)
+def not_found(error):
+    return {"error": error.description}, 404
+
+# # # # # Route Protection
+@app.before_request
+def before_request():
+    path_dict = {"entrybyid": Entry, "userbyid": User }
+    if request.endpoint in path_dict:
+        id = request.view_args.get("id")
+        record = db.session.get(path_dict.get(request.endpoint), id)
+        key_name = "prod" if request.endpoint == "productionbyid" else "crew"
+        setattr(g, key_name, record)
+
+    g.time = time()
+
+def login_required(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' not in session:
+            return {"message": "Access Denied, please log in!"}, 422
+        return func(*args, **kwargs)
+    return decorated_function
+
+@app.after_request
+def after_request(response):  #! notice the response argument automatically passsed in
+    diff = time() - g.time
+    print(f"Request took {diff} seconds")
+    response.headers["X-Response-Time"] = str(diff)
+    return response
+
+
+# # # REST API
+
+# # # # # CATEGORY
 class Categories(Resource):
     def get(self):
         try:
@@ -23,17 +61,18 @@ class Categories(Resource):
         
 api.add_resource(Categories, '/categories')
 
+
+# # # # # ENTRY
 class Entries(Resource):
+    @login_required
     def get(self):
         try:
-            if session.get("user_id"):
-                entries = entries_schema.dump(Entry.query.filter_by(user_id=session.get("user_id")))
-                return entries, 200
-            else:
-                return {"Error": "User not logged in"}, 403
+            entries = entries_schema.dump(Entry.query.filter_by(user_id=session.get("user_id")))
+            return entries, 200
         except Exception as e:
             return {"Error": str(e)}, 400
-        
+
+    @login_required
     def post(self):
         try:
             data = request.get_json()
@@ -53,6 +92,7 @@ class Entries(Resource):
 api.add_resource(Entries, '/entries')
 
 class EntryById(Resource):
+    @login_required
     def get(self,id):
         try:
             entry = entry_schema.dump(Entry.query.get(id))
@@ -62,7 +102,8 @@ class EntryById(Resource):
                 return {"Error": "Entry not found"}, 404
         except Exception as e:
             return {"Error": str(e)}, 400
-
+        
+    @login_required
     def patch(self,id):
         try:
             og = Entry.query.filter(Entry.id == id).first()
@@ -75,7 +116,8 @@ class EntryById(Resource):
                 return {"Error": f"Unable to find entry with id {id}"}, 404
         except Exception as e:
             return {"Error": str(e)}, 400
-    
+        
+    @login_required
     def delete(self,id):
         try:
             entry = Entry.query.get(id)
@@ -90,6 +132,8 @@ class EntryById(Resource):
         
 api.add_resource(EntryById, '/entries/<int:id>')
 
+
+# # # # # USER LOGIN
 class SignUp(Resource):
     def post(self):
         try:
@@ -137,24 +181,12 @@ class Logout(Resource):
 
 api.add_resource(Logout, '/logout')
 
-class VoiceToText(Resource):
-    def post(self):
-        recognizer = speech_recognition.Recognizer()
 
-        while True:
 
-            try:
-                with speech_recognition.Microphone() as mic:
-                    recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-                    audio = recognizer.listen(mic)
-                    text = recognizer.recognize_google(audio)
-                    text = text.lower()
-                    print(f"Recognized {text}")
-            except speech_recognition.UnknownValueError:
-                recognizer = speech_recognition.Recognizer()
-                continue
 
-api.add_resource(VoiceToText, '/voice')
+
+
+
 
 # # # # # Execute App
 if __name__ == "__main__":
