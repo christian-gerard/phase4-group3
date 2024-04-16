@@ -1,4 +1,4 @@
-const CategoryCard = ({ name, description }) => {
+const CategoryCard = ({name, description}) => {
 
 
     return (

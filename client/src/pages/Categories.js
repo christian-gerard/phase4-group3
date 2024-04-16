@@ -13,13 +13,13 @@ const Categories = () => {
             }
             return resp.json().then(errorObj => toast.error(errorObj.message))
         })
-        .catch(err => console.log(err))
-        toast.error("An unexpected error occurred.")
+        .catch(err => {
+            toast.error("An unexpected error occurred.")
+        })
     }, []);
 
-
     const mappedCategories = categories.map(category => (
-        <CategoryCard key={category.id} category={category}/>
+        <CategoryCard key={category.id} name={category.name} description={category.description} />
     ))
     return(
         <div>
