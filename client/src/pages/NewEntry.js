@@ -41,14 +41,13 @@ const NewEntry = () => {
 	recognition.continous = true
 
 	const handleRecorder = () => {
-        
+
+		console.log("T")
 		recognition.onresult = async function (event) {
 			const transcript = event.results[0][0].transcript
 			const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
 			formik.setFieldValue('entry', newText)
 		}
-
-
 		
 		if(!isRecording){
 			setIsRecording(true)
@@ -56,7 +55,8 @@ const NewEntry = () => {
 		} else {
 			setIsRecording(false)
 		}
-		
+		recognition.stop()
+
 	}
 
 	const navigate = useNavigate()
