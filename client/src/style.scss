@@ -117,7 +117,7 @@ a:hover {
 	color: $grapefruit;
 }
 .all-entries {
-	margin-bottom: 16px;
+	margin: 16px 0;
 	height: 2em;
 	width: 5em;
 	text-transform: uppercase;
@@ -323,6 +323,24 @@ textarea {
 .all-entries-wrapper {
 	font-family: $font-primary;
 }
+.all-entries-wrapper > h2 {
+	margin-top: 36px;
+	color: $lilac;
+	text-transform: none;
+}
+.entry-link {
+	font-size: small;
+	color: $barelyblue;
+	text-decoration: none;
+}
+.entry-link:hover {
+	color: $goldochre;
+	text-decoration: none;
+}
+.long-desc {
+	font-size: smaller;
+}
+
 
 // Footer
 footer {
