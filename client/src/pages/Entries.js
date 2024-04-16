@@ -18,7 +18,7 @@ function Entries() {
         if (pages > currentPage) {
             setCurrentPage((currentPage) => currentPage + 1)
     }}
-
+//! include chips for categories for filtering
     return (
         <>
             {user ? 
