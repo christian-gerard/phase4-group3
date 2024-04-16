@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useContext} from 'react'
 import EntryPreview from '../components/EntryPreview'
 import { UserContext } from '../context/UserContext'
 

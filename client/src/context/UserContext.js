@@ -24,9 +24,7 @@ const UserProvider = ({ children }) => {
         }
         catch(err) {
             throw err
-        }
-
-    }
+    }}
 
     const updateEntries = (updatedEntries) => {
         setUser({...user, entries: updatedEntries})
@@ -36,6 +34,6 @@ const UserProvider = ({ children }) => {
         <UserContext.Provider value={{ user, login, logout, updateEntries }}>
             {children}
         </UserContext.Provider>
-)} 
+)}
 
 export default UserProvider

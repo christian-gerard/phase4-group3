@@ -10,7 +10,6 @@ function EntryPreview({id, title, body, date, category}) {
                 <p>Category:{category}</p>
             </div>
         </NavLink>
-    )
-}
+)}
 
 export default EntryPreview
