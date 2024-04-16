@@ -4,7 +4,6 @@ import { UserContext } from '../context/UserContext'
 
 const Nav = () => {
     const { user, logout } = useContext(UserContext)
-    console.log(user)
     return (
         <header>
             <h1>Rabbit Rabbit &#128007;</h1>

@@ -7,7 +7,8 @@ from schemas.category_schema import category_schema
 from models.category import Category
 from models.entry import Entry
 from models.user import User
-
+import speech_recognition
+import pyttsx3
 import ipdb
 
 
@@ -135,6 +136,25 @@ class Logout(Resource):
             return {"Error": str(e)}, 400
 
 api.add_resource(Logout, '/logout')
+
+class VoiceToText(Resource):
+    def post(self):
+        recognizer = speech_recognition.Recognizer()
+
+        while True:
+
+            try:
+                with speech_recognition.Microphone() as mic:
+                    recognizer.adjust_for_ambient_noise(mic, duration=0.2)
+                    audio = recognizer.listen(mic)
+                    text = recognizer.recognize_google(audio)
+                    text = text.lower()
+                    print(f"Recognized {text}")
+            except speech_recognition.UnknownValueError:
+                recognizer = speech_recognition.Recognizer()
+                continue
+
+api.add_resource(VoiceToText, '/voice')
 
 # # # # # Execute App
 if __name__ == "__main__":
