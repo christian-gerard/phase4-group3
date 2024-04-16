@@ -35,28 +35,28 @@ const NewEntry = () => {
 	// const { updateCurrentUser } = useOutletContext()
 
 	const [isRecording, setIsRecording] = useState(false)
+	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+	const recognition = new SpeechRecognition()
+	recognition.interimResults = true
+	recognition.continous = true
+
 	const handleRecorder = () => {
+        
+		recognition.onresult = async function (event) {
+			const transcript = event.results[0][0].transcript
+			const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+			formik.setFieldValue('entry', newText)
+		}
 
-		const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-		const recognition = new SpeechRecognition()
+
 		
-			if(!isRecording){
-	
-				console.log("RECORD")
-				recognition.start()
-	
-				recognition.onresult = async function (event) {
-					const transcript = event.results[0][0].transcript
-	
-					formik.values.entry = transcript
-	
-					console.log('STOP')
-					recognition.stop()
-
-					setIsRecording(!isRecording)
-				}
-			}
-		setIsRecording(!isRecording)
+		if(!isRecording){
+			setIsRecording(true)
+			recognition.start()
+		} else {
+			setIsRecording(false)
+		}
+		
 	}
 
 	const navigate = useNavigate()
@@ -128,6 +128,7 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label htmlFor='entry'>Entry</label>
+				<button type='button' onClick={handleRecorder}>{isRecording ? "Stop" : "Record" }</button>
 				<textarea
 					type='textarea'
 					name='entry'
