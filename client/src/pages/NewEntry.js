@@ -150,7 +150,7 @@ const NewEntry = () => {
 					wrap='soft'
 					placeholder="Last night's dream..."
 				/>
-				{formik.errors.entry && formik.touched.entry && (
+				{formik.errors.body && formik.touched && (
 					<div className='error-message show'>
 						{formik.errors.entry}
 					</div>

@@ -153,7 +153,7 @@ function Entry() {
                     />
                     {formik.errors.body && formik.touched.body && (
                         <div className='error-message show'>
-                            {formik.errors.entry}
+                            {formik.errors.body}
                         </div>
                     )}
                     <button id='submit-edit' onClick={handleSave}>Save</button>
