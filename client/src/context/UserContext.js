@@ -5,41 +5,39 @@ import {useEffect} from 'react'
 export const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+	const [user, setUser] = useState(null)
 
-    const login = (user) => {
-        setUser(user)
-    }
+	const login = (user) => {
+		setUser(user)
+	}
 
-    const logout = () => {
-        try {
-            fetch("/logout", {method: "DELETE"})
-            .then(resp => {
-                if (resp.status === 204) {
-                    setUser(null)
-                    toast.success('Entry Deleted')
-                } else {
-                    toast.error('Deletion failed...')
-                }
-            })
-        }
-        catch(err) {
-            throw err
+	const logout = (user) => {
+		try {
+			fetch('/logout', { method: 'DELETE' }).then((res) => {
+				if (res.status === 204) {
+					setUser(null)
+					toast.success('Entry Deleted')
+				} else {
+					toast.error('Could not delete!')
+				}
+			})
+		} catch (err) {
+			throw err
     }}
 
-    const updateEntries = (updatedEntries) => {
-        setUser({...user, entries: updatedEntries})
-    }
+	const updateEntries = (updatedEntries) => {
+		setUser({ ...user, entries: updatedEntries })
+	}
 
     // Refresh
     useEffect(() => {
-        fetch("/me")
+        fetch('/me')
         .then(resp => {
             if (resp.ok) {
             resp.json().then(setUser)
             
             } else {
-            toast.error("Please log in")
+            toast.error('Please log in')
             }
         })
     }, [])
