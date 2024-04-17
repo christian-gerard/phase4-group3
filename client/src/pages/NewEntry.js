@@ -25,8 +25,6 @@ const initialValues = {
 }
 
 const NewEntry = () => {
-	// const [isLogin, setIsLogin] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
@@ -55,10 +53,7 @@ const NewEntry = () => {
 		setIsRecording(false)
 
 	}
-
-
-
-		
+	
 	const voiceToText = async () => {
 
 		if(!isRecording) {
@@ -198,9 +193,9 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
-			<div className='toast'>
+			{/* <div className='toast'>
 				<Toaster  />
-			</div>
+			</div> */}
 
 		</article>
 )}
