@@ -20,7 +20,6 @@ const App = () => {
         return <p>Welcome {user}.</p>
     }
 
-
   return (
 		<main>
          <Nav />

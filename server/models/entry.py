@@ -44,7 +44,7 @@ class Entry(db.Model, SerializerMixin):
     def validate_role(self, _, title):
         if not isinstance(title, str):
             raise TypeError("Title text must be strings")
-        elif title > 50:
+        elif len(title) > 50:
             raise ValueError(f"Title must be 50 characters or less")
         return title
 
@@ -53,9 +53,9 @@ class Entry(db.Model, SerializerMixin):
     def validate_role(self, _, body):
         if not isinstance(body, str):
             raise TypeError("Entry text must be strings")
-        elif body < 10:
+        elif len(body) < 10:
             raise ValueError(f"Entry must be at least 10 characters long")
-        elif body > 40000:
+        elif len(body) > 40000:
             raise ValueError(f"Entry may not be more than 40,000 characters")
         return body
 
