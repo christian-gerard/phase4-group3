@@ -58,7 +58,6 @@ table {
     "wdth" <width>;
 } */
 
-
 /* Start Styles */
 // Typography
 $font-primary: "Noto Sans", sans-serif;
@@ -85,11 +84,9 @@ $black: #000;
 	color: $text;
 	background-color: $bg;
 }
-
 main {
 	margin: 0 16px;
 	padding: 16px;
-	// border: 1px solid $dkgrapefruit;
 	border-radius: 3px;
 }
 
@@ -98,86 +95,82 @@ a {
 	color: $greyblue;
 	text-decoration: none;
 	cursor: pointer;
-  }
-  
+} 
+
 a:hover {
 	color: $dkgrapefruit;
 	text-decoration: underline;
 	cursor: pointer;
 }
-
 #link {
 	margin-right: 10px;
 	text-decoration: none;
 	text-transform: uppercase;
 	font-family: $font-primary;
-	font-size: medium;
+	font-size: small;
 	color: $greyblue ;
 	cursor: pointer;
 }
-
 #link.nav-link:hover {
 	text-decoration: underline;
 }
-
 #link.nav-link.active {
 	color: $grapefruit;
 }
 
-.all-entries {
-	margin-bottom: 16px;
+.error-nav {
+	margin: 16px 16px 0 0;
 	height: 2em;
-	width: 5em;
+	width: 10em;
+	font-weight: 700;
 	text-transform: uppercase;
-	background-color: $purple;
+	background-color: $greyblue;
+	color: $bg;
+	border: none;
 	border-radius: 3px;
+	cursor: pointer;
 }
-
+.nav-error {
+	font-family: $font-accent;
+	color: $dkgrapefruit;
+}
+.non-route {
+	margin: 16px;
+}
 div .entries-error-message {
 	margin: 16px 0;
 	font-size: medium;
 	color: $grapefruit;
 	font-family: $font-primary;
 }
-
 nav {
+	margin-top: 10px;
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
 }
-
 h1 {
+	margin-bottom: 6px;
 	font-family: $font-accent;
 	font-size: 45px;
 	color: $barelyblue;
 }
-
-hr {
-	background-color: $greyblue;
-	border: none;
-	height: 1px;
-}
-
 h2 {
-	margin: 20px 0;
+	margin: 36px 0 16px 0;
 	font-family: $font-primary;
 	font-size: x-large;
-	color: $goldochre;
+	color: $lilac;
 	text-transform: uppercase;
 }
-
 section {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 }
 
-.color-test {
-	height: 30px;
-	width: 30px;
-	margin-left: 16px;
-	border-radius: 3px;
+.color-bar {
+	height: 1px;
+	width: 13%;
 }
-
 #a {
 	background: $offwhite;
 }
@@ -203,11 +196,14 @@ section {
 	background: $purple;
 }
 
+// Toast 
+.toast {
+	position: static;
+}
 // Auth
 .auth {
 	margin: 16px 0;
 }
-
 .form {
 	font-family: $font-primary;
 	color: $bg;
@@ -215,14 +211,13 @@ section {
 	flex-flow: column nowrap;
 	align-items: center;
 }
-
-.auth > p {
-	margin: 16px 0;
+.auth > h2 {
+	margin: 36px 0 16px 0;
 	font-family: $font-primary;
 	text-align: center;
-	color: $greyblue;
+	color: $lilac;
+	text-transform: none;
 }
-
 .input {
 	margin-bottom: 16px;
 	padding: 3px 6px;
@@ -233,24 +228,26 @@ section {
 	border-radius: 3px;
 	border: none;
 }
-
 .submit, .change-form{
 	margin-bottom: 16px;
 	height: 2em;
-	width: 16em;
+	width: 17em;
 	text-transform: uppercase;
+	font-weight: 700;
+	color: $bg;
 	background-color: $greyblue;
+	border: none;
+	border-radius: 3px;
 }
-
 .auth .error-message {
 	margin-bottom: 16px;
 }
-
 .error-message {
 	font-size: small;
 	color: $grapefruit;
 	font-family: $font-primary;
 }
+
 
 // New Entry
 #new {
@@ -261,12 +258,14 @@ section {
 	flex-flow: column nowrap;
 	align-items: center;
 }
-
+#new > h2 {
+	color: $lilac;
+	text-transform: none;
+}
 .new-entry {
 	display: flex;
 	flex-flow: column nowrap;
 }
-
 .new-entry > input, textarea, select, option {
 	margin: 0 0 16px 0;
 	padding: 3px 6px;
@@ -276,7 +275,6 @@ section {
 	background-color: $offwhite;
 	color: $black;
 }
-
 .new-entry > label {
 	width: 30em;
 	margin-bottom: 3px;
@@ -284,20 +282,16 @@ section {
 	text-transform: uppercase;
 	resize: none;
 }
-
 #title {
 	min-width: 20em;
 	max-width: 22em;
 }
-
 #date {
 	width: 8em;
 }
-
 select, option {
 	width: 15em;
 }
-
 textarea {
 	min-width: 20em;
 	max-width: 29em;
@@ -306,33 +300,99 @@ textarea {
 	resize: none;
 	font-family: $font-primary;
 }
-
+.record {
+	height: 2em;
+	width: 100%;
+	color: $bg;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border: none;
+	background-color: $goldochre;
+}
+.record:hover {
+	background-color: $purple;
+}
+//! talks to isRecording...
+.record:active {
+	background-color: $dkgrapefruit;
+}
 #submit-new {
 	margin-bottom: 16px;
 	height: 2em;
 	width: 16em;
+	font-weight: 700;
 	text-transform: uppercase;
 	background-color: $greyblue;
 }
 
+// View Entries
+.all-entries-wrapper {
+	font-family: $font-primary;
+}
+.all-entries-wrapper > h2 {
+	margin-top: 36px;
+	color: $lilac;
+	text-transform: none;
+}
+.all-entries-wrapper > a {
+	text-decoration: none;
+	line-height: normal;
+}
+.entry-link > p {
+	color: $barelyblue;
+	margin-bottom: 16px;
+	font-weight: 300;
+	display: inline-grid;
+}
+.entry-link > p:hover, .entry-link > p > span:hover {
+	color: $goldochre;
+}
+.entry-link > p > span {
+	color: $greyblue;
+	font-size: smaller;
+	letter-spacing: .03em;
+}
+.all-entries {
+	margin: 16px 0;
+	height: 2em;
+	width: 5em;
+	color: $bg;
+	text-transform: uppercase;
+	font-weight: 700;
+	background-color: $barelyblue;
+	border-radius: 3px;
+	border: none;
+}
+
+// Categories
+.learn {
+	text-transform: none;
+}
 #category-container {
     display: flex;
     width: 95%;
 	padding: 10px;
-	font-family: $font-primary;  
-
+	font-family: $font-primary;
 }
-
 #category-name {
-    width: 14%;  
+	width: 14%;
 	padding-top: 5px;
+	font-size: small;
+	text-transform: uppercase;
+}
+#category-name > h3 {
+	color: $barelyblue;
 }
 
 #category-descr {
     width: 86%;
-	font-weight: 100;
-	line-height: 1.6;  
-
+	margin-left: 16px;
+	font-weight: 300;
+	line-height: 1.6;
+}
+#category-descr > p {
+	// color: $lilac;
+	letter-spacing: .01em;
 }
 
 // Footer
@@ -343,7 +403,6 @@ footer {
 	justify-content: center;
 	align-items: center;
 }
-
 footer > p {
 	font-family: $font-primary;
 	font-size: x-small;
@@ -355,11 +414,8 @@ footer > p {
 //! inc styles for text area width in new entry
 // Tablet
 @media only screen and (min-width: 600px) {
-	body {
-		max-width: 990px;
-	}
 	main {
-		background-color: $purple;
+		width: 85vw;
 	}
 	nav {
 		max-width: 500px;
@@ -372,7 +428,7 @@ footer > p {
 // Desktop
 @media only screen and (min-width: 992px) {
 	main {
-		background-color: darkblue;
+		width: 85vw;
 	}
 	nav {
 		max-width: 500px;

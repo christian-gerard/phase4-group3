@@ -96,7 +96,7 @@ const Auth = () => {
 
 	return (
 		<div className='auth'>
-			<p>Sign up or log in to get started</p>
+			<h2>Sign up or log in to get started</h2>
 			<Formik onSubmit={formik.handleSubmit}>
 				<Form className='form' onSubmit={formik.handleSubmit}>
 					<Field

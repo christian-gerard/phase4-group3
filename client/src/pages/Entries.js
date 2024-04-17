@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext'
 
 function Entries() {
     const { user } = useContext(UserContext)
-    const [pages, setPages] = useState(0)
+    const [pages, setPages] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
     const startIndex = (currentPage - 1) * 10
     const endIndex = currentPage * 10
@@ -18,9 +18,10 @@ function Entries() {
         if (pages > currentPage) {
             setCurrentPage((currentPage) => currentPage + 1)
     }}
-
+//! include chips for categories for filtering
     return (
-        <>
+        <article className='all-entries-wrapper'>
+            <h2>View Journal Entries</h2>
             {user ? 
                 user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
                 : 
@@ -31,7 +32,7 @@ function Entries() {
                 &nbsp; {currentPage} of {pages} &nbsp;
                 <button className='all-entries' onClick={handleNext}>Next</button>
             </div>
-        </>
+        </article>
     )
 }
 

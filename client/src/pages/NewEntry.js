@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import { useNavigate, useOutletContext } from 'react-router-dom'
+import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -20,7 +21,7 @@ const entrySchema = object({
 const initialValues = {
 	title: '',
 	date: '',
-	entry: '',
+	body: '',
 	category: ''
 }
 
@@ -80,7 +81,7 @@ const NewEntry = () => {
 					title: formData.title,
 					date: formData.date,
 					body: formData.entry,
-					id_category: formData.category
+					category_id: formData.category
 				})
 			})
 				.then((resp) => {
@@ -102,9 +103,8 @@ const NewEntry = () => {
 	 
 	return (
 		<article id='new'>
-			<h2>New journal entry</h2>
+			<h2>New Journal Entry</h2>
 			<form className='new-entry' onSubmit={formik.handleSubmit}>
-
 				<label htmlFor='title'>Title &nbsp;</label>
 				<input
 					type='text'
@@ -135,7 +135,7 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label htmlFor='entry'>Entry</label>
-				<button type='button' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
+				<button type='button' className='record' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
 				<textarea
 					type='textarea'
 					name='entry'
@@ -194,6 +194,10 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
+			<div className='toast'>
+				<Toaster  />
+			</div>
+
 		</article>
 )}
 
