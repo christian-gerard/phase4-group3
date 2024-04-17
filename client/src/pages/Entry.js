@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { date as yupDate } from 'yup'
 import { useToaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
@@ -48,11 +49,11 @@ function Entry() {
     }
 
     const editSchema = object({
-        title: string(),
-        date: string()
-            .matches(/[a-zA-Z0-9]/, "Date can only contain letters and numbers.")
-            .required('Date is required.'),
+        title: string().max(50, 'Title must be 50 characters or less'),
+        date: yupDate().required('Date is required.'),
         body: string()
+            .min(10, 'Entry must be at least 10 characters long')
+            .max(40000, 'Entry may not be more than 40,000 characters'),
     })
     
     const initialValues = {
@@ -84,7 +85,6 @@ function Entry() {
 					}
 				})
 				.catch((error) => console.error('Error:', error))
-
         }
     })
     

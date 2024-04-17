@@ -20,7 +20,7 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         validate=validate.Length(
             min=10,
             max=40000, 
-            error="Body must be between 15 and 40,000 characters")
+            error="Body must be between 10 and 40,000 characters")
         )
     
     date = fields.String(require=True)
