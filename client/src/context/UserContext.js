@@ -10,7 +10,7 @@ const UserProvider = ({ children }) => {
 		setUser(user)
 	}
 
-	const logout = () => {
+	const logout = (user) => {
 		try {
 			fetch('/logout', { method: 'DELETE' }).then((resp) => {
 				if (resp.status === 204) {
