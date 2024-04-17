@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
-import { toast } from 'react-hot-toast'
+import { useToaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
@@ -12,6 +12,7 @@ function Entry() {
     const params = useParams()
     const [isEdit, setIsEdit] = useState(false)
     const navigate = useNavigate()
+    const toast = useToaster()
 
     const currentEntry = user.entries.filter((entry) => entry.id === parseInt(params.id))[0]
 
@@ -73,7 +74,7 @@ function Entry() {
                 })
                 .then((resp) => {
 					if (resp.ok) {
-                        const updatedEntries = [...user.entries, formData]
+                        const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? formData : entry)
                         updateEntries(updatedEntries)
                         navigate('/view')
 					} else {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -37,13 +37,13 @@ const NewEntry = () => {
 
 			if(!event.results[0].isFinal) {
 				const transcript = event.results[0][0].transcript
-				const newText = formik.values.body + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
-				formik.setFieldValue('body', newText)
+				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('entry', newText)
 
 			} else {
 				const transcript = event.results[0][0].transcript
-				const newText = formik.values.body + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
-				formik.setFieldValue('body', newText)
+				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('entry', newText)
 				recognition.stop()
 			}
 
@@ -198,6 +198,10 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
+			<div className='toast'>
+				<Toaster  />
+			</div>
+
 		</article>
 )}
 
