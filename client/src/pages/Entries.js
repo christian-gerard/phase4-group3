@@ -4,7 +4,7 @@ import { UserContext } from '../context/UserContext'
 
 function Entries() {
     const { user } = useContext(UserContext)
-    const [pages, setPages] = useState(0)
+    const [pages, setPages] = useState(1)
     const [currentPage, setCurrentPage] = useState(1)
     const startIndex = (currentPage - 1) * 10
     const endIndex = currentPage * 10
