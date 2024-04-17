@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { useToaster } from 'react-hot-toast'
 import * as Yup from 'yup'
-import YupPassword from 'yup-password'
 import { object, string } from 'yup'
 import { Formik, Form, Field, useFormik } from 'formik'
 
@@ -39,12 +38,6 @@ function Entry() {
                 }
             })
             .catch((error) => console.error('Error:', error))
-
-
-
-
-
-
     }
 
     const editSchema = object({

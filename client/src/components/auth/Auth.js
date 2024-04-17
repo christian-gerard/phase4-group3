@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
@@ -106,6 +106,7 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.username}
 						className='input'
+						autoComplete='username'
 					/>
 					{formik.errors.username && formik.touched.username && (
 						<div className='error-message show'>
@@ -120,6 +121,7 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values._password_hash}
 						className='input'
+						autoComplete='current-password'
 					/>
 					{formik.errors._password_hash &&
 						formik.touched._password_hash && (
