@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
@@ -87,7 +87,7 @@ const Auth = () => {
 				} else {
 					return res
 						.json()
-						.then((errorObj) => toast.error(errorObj.Error))				}
+						.then((errorObj) => toast.error(errorObj.Error))}
 			})
 		}
 	})

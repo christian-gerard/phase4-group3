@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { UserContext } from './context/UserContext'
 import Nav from './components/Nav'
@@ -7,26 +7,17 @@ import Footer from './components/Footer'
 
 const App = () => {
   const { user } = useContext(UserContext)
-
-      const useAuth = () => {
-          return useContext(UserContext)
-      }
-  
-      const AuthStatus = () => {
-          const auth = useAuth()
-  
-          if (!auth.user) {
-              return 'not logged in!'
-          }
-          return <p>Welcome {user}.</p>
-        }
+  const redirect = useNavigate()
 
   return (
 		<main>
          <Nav />
-          <AuthStatus />
          <Toaster position="top-center" containerClassName="toaster-style" />
-         <Outlet context={{ user }} />
+         {/* {user ? ( */}
+              <Outlet context={{ user }} />
+         {/* ) : (  */}
+          {/* redirect('/') */}
+         {/* )} */}
          <Footer />
 		</main>
 )}

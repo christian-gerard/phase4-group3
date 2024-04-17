@@ -19,15 +19,16 @@ const Nav = () => {
                 <div id='a' className='color-bar' />
             </section>
             <nav>
-                <NavLink id='link' to='/' className='link'>Home</NavLink>
-                    {user ? 
-                        (<>
+                {user ? (
+                    <>
                         <NavLink id='link' to='/new' className='nav-link'>New Entry</NavLink>
                         <NavLink id='link' to='/view' className='nav-link'>View Journal</NavLink>
                         <NavLink id='link' to='/categories' className='nav-link'>Dream Categories</NavLink>
                         <NavLink id='link' to='/' className='nav-link' onClick={logout}>Logout</NavLink>
-                        </>) : null
-                    }
+                    </>
+                ) : (
+                    <NavLink id='link' to='/' className='link'></NavLink>
+                )}
             </nav>
         </header>
 )}
