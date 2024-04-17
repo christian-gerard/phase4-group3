@@ -198,7 +198,9 @@ section {
 
 // Toast 
 .toast {
-	position: static;
+	position: relative;
+	inset: none;
+	
 }
 // Auth
 .auth {

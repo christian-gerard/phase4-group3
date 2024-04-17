@@ -198,9 +198,12 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
-			<div className='toast'>
-				<Toaster  />
-			</div>
+			{/* <div className='toast'> */}
+				{/* <Toaster toastOptions={{ 
+					className:'toast', 
+						style: {
+							position:'relative',}}} /> */}
+			{/* </div> */}
 
 		</article>
 )}
