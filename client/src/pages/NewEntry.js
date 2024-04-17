@@ -95,9 +95,7 @@ const NewEntry = () => {
 							updateEntries(updatedEntries)
 							navigate('/view')
 							toast.success("Entry Submited")
-
 						})
-
 					} else {
 						return resp
 							.json()

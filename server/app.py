@@ -13,13 +13,12 @@ from models.user import User
 import ipdb
 
 # # # General Route
-
-# # # # # Error Handling
+# # Error Handling
 @app.errorhandler(NotFound)
 def not_found(error):
     return {"error": error.description}, 404
 
-# # # # # Route Protection
+# # Route Protection
 @app.before_request
 def before_request():
     path_dict = {"entrybyid": Entry, "userbyid": User }
@@ -46,10 +45,8 @@ def after_request(response):  #! notice the response argument automatically pass
     response.headers["X-Response-Time"] = str(diff)
     return response
 
-
 # # # REST API
-
-# # # # # CATEGORY
+# # CATEGORY
 class Categories(Resource):
     def get(self):
         try:
@@ -58,7 +55,7 @@ class Categories(Resource):
             return serialized_categories, 200
         except Exception as e:
             return {"Error": str(e)}, 400
-        
+
 api.add_resource(Categories, '/categories')
 
 
@@ -91,6 +88,7 @@ class Entries(Resource):
 
 api.add_resource(Entries, '/entries')
 
+
 class EntryById(Resource):
     @login_required
     def get(self,id):
@@ -102,7 +100,7 @@ class EntryById(Resource):
                 return {"Error": "Entry not found"}, 404
         except Exception as e:
             return {"Error": str(e)}, 400
-        
+
     @login_required
     def patch(self,id):
         try:
@@ -116,7 +114,7 @@ class EntryById(Resource):
                 return {"Error": f"Unable to find entry with id {id}"}, 404
         except Exception as e:
             return {"Error": str(e)}, 400
-        
+
     @login_required
     def delete(self,id):
         try:
@@ -149,6 +147,7 @@ class SignUp(Resource):
 
 api.add_resource(SignUp, '/signup')
 
+
 class Login(Resource):
     def post(self):
         try:
@@ -166,6 +165,7 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+
 class Logout(Resource):
     def delete(self):
         try:
@@ -180,7 +180,8 @@ class Logout(Resource):
             return {"Error": str(e)}, 400
 
 api.add_resource(Logout, '/logout')
-    
+
+
 class CheckMe(Resource):
     def get(self):
         if "user_id" in session:
