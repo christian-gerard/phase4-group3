@@ -90,15 +90,15 @@ function Entry() {
     return (
         user ? (
             <>
-                currentEntry ?
-                (isEdit ? 
-                    <div>
-                        <h2>Editing: {currentEntry.title}</h2>
-                        <button onClick={editMode}>Edit</button>
-                        <button onClick={handleDelete}>Delete</button>
-                        <Formik enableReinitialize={true}>
-                            <Form className='form'  onSubmit={formik.handleSubmit}>
-                                <Field
+                {currentEntry ? (
+                    isEdit ? 
+                        <div>
+                            <h2>Editing: {currentEntry.title}</h2>
+                            <button onClick={editMode}>Edit</button>
+                            <button onClick={handleDelete}>Delete</button>
+                            <Formik enableReinitialize={true}>
+                                <Form className='form'  onSubmit={formik.handleSubmit}>
+                                    <Field
                                         type='text'
                                         name='title'
                                         placeholder={currentEntry.title}
@@ -112,7 +112,7 @@ function Entry() {
                                             {formik.errors.title}
                                         </div>
                                     )}
-                                <Field
+                                    <Field
                                         type='text'
                                         name='date'
                                         placeholder={currentEntry.date}
@@ -126,7 +126,7 @@ function Entry() {
                                             {formik.errors.date}
                                         </div>
                                     )}
-                                <Field
+                                    <Field
                                         type='text'
                                         name='body'
                                         placeholder={currentEntry.body}
@@ -140,26 +140,26 @@ function Entry() {
                                             {formik.errors.body}
                                         </div>
                                     )}
-
-                            <button onClick={handleSave}>Save</button>
-
-                            </Form>
-                        </Formik>
-                    </div>
-                :
-                    <div>
-                        <h2>Viewing: {currentEntry.title}</h2>
-                        <button onClick={editMode}>Edit</button>
-                        <button onClick={handleDelete}>Delete</button>
-                        <p>{currentEntry.title}</p>
-                        <p>{currentEntry.body}</p>
-                        <p>{currentEntry.date}</p>
-                        
-                    </div>) : (
+                                <button onClick={handleSave}>Save</button>
+                                </Form>
+                            </Formik>
+                        </div>
+                    :
+                        <div>
+                            <h2>Viewing: {currentEntry.title}</h2>
+                            <button onClick={editMode}>Edit</button>
+                            <button onClick={handleDelete}>Delete</button>
+                            <p>{currentEntry.title}</p>
+                            <p>{currentEntry.body}</p>
+                            <p>{currentEntry.date}</p>
+                            
+                        </div>
+                    ) : (
                         <>
                             <div className='entries-error-message entries'>Entry not found. Try logging in.</div>
                             <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
-            </>)
+                        </>
+                )}
             </>
         ) : (
             <>
