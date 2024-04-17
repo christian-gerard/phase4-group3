@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -46,19 +46,14 @@ const NewEntry = () => {
 				formik.setFieldValue('entry', newText)
 				recognition.stop()
 			}
-
 		}
 
 	recognition.onend = async function (event) {
 		// recognition.start()
 		console.log(event)
 		setIsRecording(false)
-
 	}
 
-
-
-		
 	const voiceToText = async () => {
 
 		if(!isRecording) {
@@ -68,7 +63,6 @@ const NewEntry = () => {
 			setIsRecording(false)
 			recognition.stop()
 		}
-
 	}
 
 	const navigate = useNavigate()
@@ -102,8 +96,6 @@ const NewEntry = () => {
 				.catch((error) => console.error('Error:', error))
 		}
 	})
-
-	//! something should happen upon successful form submission. redirect to... view all entries, else error message.
 	 
 	return (
 		<article id='new'>
@@ -198,13 +190,6 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
-			{/* <div className='toast'> */}
-				{/* <Toaster toastOptions={{ 
-					className:'toast', 
-						style: {
-							position:'relative',}}} /> */}
-			{/* </div> */}
-
 		</article>
 )}
 
