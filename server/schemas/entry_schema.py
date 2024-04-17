@@ -28,6 +28,7 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
     updated_at = fields.DateTime()
 
     user_id = fields.Integer(required=True)
+    user = fields.Nested('UserSchema', exclude=('created_at',))
 
     category_id = fields.Integer(required=True)
     category = fields.Nested('CategorySchema', exclude=('created_at',))

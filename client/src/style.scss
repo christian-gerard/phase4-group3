@@ -96,6 +96,7 @@ a {
 	text-decoration: none;
 	cursor: pointer;
 } 
+
 a:hover {
 	color: $dkgrapefruit;
 	text-decoration: underline;
@@ -195,6 +196,10 @@ section {
 	background: $purple;
 }
 
+// Toast 
+.toast {
+	position: static;
+}
 // Auth
 .auth {
 	margin: 16px 0;
@@ -242,6 +247,7 @@ section {
 	color: $grapefruit;
 	font-family: $font-primary;
 }
+
 
 // New Entry
 #new {
