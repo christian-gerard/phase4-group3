@@ -94,7 +94,7 @@ const Auth = () => {
 
 	return (
 		<div className='auth'>
-			<h2>Sign up or log in to get started</h2>
+			<h2>{isLogin ? 'Login':'Sign Up'}</h2>
 			<Formik onSubmit={formik.handleSubmit}>
 				<Form className='form' onSubmit={formik.handleSubmit}>
 					<Field
@@ -148,7 +148,10 @@ const Auth = () => {
 						</>
 					)}
 					<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
-					<button type='button' className='change-form' onClick={handleIsLogin}>SWITCH : {isLogin ? 'Sign up' : 'Login'}</button>
+					{isLogin ? 
+					<button type='button' className='change-form' onClick={handleIsLogin}>Create New Account</button>
+					: ''
+					}
 				</Form>
 			</Formik>
 		</div>

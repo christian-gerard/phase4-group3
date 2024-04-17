@@ -4,7 +4,6 @@ import { Toaster } from 'react-hot-toast'
 import { UserContext } from './context/UserContext'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
-import { UserContext } from './context/UserContext'
 
 const App = () => {
   const { user } = useContext(UserContext)

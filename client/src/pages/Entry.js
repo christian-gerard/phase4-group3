@@ -150,13 +150,12 @@ function Entry() {
                             </Formik>
                         </div>
                     :
-                        <div>
+                        <div className='view'>
                             <h2>Viewing: {currentEntry.title}</h2>
-                            <button onClick={editMode}>Edit</button>
-                            <button onClick={handleDelete}>Delete</button>
-                            <p>{currentEntry.title}</p>
-                            <p>{currentEntry.body}</p>
-                            <p>{currentEntry.date}</p>
+                            <button className='button' onClick={editMode}>Edit</button>
+                            <p className='datespan'>{currentEntry.date}</p>
+                            <p className='dream'>{currentEntry.body}</p>
+                            <button className='button' onClick={handleDelete}>Delete</button>
                             
                         </div>
                     ) : (

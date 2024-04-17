@@ -16,9 +16,9 @@ const UserProvider = ({ children }) => {
 			fetch('/logout', { method: 'DELETE' }).then((res) => {
 				if (res.status === 204) {
 					setUser(null)
-					toast.success('Entry Deleted')
+					toast.success('All logged out!')
 				} else {
-					toast.error('Could not delete!')
+					toast.error('Something whent wrong while logging out. Please try again.')
 				}
 			})
 		} catch (err) {
