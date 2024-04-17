@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
@@ -146,21 +146,11 @@ const Auth = () => {
 								)}
 						</>
 					)}
-					<input
-						type='submit'
-						className='submit'
-						value={isLogin ? 'Login' : 'Sign up'}
-					/>
-					<button
-						type='button'
-						className='change-form'
-						onClick={handleIsLogin}>
-						SWITCH : {isLogin ? 'Sign up' : 'Login'}
-					</button>
+					<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
+					<button type='button' className='change-form' onClick={handleIsLogin}>SWITCH : {isLogin ? 'Sign up' : 'Login'}</button>
 				</Form>
 			</Formik>
 		</div>
-	)
-}
+)}
 
 export default Auth
