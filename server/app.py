@@ -180,12 +180,16 @@ class Logout(Resource):
             return {"Error": str(e)}, 400
 
 api.add_resource(Logout, '/logout')
-
-
-
-
-
-
+    
+class CheckMe(Resource):
+    def get():
+        if "user_id" in session:
+            user = db.session.get(User, session.get("user_id"))
+            return user.to_dict(), 200
+        else:
+            return {"message": "Please log in"}, 400
+        
+api.add_resource(CheckMe, '/me')
 
 
 # # # # # Execute App

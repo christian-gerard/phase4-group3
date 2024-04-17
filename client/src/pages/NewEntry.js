@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from 'yup'
@@ -25,8 +26,6 @@ const initialValues = {
 }
 
 const NewEntry = () => {
-	// const [isLogin, setIsLogin] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
@@ -55,10 +54,7 @@ const NewEntry = () => {
 		setIsRecording(false)
 
 	}
-
-
-
-		
+	
 	const voiceToText = async () => {
 
 		if(!isRecording) {
