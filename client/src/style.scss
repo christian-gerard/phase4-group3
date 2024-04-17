@@ -196,12 +196,6 @@ section {
 	background: $purple;
 }
 
-// Toast 
-.toast {
-	position: relative;
-	inset: none;
-	
-}
 // Auth
 .auth {
 	margin: 16px 0;
@@ -249,7 +243,6 @@ section {
 	color: $grapefruit;
 	font-family: $font-primary;
 }
-
 
 // New Entry
 #new {
@@ -411,6 +404,27 @@ footer > p {
 	line-height: normal;
 	text-align: center;
   }
+
+// Toast 
+.toast {
+	position: relative;
+	inset: none;
+}
+
+div#root div.toaster-style {
+  // background-color: $bg;
+  color: $text;
+  inset: 0px !important;
+  position:relative !important;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 25px;
+}
+
+div#root div.toaster-style div {
+  // background-color: $bg;
+  color: $text;
+}
 
 /* Breakpoints */
 //! inc styles for text area width in new entry
