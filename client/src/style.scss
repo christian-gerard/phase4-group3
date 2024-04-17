@@ -198,7 +198,7 @@ section {
 
 // Toast 
 .toast {
-	position: static;
+	position: relative;
 }
 // Auth
 .auth {
@@ -299,6 +299,8 @@ textarea {
 	overflow: auto;
 	resize: none;
 	font-family: $font-primary;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 .record {
 	height: 2em;

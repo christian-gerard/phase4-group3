@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -194,9 +193,9 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
-			<div className='toast'>
+			{/* <div className='toast'>
 				<Toaster  />
-			</div>
+			</div> */}
 
 		</article>
 )}
