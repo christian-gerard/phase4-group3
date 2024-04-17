@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
+import { UserContext } from '../context/UserContext'
 
 // Yup entry validation
 const entrySchema = object({
@@ -26,6 +26,7 @@ const initialValues = {
 }
 
 const NewEntry = () => {
+	const { user } = useContext(UserContext)
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
@@ -81,21 +82,20 @@ const NewEntry = () => {
 					title: formData.title,
 					date: formData.date,
 					body: formData.entry,
-					category_id: formData.category
+					category_id: parseInt(formData.category),
+					user_id: user.id
 				})
 			})
 				.then((resp) => {
 					if (resp.ok) {
 						resp.json()
-							.then(() => navigate('/'))
-							.catch((error) => console.error('Error:', error))
+							.then(() => navigate('/view'))
 					} else {
 						return resp
 							.json()
 							.then((errorObj) => toast.error(errorObj.message))
 					}
 				})
-				.catch((error) => console.error('Error:', error))
 		}
 	})
 
@@ -194,9 +194,7 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
-			<div className='toast'>
-				<Toaster  />
-			</div>
+
 
 		</article>
 )}
