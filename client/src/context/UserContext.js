@@ -17,9 +17,9 @@ const UserProvider = ({ children }) => {
             .then(resp => {
                 if (resp.status === 204) {
                     setUser(null)
-                    toast.success('Entry Deleted')
+                    toast.success('Logged Out')
                 } else {
-                    toast.error('Deletion failed...')
+                    toast.error('Logout Failed...')
                 }
             })
         }
