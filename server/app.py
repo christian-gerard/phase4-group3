@@ -182,10 +182,10 @@ class Logout(Resource):
 api.add_resource(Logout, '/logout')
     
 class CheckMe(Resource):
-    def get():
+    def get(self):
         if "user_id" in session:
             user = db.session.get(User, session.get("user_id"))
-            return user.to_dict(), 200
+            return user_schema.dump(user), 200
         else:
             return {"message": "Please log in"}, 400
         
