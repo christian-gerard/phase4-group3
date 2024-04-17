@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast, {Toaster} from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
@@ -50,10 +50,10 @@ const initialValues = {
 }
 
 const Auth = () => {
-    const { user, login, logout } = useContext(UserContext)
+	const { user, login, logout } = useContext(UserContext)
 	const [isLogin, setIsLogin] = useState(true)
-    const navigate = useNavigate()
-    
+	const navigate = useNavigate()
+
 	const requestUrl = isLogin ? '/login' : '/signup'
 
 	const handleIsLogin = () => {
@@ -71,31 +71,30 @@ const Auth = () => {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(formData)
-			})
-			.then((res) => {
+			}).then((res) => {
 				if (res.ok) {
 					res.json()
-					.then((userData) => {
-						login(userData)
-					})
-					.then(() => {
-						isLogin ? navigate('/view') : navigate('/new')
-						toast.success("Logged in")
-					})
+						.then((userData) => {
+							login(userData)
+						})
+						.then(() => {
+							isLogin ? navigate('/view') : navigate('/new')
+							toast.success('Logged in')
+						})
 					console.log(user)
 				} else if (res.status === 422) {
-						toast.error('Invalid Login')
+					toast.error('Invalid Login')
 				} else {
 					return res
 						.json()
-						.then((errorObj) => toast.error(errorObj.Error))				}
+						.then((errorObj) => toast.error(errorObj.Error))}
 			})
 		}
 	})
 
 	return (
 		<div className='auth'>
-			<h2>Sign up or log in to get started</h2>
+			<h2>{isLogin ? 'Login':'Sign Up'}</h2>
 			<Formik onSubmit={formik.handleSubmit}>
 				<Form className='form' onSubmit={formik.handleSubmit}>
 					<Field
@@ -106,7 +105,8 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values.username}
 						className='input'
-						/>
+						autoComplete='username'
+					/>
 					{formik.errors.username && formik.touched.username && (
 						<div className='error-message show'>
 							{formik.errors.username}
@@ -120,12 +120,14 @@ const Auth = () => {
 						onBlur={formik.handleBlur}
 						value={formik.values._password_hash}
 						className='input'
-						/>
-					{formik.errors._password_hash && formik.touched._password_hash && (
-						<div className='error-message show'>
-							{formik.errors._password_hash}
-						</div>
-					)}
+						autoComplete='current-password'
+					/>
+					{formik.errors._password_hash &&
+						formik.touched._password_hash && (
+							<div className='error-message show'>
+								{formik.errors._password_hash}
+							</div>
+						)}
 					{!isLogin && (
 						<>
 							<Field
@@ -136,7 +138,7 @@ const Auth = () => {
 								onBlur={formik.handleBlur}
 								value={formik.values.confirmPassword}
 								className='input'
-								/>
+							/>
 							{formik.errors.confirmPassword &&
 								formik.touched.confirmPassword && (
 									<div className='error-message show'>
@@ -145,8 +147,11 @@ const Auth = () => {
 								)}
 						</>
 					)}
-				<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
-				<button type='button' className='change-form' onClick={handleIsLogin }>SWITCH : {isLogin ? 'Sign up' : 'Login'}</button>
+					<input type='submit' className='submit' value={isLogin ? 'Login' : 'Sign up'} />
+					{isLogin ? 
+					<button type='button' className='change-form' onClick={handleIsLogin}>Create New Account</button>
+					: ''
+					}
 				</Form>
 			</Formik>
 		</div>

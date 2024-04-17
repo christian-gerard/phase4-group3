@@ -5,12 +5,13 @@ import {useEffect} from 'react'
 export const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+	const [user, setUser] = useState(null)
 
-    const login = (user) => {
-        setUser(user)
-    }
+	const login = (user) => {
+		setUser(user)
+	}
 
+<<<<<<< HEAD
     const logout = () => {
         try {
             fetch("/logout", {method: "DELETE"})
@@ -25,21 +26,35 @@ const UserProvider = ({ children }) => {
         }
         catch(err) {
             throw err
+=======
+	const logout = (user) => {
+		try {
+			fetch('/logout', { method: 'DELETE' }).then((res) => {
+				if (res.status === 204) {
+					setUser(null)
+					toast.success('All logged out!')
+				} else {
+					toast.error('Something whent wrong while logging out. Please try again.')
+				}
+			})
+		} catch (err) {
+			throw err
+>>>>>>> main
     }}
 
-    const updateEntries = (updatedEntries) => {
-        setUser({...user, entries: updatedEntries})
-    }
+	const updateEntries = (updatedEntries) => {
+		setUser({ ...user, entries: updatedEntries })
+	}
 
     // Refresh
     useEffect(() => {
-        fetch("/me")
+        fetch('/me')
         .then(resp => {
             if (resp.ok) {
             resp.json().then(setUser)
             
             } else {
-            toast.error("Please log in")
+            toast.error('Please log in')
             }
         })
     }, [])
