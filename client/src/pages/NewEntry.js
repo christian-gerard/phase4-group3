@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast, from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -46,14 +46,12 @@ const NewEntry = () => {
 				formik.setFieldValue('entry', newText)
 				recognition.stop()
 			}
-
 		}
 
 	recognition.onend = async function (event) {
 		// recognition.start()
 		console.log(event)
 		setIsRecording(false)
-
 	}
 	
 	const voiceToText = async () => {
@@ -65,7 +63,6 @@ const NewEntry = () => {
 			setIsRecording(false)
 			recognition.stop()
 		}
-
 	}
 
 	const navigate = useNavigate()
@@ -98,8 +95,6 @@ const NewEntry = () => {
 				})
 		}
 	})
-
-	//! something should happen upon successful form submission. redirect to... view all entries, else error message.
 	 
 	return (
 		<article id='new'>

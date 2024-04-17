@@ -87,8 +87,7 @@ const Auth = () => {
 				} else {
 					return res
 						.json()
-						.then((errorObj) => toast.error(errorObj.message))
-				}
+						.then((errorObj) => toast.error(errorObj.Error))				}
 			})
 		}
 	})
