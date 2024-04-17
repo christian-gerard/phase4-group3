@@ -107,9 +107,8 @@ const NewEntry = () => {
 	 
 	return (
 		<article id='new'>
-			<h2>New journal entry</h2>
+			<h2>New Journal Entry</h2>
 			<form className='new-entry' onSubmit={formik.handleSubmit}>
-
 				<label htmlFor='title'>Title &nbsp;</label>
 				<input
 					type='text'
@@ -140,7 +139,7 @@ const NewEntry = () => {
 				)}
 				<br />
 				<label htmlFor='entry'>Entry</label>
-				<button type='button' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
+				<button type='button' className='record' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
 				<textarea
 					type='textarea'
 					name='entry'

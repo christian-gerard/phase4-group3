@@ -18,9 +18,10 @@ function Entries() {
         if (pages > currentPage) {
             setCurrentPage((currentPage) => currentPage + 1)
     }}
-
+//! include chips for categories for filtering
     return (
-        <>
+        <article className='all-entries-wrapper'>
+            <h2>View Journal Entries</h2>
             {user ? 
                 user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
                 : 
@@ -31,7 +32,7 @@ function Entries() {
                 &nbsp; {currentPage} of {pages} &nbsp;
                 <button className='all-entries' onClick={handleNext}>Next</button>
             </div>
-        </>
+        </article>
     )
 }
 

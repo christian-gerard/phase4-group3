@@ -11,7 +11,7 @@ class User(db.Model, SerializerMixin):
 
     # # # # # Attribute
     id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String)
+    username = db.Column(db.String, unique=True)
     _password_hash = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
