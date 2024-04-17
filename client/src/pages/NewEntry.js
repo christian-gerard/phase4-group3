@@ -26,7 +26,7 @@ const initialValues = {
 }
 
 const NewEntry = () => {
-	const { user } = useContext(UserContext)
+	const { user, updateEntries } = useContext(UserContext)
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
@@ -89,8 +89,15 @@ const NewEntry = () => {
 			})
 				.then((resp) => {
 					if (resp.ok) {
-						resp.json()
-							.then(() => navigate('/view'))
+						return resp.json().then((data) => {
+
+							const updatedEntries = [...user.entries, data]
+							updateEntries(updatedEntries)
+							navigate('/view')
+							toast.success("Entry Submited")
+
+						})
+
 					} else {
 						return resp
 							.json()

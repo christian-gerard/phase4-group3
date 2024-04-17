@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useToaster } from 'react-hot-toast'
 import { Formik, Form, Field, useFormik } from 'formik'
 import { object, string, date as yupDate } from 'yup'
+import YupPassword from 'yup-password'
 import * as Yup from 'yup'
+import { useToaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { UserContext } from '../context/UserContext'
 
 function Entry() {
@@ -11,7 +13,6 @@ function Entry() {
     const params = useParams()
     const [isEdit, setIsEdit] = useState(false)
     const navigate = useNavigate()
-    const toast = useToaster()
 
     const currentEntry = user.entries.filter((entry) => entry.id === parseInt(params.id))[0]
 
@@ -35,6 +36,7 @@ function Entry() {
                     const updatedEntries = user.entries.filter((entry) => entry.id !== currentEntry.id)
                     updateEntries(updatedEntries)
                     navigate('/view')
+                    toast.success("Deleted")
                 } else {
                     return resp
                         .json()
@@ -71,9 +73,12 @@ function Entry() {
                 })
                 .then((resp) => {
 					if (resp.ok) {
-                        const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? formData : entry)
-                        updateEntries(updatedEntries)
-                        navigate('/view')
+                        return resp.json().then((data) => {
+                            const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? data : entry)
+                            updateEntries(updatedEntries)
+                            navigate('/view')
+                            toast.success("Updated")
+						})
 					} else {
 						return resp
 							.json()
