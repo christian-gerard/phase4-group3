@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import { UserContext } from './context/UserContext'
 
 
 const App = () => {

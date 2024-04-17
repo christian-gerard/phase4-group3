@@ -2,7 +2,7 @@ import { useNavigate, useRouteError } from 'react-router-dom'
 
 const Error = () => {
     const err = useRouteError()
-    debugger
+
     const navigate = useNavigate()
 
     const handleGoBack = () => {
