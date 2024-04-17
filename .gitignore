@@ -24,3 +24,12 @@ yarn-error.log*
 
 
 /server/instance/dreams.db
+*.db
+instance
+
+.venv
+
+.pytest_cache
+__pycache__
+
+.npm
