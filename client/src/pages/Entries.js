@@ -21,17 +21,18 @@ function Entries() {
 //! include chips for categories for filtering
     return (
         <article className='all-entries-wrapper'>
-            <h2>View Journal Entries</h2>
-            {user ? 
-                user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />) 
+            {user ? <h2>View Journal Entries</h2> : ''}
+            {user ?
+                user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />)
                 : 
-                <div className='entries-error-message entries'>You must be logged in to view entries!</div>
+                <div className='entries-error-message entries'>You must be logged in to view entries!</div>}
+            {user ?
+                <div>
+                    <button className='all-entries' onClick={handlePrev}>Prev</button>
+                    &nbsp; {currentPage} of {pages} &nbsp;
+                    <button className='all-entries' onClick={handleNext}>Next</button>
+                </div> : ''
             }
-            <div>
-                <button className='all-entries' onClick={handlePrev}>Prev</button>
-                &nbsp; {currentPage} of {pages} &nbsp;
-                <button className='all-entries' onClick={handleNext}>Next</button>
-            </div>
         </article>
     )
 }
