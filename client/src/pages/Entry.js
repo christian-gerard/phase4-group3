@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
-import { date as yupDate } from 'yup'
 import { useToaster } from 'react-hot-toast'
-import * as Yup from 'yup'
-import { object, string } from 'yup'
 import { Formik, Form, Field, useFormik } from 'formik'
+import { object, string, date as yupDate } from 'yup'
+import * as Yup from 'yup'
+import { UserContext } from '../context/UserContext'
 
 function Entry() {
     const { user, updateEntries } = useContext(UserContext)
@@ -18,6 +17,10 @@ function Entry() {
 
     const editMode = () => {
         setIsEdit(!isEdit)
+    }
+
+    const handleGoHome = () => {
+        navigate('/')
     }
 
     const handleDelete = () => {
@@ -85,78 +88,85 @@ function Entry() {
     }
 
     return (
-        currentEntry ?
-        (isEdit ? 
-            <div>
-                <h2>Editing: {currentEntry.title}</h2>
-                <button onClick={editMode}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-                <Formik enableReinitialize={true}>
-                    <Form className='form'  onSubmit={formik.handleSubmit}>
-                        <Field
-                                type='text'
-                                name='title'
-                                placeholder={currentEntry.title}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.title}
-                                className='input'
-                            />
-                            {formik.errors.title && formik.touched.title && (
-                                <div className='error-message show'>
-                                    {formik.errors.title}
-                                </div>
-                            )}
-                        <Field
-                                type='text'
-                                name='date'
-                                placeholder={currentEntry.date}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.date}
-                                className='input'
-                            />
-                            {formik.errors.date && formik.touched.date && (
-                                <div className='error-message show'>
-                                    {formik.errors.date}
-                                </div>
-                            )}
-                        <Field
-                                type='text'
-                                name='body'
-                                placeholder={currentEntry.body}
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.body}
-                                className='input'
-                            />
-                            {formik.errors.body && formik.touched.body && (
-                                <div className='error-message show'>
-                                    {formik.errors.body}
-                                </div>
-                            )}
+        user ? (
+            <>
+                currentEntry ?
+                (isEdit ? 
+                    <div>
+                        <h2>Editing: {currentEntry.title}</h2>
+                        <button onClick={editMode}>Edit</button>
+                        <button onClick={handleDelete}>Delete</button>
+                        <Formik enableReinitialize={true}>
+                            <Form className='form'  onSubmit={formik.handleSubmit}>
+                                <Field
+                                        type='text'
+                                        name='title'
+                                        placeholder={currentEntry.title}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.title}
+                                        className='input'
+                                    />
+                                    {formik.errors.title && formik.touched.title && (
+                                        <div className='error-message show'>
+                                            {formik.errors.title}
+                                        </div>
+                                    )}
+                                <Field
+                                        type='text'
+                                        name='date'
+                                        placeholder={currentEntry.date}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.date}
+                                        className='input'
+                                    />
+                                    {formik.errors.date && formik.touched.date && (
+                                        <div className='error-message show'>
+                                            {formik.errors.date}
+                                        </div>
+                                    )}
+                                <Field
+                                        type='text'
+                                        name='body'
+                                        placeholder={currentEntry.body}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.body}
+                                        className='input'
+                                    />
+                                    {formik.errors.body && formik.touched.body && (
+                                        <div className='error-message show'>
+                                            {formik.errors.body}
+                                        </div>
+                                    )}
 
-                    <button onClick={handleSave}>Save</button>
+                            <button onClick={handleSave}>Save</button>
 
-                    </Form>
-                </Formik>
-            </div>
-            :
-            <div>
-                <h2>Viewing: {currentEntry.title}</h2>
-                <button onClick={editMode}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-                <p>{currentEntry.title}</p>
-                <p>{currentEntry.body}</p>
-                <p>{currentEntry.date}</p>
-                
-            </div>)
-
-            :
-
-            <h1>User not logged in</h1>
-
-    )
-}
+                            </Form>
+                        </Formik>
+                    </div>
+                :
+                    <div>
+                        <h2>Viewing: {currentEntry.title}</h2>
+                        <button onClick={editMode}>Edit</button>
+                        <button onClick={handleDelete}>Delete</button>
+                        <p>{currentEntry.title}</p>
+                        <p>{currentEntry.body}</p>
+                        <p>{currentEntry.date}</p>
+                        
+                    </div>) : (
+                        <>
+                            <div className='entries-error-message entries'>Entry not found. Try logging in.</div>
+                            <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+            </>)
+            </>
+        ) : (
+            <>
+                <div className='entries-error-message entries'>You must be logged in to view this page.</div>
+                <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+            </>
+        )
+)}
 
 export default Entry

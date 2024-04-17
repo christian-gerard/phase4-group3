@@ -31,13 +31,13 @@ const UserProvider = ({ children }) => {
 
     // Refresh
     useEffect(() => {
-        fetch("/me")
+        fetch('/me')
         .then(resp => {
             if (resp.ok) {
             resp.json().then(setUser)
             
             } else {
-            toast.error("Please log in")
+            toast.error('Please log in')
             }
         })
     }, [])

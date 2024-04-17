@@ -40,7 +40,7 @@ function Entries() {
             </>
         ) : (
             <>
-                <div className='entries-error-message entries'>You must be logged in to view entries!</div>
+                <div className='entries-error-message entries'>You must be logged in to view this page.</div>
                 <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
             </>
     )
