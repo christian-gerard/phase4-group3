@@ -1,6 +1,8 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { date as yupDate } from 'yup'
+import { useToaster } from 'react-hot-toast'
 import * as Yup from 'yup'
 import YupPassword from 'yup-password'
 import { object, string } from 'yup'
@@ -11,6 +13,7 @@ function Entry() {
     const params = useParams()
     const [isEdit, setIsEdit] = useState(false)
     const navigate = useNavigate()
+    const toast = useToaster()
 
     const currentEntry = user.entries.filter((entry) => entry.id === parseInt(params.id))[0]
 
@@ -19,30 +22,38 @@ function Entry() {
     }
 
     const handleDelete = () => {
-        try {
             fetch(`/entries/${currentEntry.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(resp => {
-                if(resp.ok){
+            .then((resp) => {
+                if (resp.ok) {
                     const updatedEntries = user.entries.filter((entry) => entry.id !== currentEntry.id)
                     updateEntries(updatedEntries)
                     navigate('/view')
+                } else {
+                    return resp
+                        .json()
+                        .then((errorObj) => toast.error(errorObj.message))
                 }
             })
-        } catch(err) {
-            throw err
-    }}
+            .catch((error) => console.error('Error:', error))
+
+
+
+
+
+
+    }
 
     const editSchema = object({
-        title: string(),
-        date: string()
-            .matches(/[a-zA-Z0-9]/, "Date can only contain letters and numbers.")
-            .required('Date is required.'),
+        title: string().max(50, 'Title must be 50 characters or less'),
+        date: yupDate().required('Date is required.'),
         body: string()
+            .min(10, 'Entry must be at least 10 characters long')
+            .max(40000, 'Entry may not be more than 40,000 characters'),
     })
     
     const initialValues = {
@@ -55,7 +66,6 @@ function Entry() {
 		initialValues,
 		validationSchema: editSchema,
 		onSubmit: (formData) => { 
-            try {
                 fetch(`/entries/${currentEntry.id}`, {
                     method: 'PATCH',
                     headers: {
@@ -63,16 +73,19 @@ function Entry() {
                     },
                     body: JSON.stringify(formData)
                 })
-                .then(resp => {
-                    if(resp.ok){
-                        const updatedEntries = [...user.entries, formData]
+                .then((resp) => {
+					if (resp.ok) {
+                        const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? formData : entry)
                         updateEntries(updatedEntries)
                         navigate('/view')
-                    }
-                })
-            } catch(err) {
-                throw err
-        }}
+					} else {
+						return resp
+							.json()
+							.then((errorObj) => toast.error(errorObj.message))
+					}
+				})
+				.catch((error) => console.error('Error:', error))
+        }
     })
     
     const handleSave = () => {

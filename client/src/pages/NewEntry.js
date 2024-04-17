@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useNavigate, useOutletContext } from 'react-router-dom'
-import toast from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
 import { useFormik } from 'formik'
@@ -20,13 +21,11 @@ const entrySchema = object({
 const initialValues = {
 	title: '',
 	date: '',
-	entry: '',
+	body: '',
 	category: ''
 }
 
 const NewEntry = () => {
-	// const [isLogin, setIsLogin] = useState(false)
-	// const { updateCurrentUser } = useOutletContext()
 	const [isRecording, setIsRecording] = useState(false)
 	const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 	const recognition = new SpeechRecognition()
@@ -55,10 +54,7 @@ const NewEntry = () => {
 		setIsRecording(false)
 
 	}
-
-
-
-		
+	
 	const voiceToText = async () => {
 
 		if(!isRecording) {
@@ -84,8 +80,8 @@ const NewEntry = () => {
 				body: JSON.stringify({
 					title: formData.title,
 					date: formData.date,
-					entry: formData.entry,
-					id_category: formData.category
+					body: formData.entry,
+					category_id: formData.category
 				})
 			})
 				.then((resp) => {
@@ -198,6 +194,10 @@ const NewEntry = () => {
 				<br />
 				<input type='submit' id='submit-new' value={'Add new entry'} />
 			</form>
+			<div className='toast'>
+				<Toaster  />
+			</div>
+
 		</article>
 )}
 
