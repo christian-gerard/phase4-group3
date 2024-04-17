@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import toast from 'react-hot-toast'
+import {useEffect} from 'react'
 
 export const UserContext = createContext()
 
@@ -29,6 +30,19 @@ const UserProvider = ({ children }) => {
     const updateEntries = (updatedEntries) => {
         setUser({...user, entries: updatedEntries})
     }
+
+    // Refresh
+    useEffect(() => {
+        fetch("/me")
+        .then(resp => {
+            if (resp.ok) {
+            resp.json().then(setUser)
+            
+            } else {
+            toast.error("Please log in")
+            }
+        })
+    }, [])
 
     return (
         <UserContext.Provider value={{ user, login, logout, updateEntries }}>

@@ -156,6 +156,25 @@ class VoiceToText(Resource):
 
 api.add_resource(VoiceToText, '/voice')
 
+@app.route("/api/v1/me", methods=["GET"])
+def me():
+    #! check if we have a user_id key inside session
+    if "user_id" in session:
+        user = db.session.get(User, session.get("user_id"))
+        return user.to_dict(), 200
+    else:
+        return {"message": "Please log in"}, 400
+    
+class CheckMe(Resource):
+    def get():
+        if "user_id" in session:
+            user = db.session.get(User, session.get("user_id"))
+            return user.to_dict(), 200
+        else:
+            return {"message": "Please log in"}, 400
+        
+api.add_resource(CheckMe, '/me')
+
 # # # # # Execute App
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

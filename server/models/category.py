@@ -33,3 +33,4 @@ class Category(db.Model, SerializerMixin):
     # # # # # Property
 
     # # # # # Validate
+    
