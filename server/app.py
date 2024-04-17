@@ -72,7 +72,7 @@ class Entries(Resource):
         except Exception as e:
             return {"Error": str(e)}, 400
 
-    @login_required
+    # @login_required
     def post(self):
         try:
             data = request.get_json()
@@ -81,7 +81,7 @@ class Entries(Resource):
                 "body" : data.get("body"),
                 "date" : data.get("date"),
                 "category_id" : data.get("category_id"),
-                "user_id" : session['user_id']})
+                "user_id" : data.get("user_id")})
             db.session.add(entry)
             db.session.commit()
             return entry_schema.dump(entry), 201
@@ -182,10 +182,10 @@ class Logout(Resource):
 api.add_resource(Logout, '/logout')
     
 class CheckMe(Resource):
-    def get():
+    def get(self):
         if "user_id" in session:
             user = db.session.get(User, session.get("user_id"))
-            return user.to_dict(), 200
+            return user_schema.dump(user), 200
         else:
             return {"message": "Please log in"}, 400
         
