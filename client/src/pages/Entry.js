@@ -29,8 +29,6 @@ function Entry() {
             })
             .then((resp) => {
                 if (resp.ok) {
-
-                    
                     const updatedEntries = user.entries.filter((entry) => entry.id !== currentEntry.id)
                     updateEntries(updatedEntries)
                     navigate('/view')

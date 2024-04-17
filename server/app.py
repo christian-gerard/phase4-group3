@@ -26,7 +26,7 @@ def before_request():
     if request.endpoint in path_dict:
         id = request.view_args.get("id")
         record = db.session.get(path_dict.get(request.endpoint), id)
-        key_name = "prod" if request.endpoint == "productionbyid" else "crew"
+        key_name = "entry" if request.endpoint == "entrybyid" else "user"
         setattr(g, key_name, record)
 
     g.time = time()
@@ -46,7 +46,6 @@ def after_request(response):  #! notice the response argument automatically pass
     response.headers["X-Response-Time"] = str(diff)
     return response
 
-
 # # # REST API
 
 # # # # # CATEGORY
@@ -61,9 +60,9 @@ class Categories(Resource):
         
 api.add_resource(Categories, '/categories')
 
-
 # # # # # ENTRY
 class Entries(Resource):
+
     @login_required
     def get(self):
         try:
@@ -72,7 +71,7 @@ class Entries(Resource):
         except Exception as e:
             return {"Error": str(e)}, 400
 
-    # @login_required
+    @login_required
     def post(self):
         try:
             data = request.get_json()
@@ -81,7 +80,7 @@ class Entries(Resource):
                 "body" : data.get("body"),
                 "date" : data.get("date"),
                 "category_id" : data.get("category_id"),
-                "user_id" : data.get("user_id")})
+                "user_id" : session.get("user_id")})
             db.session.add(entry)
             db.session.commit()
             return entry_schema.dump(entry), 201
@@ -187,7 +186,7 @@ class CheckMe(Resource):
             user = db.session.get(User, session.get("user_id"))
             return user_schema.dump(user), 200
         else:
-            return {"message": "Please log in"}, 400
+            return {"Message": "Please log in"}, 400
         
 api.add_resource(CheckMe, '/me')
 
