@@ -20,7 +20,7 @@ const entrySchema = object({
 const initialValues = {
 	title: '',
 	date: '',
-	entry: '',
+	body: '',
 	category: ''
 }
 
@@ -37,13 +37,13 @@ const NewEntry = () => {
 
 			if(!event.results[0].isFinal) {
 				const transcript = event.results[0][0].transcript
-				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
-				formik.setFieldValue('entry', newText)
+				const newText = formik.values.body + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('body', newText)
 
 			} else {
 				const transcript = event.results[0][0].transcript
-				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
-				formik.setFieldValue('entry', newText)
+				const newText = formik.values.body + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
+				formik.setFieldValue('body', newText)
 				recognition.stop()
 			}
 
@@ -84,8 +84,8 @@ const NewEntry = () => {
 				body: JSON.stringify({
 					title: formData.title,
 					date: formData.date,
-					entry: formData.entry,
-					id_category: formData.category
+					body: formData.entry,
+					category_id: formData.category
 				})
 			})
 				.then((resp) => {
