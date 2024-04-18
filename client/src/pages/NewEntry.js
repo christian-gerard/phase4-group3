@@ -74,7 +74,7 @@ const NewEntry = () => {
 		initialValues,
 		validationSchema: entrySchema,
 		onSubmit: (formData) => {
-			fetch('http://127.0.0.1:5555/api/v1/entries', {
+			fetch('/entries', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -211,5 +211,6 @@ const NewEntry = () => {
 			</>
 		))
 }
+
 
 export default NewEntry
