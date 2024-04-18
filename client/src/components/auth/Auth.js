@@ -64,7 +64,7 @@ const Auth = () => {
 		initialValues,
 		validationSchema: isLogin ? loginSchema : signupSchema,
 		onSubmit: (formData) => {
-			console.log(formData)
+			// console.log(formData)
 			fetch(requestUrl, {
 				method: 'POST',
 				headers: {
@@ -81,7 +81,7 @@ const Auth = () => {
 							isLogin ? navigate('/view') : navigate('/new')
 							toast.success('Logged in')
 						})
-					console.log(user)
+					// console.log(user)
 				} else if (res.status === 422) {
 					toast.error('Invalid Login')
 				} else {

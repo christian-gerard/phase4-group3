@@ -258,12 +258,19 @@ section, .flex {
 	background-color: $offwhite;
 	color: $black;
 }
-.new-entry > label {
+.entry-wrap {
+	display: flex;
+	flex-flow: row nowrap;
+}
+.new-entry > label, .txtarea {
 	width: 30em;
 	margin-bottom: 10px;
 	font-size: 12px;
 	text-transform: uppercase;
 	resize: none;
+}
+.txtarea {
+	width: 25em;
 }
 #title {
 	min-width: 20em;
@@ -297,10 +304,6 @@ textarea {
 .record:hover {
 	background-color: $purple;
 }
-//! talks to isRecording...
-.record:active {
-	background-color: $dkgrapefruit;
-}
 #submit-new {
 	margin-bottom: 16px;
 	height: 2em;
@@ -319,6 +322,20 @@ textarea {
 	border-radius: 3px;
 	border: none;
 	color: $black;
+}
+.rec {
+	height: 8px;
+	width: 8px;
+	border-radius: 100px;
+	background-color: $grapefruit;
+	border: 1px solid $dkgrapefruit;
+}
+.recording {
+	margin-right: 8px;
+	font-size: 12px;
+	font-family: $font-primary;
+	color: $offwhite;
+	text-transform: uppercase;
 }
 
 // View Entries

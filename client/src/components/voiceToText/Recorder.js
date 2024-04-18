@@ -11,12 +11,12 @@ function Recorder() {
         const recognition = new SpeechRecognition()
 
             if(!isRecording){
-                console.log("RECORD")
+                // console.log("RECORD")
                 recognition.start()
                 recognition.onresult = async function (event) {
                     const transcript = event.results[0][0].transcript
-                    console.log(transcript)
-                    console.log('STOP')
+                    // console.log(transcript)
+                    // console.log('STOP')
                     recognition.stop()
                     setIsRecording(!isRecording)
                 }

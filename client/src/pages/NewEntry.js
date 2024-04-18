@@ -54,7 +54,7 @@ const NewEntry = () => {
 
 	recognition.onend = async function (event) {
 		// recognition.start()
-		console.log(event)
+		// console.log(event)
 		setIsRecording(false)
 	}
 	
@@ -142,7 +142,14 @@ const NewEntry = () => {
 							</div>
 						)}
 						<br />
-						<label htmlFor='entry'>Entry</label>
+						<div className='entry-wrap'>
+							<label className='txtarea' htmlFor='entry'>Entry</label>
+							{isRecording ? (
+								<>
+									<div className='recording'>Recording!</div>
+									<div className='rec' />
+								</>) : ('')}
+						</div>
 						<button type='button' className='record' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
 						<textarea
 							type='textarea'
