@@ -309,6 +309,17 @@ textarea {
 	text-transform: uppercase;
 	background-color: $greyblue;
 }
+#submit-edit {
+	margin-bottom: 16px;
+	height: 2em;
+	width: 16em;
+	font-weight: 700;
+	text-transform: uppercase;
+	background-color: $greyblue;
+	border-radius: 3px;
+	border: none;
+	color: #000;
+}
 
 // View Entries
 .all-entries-wrapper {
