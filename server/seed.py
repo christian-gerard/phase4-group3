@@ -1,12 +1,9 @@
 from faker import Faker
-
 from config import app
 from models.__init__ import db
 from models.category import Category
 from models.entry import Entry
 from models.user import User
-
-
 import sys
 import random
 from rich import print
@@ -14,15 +11,11 @@ import ipdb
 
 fake = Faker()
 
-
 with app.app_context():
-
 
     # # # # # BEGIN SEED
     print('\n[purple]------------- BEGIN ------------[/purple]')
     print('\n')
-
-
 
     # # # # # Clean Database
     print('[purple]Cleaning Database 🧽 [/purple]...\n')
@@ -35,8 +28,6 @@ with app.app_context():
     except Exception as e:
         print('\t[red]Cleaning Failed[/red] 😞\n')
         sys.exit(1)
-    
-
 
     # # # # # Create Categories
     print('[purple]Creating Categories 🔮[/purple] ...\n')
@@ -96,45 +87,32 @@ with app.app_context():
             category = Category(name=dream['name'], summary=dream['summary'], description=dream['description'], icon=dream['icon'])
             db.session.add(category)
         db.session.commit()
-
         print('\t[green]Categories Created ✅[/green] \n')
 
     except Exception as e:
         print('\t[red]Category Creation Failed[/red] 😞\n')
         sys.exit(1)
 
-    
-
     # # # # # Create Users
     print('[purple]Creating Users[/purple] 🧑🏻‍💻 ...\n')
-    try:
 
+    try:
         users = []
         usernames = []
 
         for _ in range(20):
-
             username = fake.first_name()
-
             while username in usernames:
                 username = fake.first_name()
-
             usernames.append(username)
-
             user = User(username=username)
-
             user.password_hash = user.username + 'Password1!'
-
             users.append(user)
-
         db.session.add_all(users)
-
         print('\t[green]Users Created[/green] ✅ \n')
     except Exception as e:
         print('\t[red]User Creation Failed[/red] 😞 \n')
         sys.exit(1)
-
-
 
      # # # # # Create Entries
     print('[purple]Creating Entries[/purple] ✍🏽 ...\n')
@@ -148,14 +126,11 @@ with app.app_context():
                 )
             db.session.add(new_entry)
         db.session.commit()
-
         print('\t[green]Entries Created ✅[/green]\n')
 
     except Exception as e:
         print('\t[red]Entry Creation Failed[/red] 😞 \n')
         sys.exit(1)
-
-
 
     # # # # # COMPLETE SEED
     print('[green] ----------- COMPLETE 🏁 ------------ [/green]\n')

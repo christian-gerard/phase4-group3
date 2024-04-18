@@ -3,7 +3,6 @@ from datetime import datetime
 from models.category import Category
 from models.user import User
 
-
 class Entry(db.Model, SerializerMixin):
     # # # # # Table Name
     __tablename__ = 'entries'
@@ -37,9 +36,7 @@ class Entry(db.Model, SerializerMixin):
                 />
         """
 
-
     # # # # # Validate
-
     @validates("title")
     def validate_role(self, _, title):
         if not isinstance(title, str):

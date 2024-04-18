@@ -6,15 +6,19 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 
 const App = () => {
-  const { user } = useContext(UserContext)
+	const { user } = useContext(UserContext)
 
-  return (
+	return (
 		<main>
-        <Nav />
-        <Toaster position="top-center" containerClassName="toaster-style" />
-        <Outlet context={{ user }} />
-        <Footer />
+			<Nav />
+			<Toaster 
+				position='top-center'
+				containerClassName='toaster-style'
+			/>
+			<Outlet context={{ user }} />
+			<Footer />
 		</main>
-)}
+	)
+}
 
 export default App

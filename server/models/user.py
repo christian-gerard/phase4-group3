@@ -4,7 +4,6 @@ from config import flask_bcrypt
 from datetime import datetime
 import re
 
-
 class User(db.Model, SerializerMixin):
     # # # # # Table Name
     __tablename__ = 'users'
@@ -31,11 +30,10 @@ class User(db.Model, SerializerMixin):
         """
 
     # # # # # Property
-
     @hybrid_property
     def password_hash(self):
         raise AttributeError('Access to password is restricted')
-    
+
     @password_hash.setter
     def password_hash(self, new_password):
         if not len(new_password) >= 8:
@@ -54,5 +52,3 @@ class User(db.Model, SerializerMixin):
 
     def authenticate(self, password_to_check):
         return flask_bcrypt.check_password_hash(self._password_hash, password_to_check)
-    
-    # # # # # Validate

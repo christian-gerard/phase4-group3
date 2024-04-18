@@ -1,5 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+<<<<<<< HEAD
+import { Formik, Form, Field, useFormik } from 'formik'
+import { object, string, date as yupDate } from 'yup'
+import toast from 'react-hot-toast'
+=======
+>>>>>>> main
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { useFormik } from 'formik'
@@ -16,9 +22,9 @@ const editSchema = object({
 
 function Entry() {
     const { user, updateEntries } = useContext(UserContext)
-    const params = useParams()
     const [isEdit, setIsEdit] = useState(false)
     const navigate = useNavigate()
+    const params = useParams()
 
     const currentEntry = user.entries.filter((entry) => entry.id === parseInt(params.id))[0]
 
@@ -37,21 +43,29 @@ function Entry() {
                     'Content-Type': 'application/json'
                 }
             })
-            .then((resp) => {
-                if (resp.ok) {
+            .then((res) => {
+                if (res.ok) {
                     const updatedEntries = user.entries.filter((entry) => entry.id !== currentEntry.id)
                     updateEntries(updatedEntries)
                     navigate('/view')
                     toast.success("Deleted")
                 } else {
-                    return resp
+                    return res
                         .json()
                         .then((errorObj) => toast.error(errorObj.message))
                 }
             })
             .catch((error) => console.error('Error:', error))
     }
-    
+
+    const editSchema = object({
+        title: string().max(50, 'Title must be 50 characters or less'),
+        date: yupDate().required('Date is required.'),
+        body: string()
+            .min(10, 'Entry must be at least 10 characters long')
+            .max(40000, 'Entry may not be more than 40,000 characters'),
+    })
+
     const initialValues = {
         title: currentEntry.title,
         date: currentEntry.date,
@@ -69,16 +83,16 @@ function Entry() {
                     },
                     body: JSON.stringify(formData)
                 })
-                .then((resp) => {
-					if (resp.ok) {
-                        return resp.json().then((data) => {
+                .then((res) => {
+					if (res.ok) {
+                        return res.json().then((data) => {
                             const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? data : entry)
                             updateEntries(updatedEntries)
                             navigate('/view')
                             toast.success("Updated")
 						})
 					} else {
-						return resp
+						return res
 							.json()
 							.then((errorObj) => toast.error(errorObj.message))
 					}
