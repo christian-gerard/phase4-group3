@@ -401,25 +401,18 @@ textarea {
 	align-items: flex-start;
 }
 #category-name {
-	// width: 14%;
 	padding-top: 5px;
 	padding-bottom: 5px;
 	font-size: medium;
 	text-transform: uppercase;
 	color: $barelyblue;
 }
-// #category-name > h3 {
-// 	color: $barelyblue;
-// }
-
 #category-descr {
-    // width: 70%;
 	margin-left: 16px;
 	font-weight: 300;
 	line-height: 1.6;
 }
 #category-descr > p {
-	// color: $lilac;
 	letter-spacing: .01em;
 }
 #category-icon > img {
