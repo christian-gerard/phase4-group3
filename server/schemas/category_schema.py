@@ -13,7 +13,6 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
         required=True,
         unique=True,
         validate= validate.Length(
-            min=1,
             max=25,
             error="Name must be between 1 and 25 characters"
         )
@@ -35,6 +34,8 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
             error="Description must be between 3 and 1250 characters"
         ),
     )
+
+    icon = fields.String()
 
     created_at = fields.DateTime()
 

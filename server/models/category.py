@@ -11,6 +11,7 @@ class Category(db.Model, SerializerMixin):
     name = db.Column(db.String)
     summary = db.Column(db.String)
     description = db.Column(db.String)
+    icon = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     # # # # # Relationship

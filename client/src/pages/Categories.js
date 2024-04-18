@@ -27,7 +27,7 @@ const Categories = () => {
     }, []);
 
     const mappedCategories = categories.map(category => (
-        <CategoryCard key={category.id} name={category.name} description={category.description} />
+        <CategoryCard key={category.id} name={category.name} description={category.description} icon={category.icon} />
     ))
     return(
         user ? (
