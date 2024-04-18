@@ -1,11 +1,5 @@
 import { useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
-import { Formik, Form, Field, useFormik } from 'formik'
-import { object, string, date as yupDate } from 'yup'
-import toast from 'react-hot-toast'
-=======
->>>>>>> main
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { useFormik } from 'formik'
