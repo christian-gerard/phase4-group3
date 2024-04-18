@@ -33,6 +33,10 @@ const NewEntry = () => {
 	recognition.interimResults = true
 	recognition.continuous = true
 
+    const handleGoHome = () => {
+        navigate('/')
+    }
+
 	recognition.onresult = async function (event) {
 
 			if(!event.results[0].isFinal) {
@@ -70,7 +74,7 @@ const NewEntry = () => {
 		initialValues,
 		validationSchema: entrySchema,
 		onSubmit: (formData) => {
-			fetch('http://127.0.0.1:5555/api/v1/entries', {
+			fetch('/entries', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -104,99 +108,109 @@ const NewEntry = () => {
 	})
 	 
 	return (
-		<article id='new'>
-			<h2>New Journal Entry</h2>
-			<form className='new-entry' onSubmit={formik.handleSubmit}>
-				<label htmlFor='title'>Title &nbsp;</label>
-				<input
-					type='text'
-					name='title'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.title}
-                    id = 'title'
-					placeholder='Title'
-				/>
-				{formik.errors.title && formik.touched.title && (
-					<div className='error-message show'>{formik.errors.title}</div>
-				)}
-				<br />
-				<label htmlFor='date'>Date &nbsp;</label>
-				<input
-					type='date'
-					name='date'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.date}
-                    id='date'
-				/>
-				{formik.errors.date && formik.touched.date && (
-					<div className='error-message show'>
-						{formik.errors.date}
-					</div>
-				)}
-				<br />
-				<label htmlFor='entry'>Entry</label>
-				<button type='button' className='record' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
-				<textarea
-					type='textarea'
-					name='entry'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.entry}
-					rows='30'
-					cols='100'
-                    id='entry'
-					wrap='soft'
-					placeholder="Last night's dream..."
-				/>
-				{formik.errors.body && formik.touched && (
-					<div className='error-message show'>
-						{formik.errors.entry}
-					</div>
-				)}
-				<br />
-				<label htmlFor='category'>Category</label>
-				<select
-					name='category'
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					value={formik.values.category}>
-					<option value='' label=''></option>
-					<option value='1' label='Normal'>
-						Normal
-					</option>
-					<option value='7' label='Epic'>
-						Epic
-					</option>
-					<option value='4' label='False Awakening'>
-						False Awakening
-					</option>
-					<option value='8' label='Healing'>
-						Healing
-					</option>
-					<option value='2' label='Lucid'>
-						Lucid
-					</option>
-					<option value='5' label='Nightmare'>
-						Nightmare
-					</option>
-					<option value='6' label='Prophetic'>
-						Prophetic
-					</option>
-					<option value='3' label='Recurring'>
-						Recurring
-					</option>
-				</select>
-				{formik.errors.category && formik.touched.category && (
-					<div className='error-message show'>
-						{formik.errors.category}
-					</div>
-				)}
-				<br />
-				<input type='submit' id='submit-new' value={'Add new entry'} />
-			</form>
-		</article>
-)}
+		user ? (
+			<>
+				<article id='new'>
+					<h2>New Journal Entry</h2>
+					<form className='new-entry' onSubmit={formik.handleSubmit}>
+						<label htmlFor='title'>Title &nbsp;</label>
+						<input
+							type='text'
+							name='title'
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.title}
+							id = 'title'
+							placeholder='Title'
+						/>
+						{formik.errors.title && formik.touched.title && (
+							<div className='error-message show'>{formik.errors.title}</div>
+						)}
+						<br />
+						<label htmlFor='date'>Date &nbsp;</label>
+						<input
+							type='date'
+							name='date'
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.date}
+							id='date'
+						/>
+						{formik.errors.date && formik.touched.date && (
+							<div className='error-message show'>
+								{formik.errors.date}
+							</div>
+						)}
+						<br />
+						<label htmlFor='entry'>Entry</label>
+						<button type='button' className='record' onClick={voiceToText}>{isRecording ? "Stop" : "Record" }</button>
+						<textarea
+							type='textarea'
+							name='entry'
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.entry}
+							rows='30'
+							cols='100'
+							id='entry'
+							wrap='soft'
+							placeholder="Last night's dream..."
+						/>
+						{formik.errors.entry && formik.touched.entry && (
+							<div className='error-message show'>
+								{formik.errors.entry}
+							</div>
+						)}
+						<br />
+						<label htmlFor='category'>Category</label>
+						<select
+							name='category'
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							value={formik.values.category}>
+							<option value='' label=''></option>
+							<option value='1' label='Normal'>
+								Normal
+							</option>
+							<option value='7' label='Epic'>
+								Epic
+							</option>
+							<option value='4' label='False Awakening'>
+								False Awakening
+							</option>
+							<option value='8' label='Healing'>
+								Healing
+							</option>
+							<option value='2' label='Lucid'>
+								Lucid
+							</option>
+							<option value='5' label='Nightmare'>
+								Nightmare
+							</option>
+							<option value='6' label='Prophetic'>
+								Prophetic
+							</option>
+							<option value='3' label='Recurring'>
+								Recurring
+							</option>
+						</select>
+						{formik.errors.category && formik.touched.category && (
+							<div className='error-message show'>
+								{formik.errors.category}
+							</div>
+						)}
+						<br />
+						<input type='submit' id='submit-new' value={'Add new entry'} />
+					</form>
+				</article>
+			</>
+		) : (
+			<>
+				<div className='entries-error-message entries'>You must be logged in to view this page.</div>
+				<button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+			</>
+		))
+}
+
 
 export default NewEntry

@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
-import { date as yupDate } from 'yup'
 import toast from 'react-hot-toast'
-import { object, string } from 'yup'
-// import { Formik, Form, Field, useFormik } from 'formik'
 import { useFormik } from 'formik'
-
+import { object, string, date as yupDate } from 'yup'
+import { useToaster } from 'react-hot-toast'
 
 const editSchema = object({
     title: string().max(50, 'Title must be 50 characters or less'),
@@ -28,6 +26,10 @@ function Entry() {
         setIsEdit(!isEdit)
     }
 
+    const handleGoHome = () => {
+        navigate('/')
+    }
+
     const handleDelete = () => {
             fetch(`/entries/${currentEntry.id}`, {
                 method: 'DELETE',
@@ -37,8 +39,6 @@ function Entry() {
             })
             .then((resp) => {
                 if (resp.ok) {
-
-                    
                     const updatedEntries = user.entries.filter((entry) => entry.id !== currentEntry.id)
                     updateEntries(updatedEntries)
                     navigate('/view')
@@ -51,14 +51,6 @@ function Entry() {
             })
             .catch((error) => console.error('Error:', error))
     }
-
-    // const editSchema = object({
-    //     title: string().max(50, 'Title must be 50 characters or less'),
-    //     date: yupDate().required('Date is required.'),
-    //     body: string()
-    //         .min(10, 'Entry must be at least 10 characters long')
-    //         .max(40000, 'Entry may not be more than 40,000 characters'),
-    // })
     
     const initialValues = {
         title: currentEntry.title,
@@ -79,16 +71,12 @@ function Entry() {
                 })
                 .then((resp) => {
 					if (resp.ok) {
-
                         return resp.json().then((data) => {
-
                             const updatedEntries = user.entries.map((entry) => entry.id === parseInt(currentEntry.id)? data : entry)
                             updateEntries(updatedEntries)
                             navigate('/view')
                             toast.success("Updated")
-
 						})
-
 					} else {
 						return resp
 							.json()
@@ -103,79 +91,89 @@ function Entry() {
     }
 
     return (
-        currentEntry ?
-        (isEdit ? 
-            <div id='new'>
-                <h2>Editing: {currentEntry.title}</h2>
-                <form className='new-entry' onSubmit={formik.handleSubmit}>
-                    <label htmlFor='title'>Title &nbsp;</label>
-                    <input
-                        type='text'
-                        name='title'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.title}
-                        id = 'title'
-                        placeholder={currentEntry.title}
-                    />
-                    {formik.errors.title && formik.touched.title && (
-                        <div className='error-message show'>{formik.errors.title}</div>
-                    )}
-                    <br />
-                    <label htmlFor='date'>Date &nbsp;</label>
-                    <input
-                        type='date'
-                        name='date'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.date}
-                        id='date'
-                        placeholder={currentEntry.date}
-                    />
-                    {formik.errors.date && formik.touched.date && (
-                        <div className='error-message show'>
-                            {formik.errors.date}
-                        </div>
-                    )}
-                    <br />
-                    <label htmlFor='body'>Entry</label>
-                    <textarea
-                        type='textarea'
-                        name='body'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.body}
-                        rows='30'
-                        cols='100'
-                        id='entry'
-                        wrap='soft'
-                        placeholder={currentEntry.body}
-                    />
-                    {formik.errors.body && formik.touched.body && (
-                        <div className='error-message show'>
-                            {formik.errors.body}
-                        </div>
-                    )}
-                    <button id='submit-edit' onClick={handleSave}>Save</button>
-                    <button id='submit-edit' onClick={handleDelete}>Delete</button>
-                </form>
-            </div>
-            :
-            <div>
-                <h2>Viewing: {currentEntry.title}</h2>
-                <button onClick={editMode}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
-                <p>{currentEntry.title}</p>
-                <p>{currentEntry.body}</p>
-                <p>{currentEntry.date}</p>
-                
-            </div>)
+        user ? (
+            <>
+                currentEntry ? (isEdit ? 
+                <div id='new'>
+                    <h2>Editing: {currentEntry.title}</h2>
+                    <form className='new-entry' onSubmit={formik.handleSubmit}>
+                        <label htmlFor='title'>Title &nbsp;</label>
+                        <input
+                            type='text'
+                            name='title'
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.title}
+                            id = 'title'
+                            placeholder={currentEntry.title}
+                        />
+                        {formik.errors.title && formik.touched.title && (
+                            <div className='error-message show'>{formik.errors.title}</div>
+                        )}
+                        <br />
+                        <label htmlFor='date'>Date &nbsp;</label>
+                        <input
+                            type='date'
+                            name='date'
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.date}
+                            id='date'
+                            placeholder={currentEntry.date}
+                        />
+                        {formik.errors.date && formik.touched.date && (
+                            <div className='error-message show'>
+                                {formik.errors.date}
+                            </div>
+                        )}
+                        <br />
+                        <label htmlFor='body'>Entry</label>
+                        <textarea
+                            type='textarea'
+                            name='body'
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.body}
+                            rows='30'
+                            cols='100'
+                            id='entry'
+                            wrap='soft'
+                            placeholder={currentEntry.body}
+                        />
+                        {formik.errors.body && formik.touched.body && (
+                            <div className='error-message show'>
+                                {formik.errors.body}
+                            </div>
+                        )}
+                        <button id='submit-edit' onClick={handleSave}>Save</button>
+                        <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                    </form>
+                </div>
+                :
+                <div>
+                    <h2>Viewing: {currentEntry.title}</h2>
+                    <button onClick={editMode}>Edit</button>
+                    <button onClick={handleDelete}>Delete</button>
+                    <p>{currentEntry.title}</p>
+                    <p>{currentEntry.body}</p>
+                    <p>{currentEntry.date}</p>
 
-            :
+                </div>)
 
-            <h1>User not logged in</h1>
+                : (
+                        <>
+                            <div className='entries-error-message entries'>Entry not found. Try logging in.</div>
+                            <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+                        </>
+                )
+            </>
+        ) : (
+            <>
+                <div className='entries-error-message entries'>You must be logged in to view this page.</div>
+                <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+            </>
+        )
+)}
 
-    )
-}
 
 export default Entry
