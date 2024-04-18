@@ -146,8 +146,10 @@ function Entry() {
                                     {formik.errors.body}
                                 </div>
                             )}
-                            <button id='submit-edit' onClick={handleSave}>Save</button>
-                            <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                            <div className='flex'>
+                                <button id='submit-edit' onClick={handleSave}>Save</button>
+                                <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                            </div>
                         </form>
                     </div>
                 :
