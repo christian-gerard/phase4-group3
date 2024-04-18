@@ -2,7 +2,7 @@
 
 Do you remember what you last dreamed about? Do you remember who was in it? What happened? Or even better - did you ask yourself why you dreamed what you did?
 
-Dreams have always been a deep source of mystery. To this day we do not fully comprehend their purpose or why we have certain dreams. While we can not fully comprehend dreaming diving into your own dreams is a source of creative inspiration and self introspection. Keeping a dream journal allows individualsto remember their dreams more frequently. Through review those recorded dreams one can discover patterns and draw conclusions about their own psyche. 
+Dreams have always been a deep source of mystery. To this day we do not fully comprehend their purpose or why we have certain dreams. While we can not fully comprehend dreaming diving into your own dreams is a source of creative inspiration and self introspection. Keeping a dream journal allows individuals to remember their dreams more frequently. Through review those recorded dreams one can discover patterns and draw conclusions about their own psyche. 
 
 Begin dream journaling with Rabbit Rabbit. The Rabbit is commonly associated with the moon and night hence the name. In Chinese folklore, the Jade Rabbit lives on the moon where they create the elixir of life.  If one squints at the moon you might be able to see the outline of a rabbit working away with a mortar and pestle. As the Jade Rabbit toils away we are in a dreamstate experiencing a complex physical/psychological process. Without the proper journalling tool those experiences go to waste. Begin dream journalling via Rabbit Rabbit!
 
@@ -95,8 +95,10 @@ Deleting an Entry in Rabbit Rabbit is simple. Navigate to the entry you would li
 
 ## Manage Login/Logout
 
-To logout of your account click the 'LOGOUT' button on the top right side. If any errors occured then Rabbit Rabbit will notify you. Otherwise, you'll recieve a notification letting you know the logout was successful.
+To logout of your account click the 'LOGOUT' button on the top right side. If any errors occured then Rabbit Rabbit will notify you. Otherwise, you'll receive a notification letting you know the logout was successful.
 
+## Image Credits
 
+Category icons created by max.icons - Flaticon: https://www.flaticon.com/packs/celestial-and-witchcraft
 
 
