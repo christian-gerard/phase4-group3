@@ -30,7 +30,9 @@ function Entries() {
             <>
                 <article className='all-entries-wrapper'>
                     <h2>View Journal Entries</h2>
-                        {user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />)}
+                        <div className='entries-container'>
+                            {user.entries.slice(startIndex, endIndex).map((entry) => <EntryPreview key={entry.id} {...entry} />)}
+                        </div>
                     <div>
                         <button className='all-entries' onClick={handlePrev}>Prev</button>
                         &nbsp; {currentPage} of {pages} &nbsp;

@@ -319,6 +319,9 @@ textarea {
 	color: $lilac;
 	text-transform: none;
 }
+.entries-container {
+	display: grid;
+}
 .all-entries-wrapper > a {
 	text-decoration: none;
 	line-height: normal;
