@@ -93,79 +93,77 @@ function Entry() {
     return (
         user ? (
             <>
-                currentEntry ? (isEdit ? 
-                <div id='new'>
-                    <h2>Editing: {currentEntry.title}</h2>
-                    <form className='new-entry' onSubmit={formik.handleSubmit}>
-                        <label htmlFor='title'>Title &nbsp;</label>
-                        <input
-                            type='text'
-                            name='title'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.title}
-                            id = 'title'
-                            placeholder={currentEntry.title}
-                        />
-                        {formik.errors.title && formik.touched.title && (
-                            <div className='error-message show'>{formik.errors.title}</div>
-                        )}
-                        <br />
-                        <label htmlFor='date'>Date &nbsp;</label>
-                        <input
-                            type='date'
-                            name='date'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.date}
-                            id='date'
-                            placeholder={currentEntry.date}
-                        />
-                        {formik.errors.date && formik.touched.date && (
-                            <div className='error-message show'>
-                                {formik.errors.date}
-                            </div>
-                        )}
-                        <br />
-                        <label htmlFor='body'>Entry</label>
-                        <textarea
-                            type='textarea'
-                            name='body'
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            value={formik.values.body}
-                            rows='30'
-                            cols='100'
-                            id='entry'
-                            wrap='soft'
-                            placeholder={currentEntry.body}
-                        />
-                        {formik.errors.body && formik.touched.body && (
-                            <div className='error-message show'>
-                                {formik.errors.body}
-                            </div>
-                        )}
-                        <button id='submit-edit' onClick={handleSave}>Save</button>
-                        <button id='submit-edit' onClick={handleDelete}>Delete</button>
-                    </form>
-                </div>
+                {currentEntry ? (
+                    isEdit ? 
+                    <div id='new'>
+                        <h2>Editing: {currentEntry.title}</h2>
+                        <form className='new-entry' onSubmit={formik.handleSubmit}>
+                            <label htmlFor='title'>Title &nbsp;</label>
+                            <input
+                                type='text'
+                                name='title'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.title}
+                                id = 'title'
+                                placeholder={currentEntry.title}
+                            />
+                            {formik.errors.title && formik.touched.title && (
+                                <div className='error-message show'>{formik.errors.title}</div>
+                            )}
+                            <br />
+                            <label htmlFor='date'>Date &nbsp;</label>
+                            <input
+                                type='date'
+                                name='date'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.date}
+                                id='date'
+                                placeholder={currentEntry.date}
+                            />
+                            {formik.errors.date && formik.touched.date && (
+                                <div className='error-message show'>
+                                    {formik.errors.date}
+                                </div>
+                            )}
+                            <br />
+                            <label htmlFor='body'>Entry</label>
+                            <textarea
+                                type='textarea'
+                                name='body'
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.body}
+                                rows='30'
+                                cols='100'
+                                id='entry'
+                                wrap='soft'
+                                placeholder={currentEntry.body}
+                            />
+                            {formik.errors.body && formik.touched.body && (
+                                <div className='error-message show'>
+                                    {formik.errors.body}
+                                </div>
+                            )}
+                            <button id='submit-edit' onClick={handleSave}>Save</button>
+                            <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                        </form>
+                    </div>
                 :
-                <div>
-                    <h2>Viewing: {currentEntry.title}</h2>
-                    <button onClick={editMode}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
-                    <p>{currentEntry.title}</p>
-                    <p>{currentEntry.body}</p>
-                    <p>{currentEntry.date}</p>
-
-                </div>)
-
-                : (
+                    <div className='view'>
+                        <h2>Viewing: {currentEntry.title}</h2>
+                        <button className='button' onClick={editMode}>Edit</button>
+                        <p className='datespan'>{currentEntry.date}</p>
+                        <p className='dream'>{currentEntry.body}</p>
+                        <button className='button' onClick={handleDelete}>Delete</button>
+                    </div>
+                ) : (
                         <>
                             <div className='entries-error-message entries'>Entry not found. Try logging in.</div>
                             <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
                         </>
-                )
+                )}
             </>
         ) : (
             <>
@@ -174,6 +172,5 @@ function Entry() {
             </>
         )
 )}
-
 
 export default Entry
