@@ -398,27 +398,35 @@ textarea {
     width: 95%;
 	padding: 10px;
 	font-family: $font-primary;
+	align-items: flex-start;
 }
 #category-name {
-	width: 14%;
 	padding-top: 5px;
-	font-size: small;
+	padding-bottom: 5px;
+	font-size: medium;
 	text-transform: uppercase;
-}
-#category-name > h3 {
 	color: $barelyblue;
 }
-
 #category-descr {
-    width: 86%;
 	margin-left: 16px;
 	font-weight: 300;
 	line-height: 1.6;
 }
 #category-descr > p {
-	// color: $lilac;
 	letter-spacing: .01em;
 }
+#category-icon > img {
+	width: 100px;
+	height: auto;
+	margin-right: 20px;
+	padding-top: 5px;
+	background: $text;
+	border-radius: 3px;
+}
+.text-content{
+	flex-grow: 1;
+}
+
 
 // Footer
 footer {

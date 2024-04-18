@@ -30,6 +30,8 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
         ),
     )
 
+    icon = fields.String()
+
     created_at = fields.DateTime()
 
 category_schema = CategorySchema()

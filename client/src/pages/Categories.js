@@ -28,25 +28,28 @@ const Categories = () => {
 			})
 	}, [])
 
-	const mappedCategories = categories.map((category) => (
-		<CategoryCard
-			key={category.id}
-			name={category.name}
-			description={category.description}
-		/>
-	))
-	return user ? (
-		<>
-			<div>
-				<h2 className='learn'>Learn About Dream Categories</h2>
-				{mappedCategories}
-			</div>
-		</>
-	) : (
-		<>
-			<div className='entries-error-message entries'>You must be logged in to view this page.</div>
-			<button className='error-nav' onClick={handleGoHome}>Go to Login</button>
-		</>
-)}
+    const mappedCategories = categories.map(category => (
+        <CategoryCard 
+            key={category.id} 
+            name={category.name} 
+            description={category.description} 
+            icon={category.icon} 
+        />
+    ))
+    return(
+        user ? (
+            <>
+                <div>
+                    <h2 className='learn'>Learn About Dream Categories</h2>
+                    {mappedCategories}
+                </div>
+            </>
+        ) : (
+        <>
+            <div className='entries-error-message entries'>You must be logged in to view this page.</div>
+            <button className='error-nav' onClick={handleGoHome}>Go to Login</button>
+        </>
+    ))
+}
 
 export default Categories
