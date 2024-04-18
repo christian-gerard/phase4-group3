@@ -5,29 +5,36 @@ import toast from 'react-hot-toast'
 import CategoryCard from '../components/CategoryCard'
 
 const Categories = () => {
-    const { user } = useContext(UserContext)
-    const navigate = useNavigate()
-    const [categories, setCategories] = useState([])
+	const { user } = useContext(UserContext)
+	const navigate = useNavigate()
+	const [categories, setCategories] = useState([])
 
-    const handleGoHome = () => {
-        navigate('/')
-    }
+	const handleGoHome = () => {
+		navigate('/')
+	}
 
-    useEffect(() => {
-        fetch("/categories")
-        .then(resp => {
-            if (resp.ok) {
-                return resp.json().then(setCategories)
-            }
-            return resp.json().then(errorObj => toast.error(errorObj.message))
-        })
-        .catch(err => {
-            toast.error("An unexpected error occurred.")
-        })
-    }, []);
+	useEffect(() => {
+		fetch('/categories')
+			.then((res) => {
+				if (res.ok) {
+					return res.json().then(setCategories)
+				}
+				return res
+					.json()
+					.then((errorObj) => toast.error(errorObj.message))
+			})
+			.catch((err) => {
+				toast.error('An unexpected error occurred.')
+			})
+	}, [])
 
     const mappedCategories = categories.map(category => (
-        <CategoryCard key={category.id} name={category.name} description={category.description} />
+        <CategoryCard 
+            key={category.id} 
+            name={category.name} 
+            description={category.description} 
+            icon={category.icon} 
+        />
     ))
     return(
         user ? (

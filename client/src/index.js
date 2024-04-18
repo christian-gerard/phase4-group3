@@ -8,7 +8,7 @@ const rootElement = document.getElementById('root')
 const root = createRoot(rootElement)
 
 root.render(
-    <UserProvider>
-        <RouterProvider router={router} />
-    </UserProvider>
+	<UserProvider>
+		<RouterProvider router={router} />
+	</UserProvider>
 )

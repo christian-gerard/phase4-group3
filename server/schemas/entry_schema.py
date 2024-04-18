@@ -7,14 +7,12 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         ordered = True
         partial = ('id',)
 
-    # id = fields.Integer()
-
     title = fields.String(
         validate=validate.Length(
-            max=50, 
+            max=50,
             error="Title must be less than 50 characters")
         )
-    
+
     body = fields.String(
         require=True, 
         validate=validate.Length(
@@ -22,7 +20,7 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
             max=40000, 
             error="Body must be between 10 and 40,000 characters")
         )
-    
+
     date = fields.String(require=True)
     created_at = fields.DateTime()
     updated_at = fields.DateTime()
@@ -38,7 +36,5 @@ class EntrySchema(ma.SQLAlchemyAutoSchema):
         if not datetime.strptime(date, "%Y-%m-%d"):
             raise ValueError('Date must be in \"YYYY-MM-DD\"')
 
-
 entry_schema = EntrySchema()
-
 entries_schema = EntrySchema(many=True)

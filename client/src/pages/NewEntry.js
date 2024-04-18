@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { object, string } from 'yup'
 import { date as yupDate } from 'yup'
@@ -32,13 +32,14 @@ const NewEntry = () => {
 	const recognition = new SpeechRecognition()
 	recognition.interimResults = true
 	recognition.continuous = true
+	const navigate = useNavigate()
 
     const handleGoHome = () => {
         navigate('/')
     }
 
+	// Voice to Text
 	recognition.onresult = async function (event) {
-
 			if(!event.results[0].isFinal) {
 				const transcript = event.results[0][0].transcript
 				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
@@ -49,27 +50,22 @@ const NewEntry = () => {
 				const newText = formik.values.entry + ' ' + transcript[0].toUpperCase() + transcript.substring(1) + '.'
 				formik.setFieldValue('entry', newText)
 				recognition.stop()
-			}
-		}
+	}}
 
 	recognition.onend = async function (event) {
-		// recognition.start()
-		// console.log(event)
 		setIsRecording(false)
 	}
 	
 	const voiceToText = async () => {
-
 		if(!isRecording) {
 			setIsRecording(true)
 			recognition.start()
 		} else {
 			setIsRecording(false)
 			recognition.stop()
-		}
-	}
+	}}
 
-	const navigate = useNavigate()
+	// Formik
 	const formik = useFormik({
 		initialValues,
 		validationSchema: entrySchema,
@@ -87,19 +83,17 @@ const NewEntry = () => {
 					user_id: user.id
 				})
 			})
-				.then((resp) => {
-					if (resp.ok) {
-						return resp.json().then((data) => {
+				.then((res) => {
+					if (res.ok) {
+						return res.json().then((data) => {
 
 							const updatedEntries = [...user.entries, data]
 							updateEntries(updatedEntries)
 							navigate('/view')
 							toast.success("Entry Submited")
-
 						})
-
 					} else {
-						return resp
+						return res
 							.json()
 							.then((errorObj) => toast.error(errorObj.message))
 					}

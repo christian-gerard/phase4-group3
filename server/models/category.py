@@ -1,7 +1,6 @@
 from . import SerializerMixin, validates, re, db
 from datetime import datetime
 
-
 class Category(db.Model, SerializerMixin):
     # # # # # Table Name
     __tablename__ = 'categories'
@@ -11,10 +10,11 @@ class Category(db.Model, SerializerMixin):
     name = db.Column(db.String)
     summary = db.Column(db.String)
     description = db.Column(db.String)
+    icon = db.Column(db.String)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
     # # # # # Relationship
-    entries = db.relationship('Entry', back_populates='category')
+    entries = db.relationship('Entry',back_populates='category')
 
     # # # # # Serialize
     serialize_rules=('-entries',)
@@ -29,8 +29,3 @@ class Category(db.Model, SerializerMixin):
                 created_at: {self.created_at}
                 />
         """
-
-    # # # # # Property
-
-    # # # # # Validate
-    
