@@ -13,6 +13,7 @@ class CategorySchema(ma.SQLAlchemyAutoSchema):
         required=True,
         unique=True,
         validate= validate.Length(
+            min=1,
             max=25,
             error="Name must be between 1 and 25 characters"
         )
