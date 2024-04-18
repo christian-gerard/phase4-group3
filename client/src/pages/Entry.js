@@ -1,11 +1,5 @@
 import { useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-<<<<<<< HEAD
-import { Formik, Form, Field, useFormik } from 'formik'
-import { object, string, date as yupDate } from 'yup'
-import toast from 'react-hot-toast'
-=======
->>>>>>> main
 import { UserContext } from '../context/UserContext'
 import toast from 'react-hot-toast'
 import { useFormik } from 'formik'
@@ -160,8 +154,10 @@ function Entry() {
                                     {formik.errors.body}
                                 </div>
                             )}
-                            <button id='submit-edit' onClick={handleSave}>Save</button>
-                            <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                            <div className='flex'>
+                                <button id='submit-edit' onClick={handleSave}>Save</button>
+                                <button id='submit-edit' onClick={handleDelete}>Delete</button>
+                            </div>
                         </form>
                     </div>
                 :
